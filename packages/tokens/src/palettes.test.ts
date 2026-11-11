@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { radiusVars, semanticColorVars, statusRoles } from "./index";
+import { radiusVars, semanticColorVars, statusTones } from "./index";
 
 const themeRoot = fileURLToPath(new URL("../../themes", import.meta.url));
 const themeIds = ["runifly", "nostr", "exosquare"] as const;
@@ -149,12 +149,26 @@ describe("temporary theme palettes", () => {
           pair("--color-danger-fg", "--color-bg", 4.5);
           pair("--color-danger-fg", "--color-surface", 4.5);
 
-          for (const status of statusRoles) {
-            const background = scheme.get(`--color-status-${status}-bg`);
-            if (!background || !/^#[0-9a-f]{6}$/i.test(background)) continue;
-            pair(`--color-status-${status}-fg`, `--color-status-${status}-bg`, 4.5);
-            pair("--color-text", `--color-status-${status}-bg`, 4.5);
-            pair("--color-muted", `--color-status-${status}-bg`, 4.5);
+          for (const tone of statusTones) {
+            pair(`--color-status-${tone}-fg`, `--color-status-${tone}-bg`, 4.5);
+            pair("--color-text", `--color-status-${tone}-bg`, 4.5);
+            pair("--color-muted", `--color-status-${tone}-bg`, 4.5);
+          }
+        }
+      });
+
+      it("keeps every status tone at AA in both schemes", () => {
+        for (const [scheme, schemeName] of [
+          [light, "light"],
+          [dark, "dark"],
+        ] as const) {
+          for (const tone of statusTones) {
+            const foreground = `--color-status-${tone}-fg`;
+            const background = `--color-status-${tone}-bg`;
+            const ratio = contrast(requireHex(scheme, foreground), requireHex(scheme, background));
+            expect(ratio, `${schemeName} ${foreground} on ${background}`).toBeGreaterThanOrEqual(
+              4.5,
+            );
           }
         }
       });

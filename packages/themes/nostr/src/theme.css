@@ -27,20 +27,18 @@
   --color-focus: #662482;
   --color-danger-fg: #7a2428;
   --color-danger-bg: #f0d9d8;
-  --color-status-draft-fg: #404846;
-  --color-status-draft-bg: transparent;
-  --color-status-queued-fg: #404846;
-  --color-status-queued-bg: transparent;
-  --color-status-approved-fg: #404846;
-  --color-status-approved-bg: transparent;
-  --color-status-signed-fg: #404846;
-  --color-status-signed-bg: transparent;
-  --color-status-sent-fg: #404846;
-  --color-status-sent-bg: transparent;
-  --color-status-failed-fg: #7a2428;
-  --color-status-failed-bg: #f0d9d8;
-  --color-status-missed-fg: #5c4010;
-  --color-status-missed-bg: #ede3c8;
+  --color-status-neutral-fg: #404846;
+  --color-status-neutral-bg: #f3f4f3;
+  --color-status-accent-fg: #521c69;
+  --color-status-accent-bg: #dbdedc;
+  --color-status-success-fg: #243c2e;
+  --color-status-success-bg: #dce6de;
+  --color-status-warning-fg: #5c4010;
+  --color-status-warning-bg: #ede3c8;
+  --color-status-danger-fg: #7a2428;
+  --color-status-danger-bg: #f0d9d8;
+  --color-status-info-fg: #1e3842;
+  --color-status-info-bg: #d7e2e4;
 }
 
 [data-theme="nostr"][data-scheme="dark"] {
@@ -61,20 +59,18 @@
   --color-focus: #b373ce;
   --color-danger-fg: #e8a8a4;
   --color-danger-bg: #3a2424;
-  --color-status-draft-fg: #a8b0ad;
-  --color-status-draft-bg: transparent;
-  --color-status-queued-fg: #a8b0ad;
-  --color-status-queued-bg: transparent;
-  --color-status-approved-fg: #a8b0ad;
-  --color-status-approved-bg: transparent;
-  --color-status-signed-fg: #a8b0ad;
-  --color-status-signed-bg: transparent;
-  --color-status-sent-fg: #a8b0ad;
-  --color-status-sent-bg: transparent;
-  --color-status-failed-fg: #e8a8a4;
-  --color-status-failed-bg: #3a2424;
-  --color-status-missed-fg: #e0c98a;
-  --color-status-missed-bg: #3a3320;
+  --color-status-neutral-fg: #a8b0ad;
+  --color-status-neutral-bg: #1c1e1d;
+  --color-status-accent-fg: #be82d4;
+  --color-status-accent-bg: #262928;
+  --color-status-success-fg: #b7cdbb;
+  --color-status-success-bg: #24302a;
+  --color-status-warning-fg: #e0c98a;
+  --color-status-warning-bg: #3a3320;
+  --color-status-danger-fg: #e8a8a4;
+  --color-status-danger-bg: #3a2424;
+  --color-status-info-fg: #b3c7ce;
+  --color-status-info-bg: #243036;
 }
 
 [data-theme="nostr"] .motion-shimmer {

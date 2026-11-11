@@ -18,13 +18,12 @@ const swatches = [
 ] as const;
 
 const statuses = [
-  ["draft", "bg-status-draft-bg text-status-draft-fg"],
-  ["queued", "bg-status-queued-bg text-status-queued-fg"],
-  ["approved", "bg-status-approved-bg text-status-approved-fg"],
-  ["signed", "bg-status-signed-bg text-status-signed-fg"],
-  ["sent", "bg-status-sent-bg text-status-sent-fg"],
-  ["failed", "bg-status-failed-bg text-status-failed-fg"],
-  ["missed", "bg-status-missed-bg text-status-missed-fg"],
+  ["neutral", "bg-status-neutral-bg text-status-neutral-fg"],
+  ["accent", "bg-status-accent-bg text-status-accent-fg"],
+  ["success", "bg-status-success-bg text-status-success-fg"],
+  ["warning", "bg-status-warning-bg text-status-warning-fg"],
+  ["danger", "bg-status-danger-bg text-status-danger-fg"],
+  ["info", "bg-status-info-bg text-status-info-fg"],
 ] as const;
 
 const themeNames: Record<string, string> = {

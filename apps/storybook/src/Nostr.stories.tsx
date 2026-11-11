@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Badge } from "@macro88/ui";
 
 const themeNames: Record<string, string> = {
   nostr: "Nostr (temporary)",
@@ -25,14 +26,10 @@ function NostrMarks({ theme, scheme }: { theme: string; scheme: string }) {
       <div className="ink-rule" role="presentation" />
       <p className="font-display text-caption text-muted">Draft</p>
       <p>
-        <span className="bg-status-failed-bg text-status-failed-fg rounded-badge inline-block px-2 py-1 font-display text-caption">
-          Failed
-        </span>
+        <Badge tone="danger">Failed</Badge>
       </p>
       <p>
-        <span className="bg-status-missed-bg text-status-missed-fg rounded-badge inline-block px-2 py-1 font-display text-caption">
-          Missed
-        </span>
+        <Badge tone="warning">Missed</Badge>
       </p>
       <div className="bg-skeleton h-4 w-full" />
     </div>

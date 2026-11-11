@@ -94,16 +94,20 @@ const aaPairs: Array<[string, string, number]> = [
   ["--color-focus", "--color-surface", 3],
   ["--color-border-strong", "--color-bg", 3],
   ["--color-border-strong", "--color-surface", 3],
-  ["--color-status-failed-fg", "--color-status-failed-bg", 4.5],
-  ["--color-status-failed-fg", "--color-bg", 4.5],
-  ["--color-status-failed-fg", "--color-surface", 4.5],
-  ["--color-text", "--color-status-failed-bg", 4.5],
-  ["--color-muted", "--color-status-failed-bg", 4.5],
-  ["--color-status-missed-fg", "--color-status-missed-bg", 4.5],
-  ["--color-status-missed-fg", "--color-bg", 4.5],
-  ["--color-status-missed-fg", "--color-surface", 4.5],
-  ["--color-text", "--color-status-missed-bg", 4.5],
-  ["--color-muted", "--color-status-missed-bg", 4.5],
+  ["--color-status-neutral-fg", "--color-status-neutral-bg", 4.5],
+  ["--color-status-accent-fg", "--color-status-accent-bg", 4.5],
+  ["--color-status-success-fg", "--color-status-success-bg", 4.5],
+  ["--color-status-warning-fg", "--color-status-warning-bg", 4.5],
+  ["--color-status-warning-fg", "--color-bg", 4.5],
+  ["--color-status-warning-fg", "--color-surface", 4.5],
+  ["--color-text", "--color-status-warning-bg", 4.5],
+  ["--color-muted", "--color-status-warning-bg", 4.5],
+  ["--color-status-danger-fg", "--color-status-danger-bg", 4.5],
+  ["--color-status-danger-fg", "--color-bg", 4.5],
+  ["--color-status-danger-fg", "--color-surface", 4.5],
+  ["--color-text", "--color-status-danger-bg", 4.5],
+  ["--color-muted", "--color-status-danger-bg", 4.5],
+  ["--color-status-info-fg", "--color-status-info-bg", 4.5],
 ];
 
 describe("nostr theme contract", () => {
@@ -123,13 +127,24 @@ describe("nostr theme contract", () => {
     expect(light.get(radiusVars.full)).toBe("9999px");
   });
 
-  it("keeps ordinary status words on muted with no capsule", () => {
-    for (const status of ["draft", "queued", "approved", "signed", "sent"]) {
-      expect(light.get(`--color-status-${status}-fg`)).toBe(light.get("--color-muted"));
-      expect(dark.get(`--color-status-${status}-fg`)).toBe(dark.get("--color-muted"));
-      expect(light.get(`--color-status-${status}-bg`)).toBe("transparent");
-      expect(dark.get(`--color-status-${status}-bg`)).toBe("transparent");
+  it("derives neutral and accent tones from existing roles", () => {
+    for (const scheme of [light, dark]) {
+      expect(scheme.get("--color-status-neutral-fg")).toBe(scheme.get("--color-muted"));
+      expect(scheme.get("--color-status-neutral-bg")).toBe(scheme.get("--color-surface"));
+      expect(scheme.get("--color-status-accent-fg")).toBe(scheme.get("--color-accent-fg"));
+      expect(scheme.get("--color-status-accent-bg")).toBe(scheme.get("--color-selected"));
     }
+  });
+
+  it("sets danger and warning to the book washes", () => {
+    expect(light.get("--color-status-danger-fg")).toBe("#7a2428");
+    expect(light.get("--color-status-danger-bg")).toBe("#f0d9d8");
+    expect(dark.get("--color-status-danger-fg")).toBe("#e8a8a4");
+    expect(dark.get("--color-status-danger-bg")).toBe("#3a2424");
+    expect(light.get("--color-status-warning-fg")).toBe("#5c4010");
+    expect(light.get("--color-status-warning-bg")).toBe("#ede3c8");
+    expect(dark.get("--color-status-warning-fg")).toBe("#e0c98a");
+    expect(dark.get("--color-status-warning-bg")).toBe("#3a3320");
   });
 
   it("sets accent-subtle and the skeleton wash to selected", () => {

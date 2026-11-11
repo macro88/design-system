@@ -124,39 +124,38 @@
   color: var(--color-text);
 }
 
-.badge[data-status="draft"] {
-  color: var(--color-status-draft-fg);
-  background-color: var(--color-status-draft-bg);
+.badge {
+  border-radius: var(--radius-full);
 }
 
-.badge[data-status="queued"] {
-  color: var(--color-status-queued-fg);
-  background-color: var(--color-status-queued-bg);
+.badge[data-tone="neutral"] {
+  color: var(--color-status-neutral-fg);
+  background-color: var(--color-status-neutral-bg);
 }
 
-.badge[data-status="approved"] {
-  color: var(--color-status-approved-fg);
-  background-color: var(--color-status-approved-bg);
+.badge[data-tone="accent"] {
+  color: var(--color-status-accent-fg);
+  background-color: var(--color-status-accent-bg);
 }
 
-.badge[data-status="signed"] {
-  color: var(--color-status-signed-fg);
-  background-color: var(--color-status-signed-bg);
+.badge[data-tone="success"] {
+  color: var(--color-status-success-fg);
+  background-color: var(--color-status-success-bg);
 }
 
-.badge[data-status="sent"] {
-  color: var(--color-status-sent-fg);
-  background-color: var(--color-status-sent-bg);
+.badge[data-tone="warning"] {
+  color: var(--color-status-warning-fg);
+  background-color: var(--color-status-warning-bg);
 }
 
-.badge[data-status="failed"] {
-  color: var(--color-status-failed-fg);
-  background-color: var(--color-status-failed-bg);
+.badge[data-tone="danger"] {
+  color: var(--color-status-danger-fg);
+  background-color: var(--color-status-danger-bg);
 }
 
-.badge[data-status="missed"] {
-  color: var(--color-status-missed-fg);
-  background-color: var(--color-status-missed-bg);
+.badge[data-tone="info"] {
+  color: var(--color-status-info-fg);
+  background-color: var(--color-status-info-bg);
 }
 
 .type-display-lg,

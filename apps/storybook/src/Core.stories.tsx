@@ -17,7 +17,7 @@ import {
   Textarea,
   typeClass,
 } from "@macro88/ui";
-import { statusRoles } from "@macro88/tokens";
+import { statusTones } from "@macro88/tokens";
 
 function Mark() {
   return (
@@ -48,9 +48,9 @@ function CoreGallery() {
         <Avatar name="Ada Lovelace" />
       </div>
       <div className="flex flex-wrap gap-2">
-        {statusRoles.map((status) => (
-          <Badge key={status} status={status}>
-            {status.charAt(0).toUpperCase() + status.slice(1)}
+        {statusTones.map((tone) => (
+          <Badge key={tone} tone={tone}>
+            {tone.charAt(0).toUpperCase() + tone.slice(1)}
           </Badge>
         ))}
       </div>

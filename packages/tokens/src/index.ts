@@ -22,17 +22,9 @@ export const colorRoles = [
 
 export type ColorRole = (typeof colorRoles)[number];
 
-export const statusRoles = [
-  "draft",
-  "queued",
-  "approved",
-  "signed",
-  "sent",
-  "failed",
-  "missed",
-] as const;
+export const statusTones = ["neutral", "accent", "success", "warning", "danger", "info"] as const;
 
-export type StatusRole = (typeof statusRoles)[number];
+export type StatusTone = (typeof statusTones)[number];
 export type StatusPart = "fg" | "bg";
 
 export const radiusRoles = ["control", "field", "panel", "badge", "overlay", "full"] as const;
@@ -62,16 +54,16 @@ export function colorVar(role: ColorRole): `--color-${ColorRole}` {
 }
 
 export function statusColorVar(
-  role: StatusRole,
+  tone: StatusTone,
   part: StatusPart,
-): `--color-status-${StatusRole}-${StatusPart}` {
-  return `--color-status-${role}-${part}`;
+): `--color-status-${StatusTone}-${StatusPart}` {
+  return `--color-status-${tone}-${part}`;
 }
 
 export const semanticColorVars = [
   ...colorRoles.map((role) => colorVar(role)),
-  ...statusRoles.flatMap(
-    (role) => [statusColorVar(role, "fg"), statusColorVar(role, "bg")] as const,
+  ...statusTones.flatMap(
+    (tone) => [statusColorVar(tone, "fg"), statusColorVar(tone, "bg")] as const,
   ),
 ] as const;
 
