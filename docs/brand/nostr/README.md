@@ -88,10 +88,20 @@ Semantic names are the design-system contract. The theme only supplies values.
 | `border`            | `--color-border`            | `#C8CBC9`       | `#2C2F2E` | Decorative hairlines, always paired with spacing                   |
 | `border-strong`     | `--color-border-strong`     | `#6A6E6B`       | `#7E807E` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
 | `focus`             | `--color-focus`             | `#662482`       | `#B373CE` | Focus ring                                                         |
-| `status.danger.fg`  | `--color-status-danger-fg`  | `#7A2428`       | `#E8A8A4` | Danger tone. Failed label and error text                           |
+| `status.neutral.fg` | `--color-status-neutral-fg` | `#404846`       | `#A8B0AD` | Neutral tone text                                                  |
+| `status.neutral.bg` | `--color-status-neutral-bg` | `#F3F4F3`       | `#1C1E1D` | Neutral tone wash                                                  |
+| `status.accent.fg`  | `--color-status-accent-fg`  | `#521C69`       | `#BE82D4` | Accent tone text                                                   |
+| `status.accent.bg`  | `--color-status-accent-bg`  | `#DBDEDC`       | `#262928` | Accent tone wash                                                   |
+| `status.success.fg` | `--color-status-success-fg` | `#243C2E`       | `#B7CDBB` | Success tone text                                                  |
+| `status.success.bg` | `--color-status-success-bg` | `#DCE6DE`       | `#24302A` | Success tone wash                                                  |
+| `status.danger.fg`  | `--color-status-danger-fg`  | `#7A2428`       | `#E8A8A4` | Danger tone. Failed badge label                                    |
 | `status.danger.bg`  | `--color-status-danger-bg`  | `#F0D9D8`       | `#3A2424` | Danger tone wash                                                   |
 | `status.warning.fg` | `--color-status-warning-fg` | `#5C4010`       | `#E0C98A` | Warning tone. Missed label                                         |
 | `status.warning.bg` | `--color-status-warning-bg` | `#EDE3C8`       | `#3A3320` | Warning tone wash                                                  |
+| `status.info.fg`    | `--color-status-info-fg`    | `#1E3842`       | `#B3C7CE` | Info tone text                                                     |
+| `status.info.bg`    | `--color-status-info-bg`    | `#D7E2E4`       | `#243036` | Info tone wash                                                     |
+
+The nostr scheduler renders only `danger` (Failed) and `warning` (Missed) as Badges. `neutral`, `accent`, `success` and `info` exist for completeness and must stay low-chroma; never use `accent` as a purple fill or wash.
 
 Failed uses the `danger` tone (`--color-status-danger-fg/bg`); Missed uses the `warning` tone (`--color-status-warning-fg/bg`). Only these two statuses render as Badges (capsule, `--radius-full`); Sent, Queued and Draft are plain `--color-muted` text.
 
@@ -136,6 +146,10 @@ Ratios use WCAG 2 relative luminance. **AAA** is 7:1 for normal text. **AA** is 
 | status.warning fg / surface | `#5C4010`  | `#F3F4F3`  |  8.67:1 | AAA     |
 | text / status.warning bg    | `#151616`  | `#EDE3C8`  | 14.18:1 | AAA     |
 | muted / status.warning bg   | `#404846`  | `#EDE3C8`  |  7.35:1 | AAA     |
+| status.neutral fg / badge   | `#404846`  | `#F3F4F3`  |  8.53:1 | AAA     |
+| status.accent fg / badge    | `#521C69`  | `#DBDEDC`  |  8.96:1 | AAA     |
+| status.success fg / badge   | `#243C2E`  | `#DCE6DE`  |  9.32:1 | AAA     |
+| status.info fg / badge      | `#1E3842`  | `#D7E2E4`  |  9.35:1 | AAA     |
 
 #### Dark
 
@@ -168,8 +182,12 @@ Ratios use WCAG 2 relative luminance. **AAA** is 7:1 for normal text. **AA** is 
 | status.warning fg / surface | `#E0C98A`  | `#1C1E1D`  | 10.29:1 | AAA     |
 | text / status.warning bg    | `#E8EBE9`  | `#3A3320`  | 10.45:1 | AAA     |
 | muted / status.warning bg   | `#A8B0AD`  | `#3A3320`  |  5.66:1 | AA      |
+| status.neutral fg / badge   | `#A8B0AD`  | `#1C1E1D`  |  7.57:1 | AAA     |
+| status.accent fg / badge    | `#BE82D4`  | `#262928`  |  5.13:1 | AA      |
+| status.success fg / badge   | `#B7CDBB`  | `#24302A`  |  8.14:1 | AAA     |
+| status.info fg / badge      | `#B3C7CE`  | `#243036`  |  7.72:1 | AAA     |
 
-Use `accent` or `accent-fg` for any small accent text on `bg` and `surface`. Error text uses `status.danger.fg`, which meets AAA on `bg` and `surface` in both themes.
+Use `accent` or `accent-fg` for any small accent text on `bg` and `surface`. Error text uses `--color-danger-fg`, which meets AAA on `bg` and `surface` in both themes.
 
 Accent-coloured text or icons on a selected or today wash always use accent-fg, never accent.
 
@@ -315,7 +333,7 @@ The ink chop and the sign-off rule do not move.
 
 **Loading.** A skeleton that follows the shape of the surface (list rows, day columns, or a work list). Show it only after 200ms, and keep it visible for at least 400ms so it does not flash. The region is `aria-busy="true"` and has an accessible name from the table. Do not paint empty copy while a request is in flight.
 
-**Error.** Plain language from the table, set in `status.danger.fg`, next to the control that failed. Offer a next step when one exists. Pending buttons disable and keep their label.
+**Error.** Plain language from the table, set in `--color-danger-fg`, next to the control that failed. Offer a next step when one exists. Pending buttons disable and keep their label.
 
 ---
 
