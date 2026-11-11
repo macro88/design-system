@@ -55,6 +55,14 @@ const preview: Preview = {
     backgrounds: { disable: true },
     a11y: {
       test: "error",
+      config: {
+        rules: [
+          // The canvas is one control, not a document, so page landmarks do not apply.
+          { id: "region", enabled: false },
+          { id: "landmark-one-main", enabled: false },
+          { id: "page-has-heading-one", enabled: false },
+        ],
+      },
     },
   },
 };

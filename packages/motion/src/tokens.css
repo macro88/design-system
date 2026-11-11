@@ -42,6 +42,13 @@
   --motion-spring-bouncy-stiffness: 520;
   --motion-spring-bouncy-damping: 26;
   --motion-spring-bouncy-mass: 1;
+
+  /* Component timings. A theme may override these. */
+  --skeleton-delay: 200ms;
+  --skeleton-min: 400ms;
+  --toast-duration-success: 4000ms;
+  --toast-duration-undo: 6000ms;
+  --shimmer-duration: 1.4s;
 }
 
 @theme inline {
@@ -64,6 +71,7 @@
     --motion-duration-slow: 0ms;
     --motion-duration-slower: 0ms;
     --motion-duration-fade: 120ms;
+    --shimmer-duration: 0ms;
     --motion-ease-standard: var(--motion-ease-linear);
     --motion-ease-exit: var(--motion-ease-linear);
     --motion-ease-emphasis: var(--motion-ease-linear);

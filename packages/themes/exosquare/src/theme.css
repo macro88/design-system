@@ -32,6 +32,8 @@
   --color-status-signed-bg: #d2eef4;
   --color-status-sent-fg: #166534;
   --color-status-sent-bg: #d2efd8;
+  --color-danger-fg: #991b1b;
+  --color-danger-bg: #f8d2d8;
   --color-status-failed-fg: #991b1b;
   --color-status-failed-bg: #f8d2d8;
   --color-status-missed-fg: #92400e;
@@ -61,6 +63,8 @@
   --color-status-signed-bg: #143e52;
   --color-status-sent-fg: #86efac;
   --color-status-sent-bg: #143824;
+  --color-danger-fg: #fecaca;
+  --color-danger-bg: #5a2028;
   --color-status-failed-fg: #fecaca;
   --color-status-failed-bg: #5a2028;
   --color-status-missed-fg: #fde68a;

@@ -91,6 +91,15 @@ export const cssVars = {
   },
 } as const;
 
+/** Timings that components read. Themes override the custom properties. */
+export const componentTimingVars = {
+  skeletonDelay: "--skeleton-delay",
+  skeletonMin: "--skeleton-min",
+  toastSuccess: "--toast-duration-success",
+  toastUndo: "--toast-duration-undo",
+  shimmer: "--shimmer-duration",
+} as const;
+
 export type TweenTransition = {
   type: "tween";
   duration: number;
