@@ -258,7 +258,7 @@
     var(--color-border) 90%
   );
   background-size: 200% 100%;
-  animation: shimmer var(--shimmer-duration) linear infinite;
+  animation: var(--skeleton-animation);
 }
 
 .sheet {

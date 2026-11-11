@@ -4,6 +4,7 @@ import {
   componentTimingVars,
   cssVars,
   duration,
+  skeletonAnimationVar,
   durationMs,
   ease,
   packageName,
@@ -55,6 +56,9 @@ describe("@macro88/motion", () => {
     for (const name of Object.values(componentTimingVars)) {
       expect(css).toContain(`${name}:`);
     }
+    expect(css).toContain("--shimmer-duration: 1.4s");
     expect(css).toContain("--shimmer-duration: 0ms");
+    expect(css).toContain(`${skeletonAnimationVar}: none`);
+    expect(css).toMatch(/prefers-reduced-motion: reduce[\s\S]*--skeleton-animation:\s*none/);
   });
 });

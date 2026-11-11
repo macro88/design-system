@@ -10,6 +10,9 @@ export const colorRoles = [
   "accent-fg",
   "accent-on",
   "accent-subtle",
+  "selected",
+  "today",
+  "skeleton",
   "border",
   "border-strong",
   "focus",
@@ -134,6 +137,7 @@ export const sheetMaxHeightVar = "--sheet-max-height";
 export const fontVars = {
   display: "--font-display",
   body: "--font-body",
+  mono: "--font-mono",
 } as const;
 
 export const spaceVars = {

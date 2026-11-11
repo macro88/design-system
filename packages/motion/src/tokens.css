@@ -49,6 +49,8 @@
   --toast-duration-success: 4000ms;
   --toast-duration-undo: 6000ms;
   --shimmer-duration: 1.4s;
+  /* None until a theme opts into the shimmer keyframes. */
+  --skeleton-animation: none;
 }
 
 @theme inline {
@@ -72,6 +74,7 @@
     --motion-duration-slower: 0ms;
     --motion-duration-fade: 120ms;
     --shimmer-duration: 0ms;
+    --skeleton-animation: none;
     --motion-ease-standard: var(--motion-ease-linear);
     --motion-ease-exit: var(--motion-ease-linear);
     --motion-ease-emphasis: var(--motion-ease-linear);
