@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@macro88/design-system": ["./packages/design-system/src/index.ts"],
+      "@macro88/tokens": ["./packages/tokens/src/index.ts"],
+      "@macro88/motion": ["./packages/motion/src/index.ts"],
+      "@macro88/ui": ["./packages/ui/src/index.ts"],
+      "@macro88/patterns": ["./packages/patterns/src/index.ts"],
+      "@macro88/theme-runifly": ["./packages/themes/runifly/src/index.ts"],
+      "@macro88/theme-nostr": ["./packages/themes/nostr/src/index.ts"],
+      "@macro88/theme-exosquare": ["./packages/themes/exosquare/src/index.ts"]
+    }
+  }
+}
