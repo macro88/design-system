@@ -30,3 +30,9 @@ Apps map their own status words onto these tones. For example, nostr maps failed
 | `--color-status-sent-bg`     | removed                     |
 
 Tokens with no previous name: `--color-status-neutral-fg`, `--color-status-neutral-bg`, `--color-status-accent-fg`, `--color-status-accent-bg`, `--color-status-success-fg`, `--color-status-success-bg`, `--color-status-info-fg`, and `--color-status-info-bg`.
+
+### Exports
+
+- `@macro88/tokens` renames `statusRoles` to `statusTones` and `StatusRole` to `StatusTone`, with no aliases.
+- `statusColorVar` now takes a tone.
+- `tone` on `Badge` is optional and defaults to `neutral`.
