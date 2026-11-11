@@ -6,7 +6,7 @@ import { defineConfig } from "vitest/config";
 const packageRoot = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
-  plugins: [dts({ entryRoot: "src", include: ["src"] })],
+  plugins: [dts({ entryRoot: "src", include: ["src/index.ts"] })],
   build: {
     emptyOutDir: true,
     lib: {

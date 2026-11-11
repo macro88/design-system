@@ -1,5 +1,5 @@
 /**
- * Reject hard-coded visual values under packages/ui.
+ * Reject hard-coded visual values under packages/ui and packages/patterns.
  *
  * Hex colours, colour functions, Tailwind arbitrary visual values, and inline
  * style objects that set colour, font, radius, spacing, or motion all fail
@@ -11,7 +11,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = fileURLToPath(new URL("..", import.meta.url));
-const uiRoot = path.join(repoRoot, "packages", "ui");
+const roots = [path.join(repoRoot, "packages", "ui"), path.join(repoRoot, "packages", "patterns")];
 
 const HEX_COLOUR =
   /(?<![\w&])#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![A-Za-z0-9_])/g;
@@ -426,7 +426,10 @@ function inspect(file, source) {
 }
 
 async function main() {
-  const files = await collectFiles(uiRoot);
+  const files = [];
+  for (const root of roots) {
+    files.push(...(await collectFiles(root)));
+  }
   const findings = [];
 
   for (const file of files) {
@@ -435,7 +438,7 @@ async function main() {
   }
 
   if (findings.length === 0) {
-    console.log("packages/ui: no hard-coded visual values.");
+    console.log("packages/ui and packages/patterns: no hard-coded visual values.");
     return;
   }
 

@@ -1,6 +1,6 @@
 # design-system
 
-Neutral, unbranded foundation for macro88 apps. The catalogue, tokens, and themes are not filled in yet.
+Neutral, unbranded foundation for macro88 apps. `@macro88/tokens` is the semantic contract. `@macro88/motion` holds the shared motion primitives. The theme packages currently ship temporary palettes so the catalogue switcher can be checked.
 
 An app installs the shared library and one project theme:
 

@@ -1,0 +1,76 @@
+/* Intended path: packages/motion/src/tokens.css
+ *
+ * Shared motion primitives for @macro88/motion. Neutral names only.
+ * Theme personality (roles, distances, scales) lives in the theme package.
+ *
+ * CSS values are milliseconds and cubic-bezier(…). Framer Motion exports in
+ * packages/motion/src/index.ts use the same names with durations in seconds.
+ *
+ * Tailwind 4: the @theme block maps these to duration-* and ease-* utilities.
+ * packages/ui must use those utilities or var(--motion-…) —
+ * see scripts/lint-visuals.mjs.
+ *
+ * When committing, add an export to packages/motion/package.json:
+ *   "./tokens.css": "./src/tokens.css"
+ */
+
+:root {
+  --motion-duration-instant: 0ms;
+  --motion-duration-fast: 120ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 320ms;
+  --motion-duration-slower: 480ms;
+  /* Opacity and colour only. Kept under prefers-reduced-motion; transforms are not. */
+  --motion-duration-fade: 120ms;
+
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-linear: cubic-bezier(0, 0, 1, 1);
+  /* Visible overshoot. y > 1 is valid in cubic-bezier(). */
+  --motion-ease-emphasis: cubic-bezier(0.22, 1.35, 0.36, 1);
+
+  /* snap, soft, layout: critically damped (ζ ≈ 1). No overshoot. */
+  --motion-spring-snap-stiffness: 500;
+  --motion-spring-snap-damping: 46;
+  --motion-spring-snap-mass: 1;
+  --motion-spring-soft-stiffness: 260;
+  --motion-spring-soft-damping: 32;
+  --motion-spring-soft-mass: 1;
+  --motion-spring-layout-stiffness: 400;
+  --motion-spring-layout-damping: 40;
+  --motion-spring-layout-mass: 1;
+  /* lively: ζ ≈ 0.72, slight overshoot, settle ~300ms. */
+  --motion-spring-lively-stiffness: 380;
+  --motion-spring-lively-damping: 28;
+  --motion-spring-lively-mass: 1;
+  /* bouncy: ζ ≈ 0.57, visible overshoot, settle ~350–400ms. */
+  --motion-spring-bouncy-stiffness: 520;
+  --motion-spring-bouncy-damping: 26;
+  --motion-spring-bouncy-mass: 1;
+}
+
+@theme inline {
+  --duration-instant: var(--motion-duration-instant);
+  --duration-fast: var(--motion-duration-fast);
+  --duration-base: var(--motion-duration-base);
+  --duration-slow: var(--motion-duration-slow);
+  --duration-slower: var(--motion-duration-slower);
+  --duration-fade: var(--motion-duration-fade);
+  --ease-standard: var(--motion-ease-standard);
+  --ease-exit: var(--motion-ease-exit);
+  --ease-linear: var(--motion-ease-linear);
+  --ease-emphasis: var(--motion-ease-emphasis);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0ms;
+    --motion-duration-base: 0ms;
+    --motion-duration-slow: 0ms;
+    --motion-duration-slower: 0ms;
+    --motion-duration-fade: 120ms;
+    --motion-ease-standard: var(--motion-ease-linear);
+    --motion-ease-exit: var(--motion-ease-linear);
+    --motion-ease-emphasis: var(--motion-ease-linear);
+  }
+}

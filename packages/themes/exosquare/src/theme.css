@@ -1,0 +1,68 @@
+/* TEMPORARY placeholder palette (violet)
+ * Not a brand. It exists so the catalogue can switch themes before a
+ * visual direction is settled. Light is the default. Dark sets data-scheme="dark".
+ * Radius roles are modest and differ per palette so the slots are visible.
+ */
+
+[data-theme="exosquare"] {
+  color-scheme: light;
+  --radius-control: 2px;
+  --radius-field: 2px;
+  --radius-panel: 4px;
+  --radius-badge: 2px;
+  --radius-overlay: 6px;
+  --color-bg: #eeecf3;
+  --color-surface: #f8f7fb;
+  --color-text: #1a1722;
+  --color-muted: #524e60;
+  --color-accent: #4c3d86;
+  --color-accent-fg: #3c3170;
+  --color-accent-on: #ffffff;
+  --color-accent-subtle: #e0dcf0;
+  --color-border: #d9d5e4;
+  --color-border-strong: #655f78;
+  --color-focus: #4c3d86;
+  --color-status-draft-fg: #3a3644;
+  --color-status-draft-bg: #e4e1ea;
+  --color-status-queued-fg: #1e3a8a;
+  --color-status-queued-bg: #d8e0f8;
+  --color-status-approved-fg: #3f6212;
+  --color-status-approved-bg: #e4eec4;
+  --color-status-signed-fg: #155e75;
+  --color-status-signed-bg: #d2eef4;
+  --color-status-sent-fg: #166534;
+  --color-status-sent-bg: #d2efd8;
+  --color-status-failed-fg: #991b1b;
+  --color-status-failed-bg: #f8d2d8;
+  --color-status-missed-fg: #92400e;
+  --color-status-missed-bg: #f8e4be;
+}
+
+[data-theme="exosquare"][data-scheme="dark"] {
+  color-scheme: dark;
+  --color-bg: #14121a;
+  --color-surface: #211e2a;
+  --color-text: #f2eef8;
+  --color-muted: #c4bed2;
+  --color-accent: #c4b6f0;
+  --color-accent-fg: #ddd4f8;
+  --color-accent-on: #14121a;
+  --color-accent-subtle: #322c44;
+  --color-border: #3a3448;
+  --color-border-strong: #9a92ac;
+  --color-focus: #c4b6f0;
+  --color-status-draft-fg: #eeeaf4;
+  --color-status-draft-bg: #322e3c;
+  --color-status-queued-fg: #c9d6fc;
+  --color-status-queued-bg: #1e2c58;
+  --color-status-approved-fg: #d9f99d;
+  --color-status-approved-bg: #2c3a16;
+  --color-status-signed-fg: #a5f3fc;
+  --color-status-signed-bg: #143e52;
+  --color-status-sent-fg: #86efac;
+  --color-status-sent-bg: #143824;
+  --color-status-failed-fg: #fecaca;
+  --color-status-failed-bg: #5a2028;
+  --color-status-missed-fg: #fde68a;
+  --color-status-missed-bg: #4a3014;
+}

@@ -226,6 +226,21 @@ importers:
       '@macro88/design-system':
         specifier: workspace:*
         version: link:../../packages/design-system
+      '@macro88/motion':
+        specifier: workspace:*
+        version: link:../../packages/motion
+      '@macro88/theme-exosquare':
+        specifier: workspace:*
+        version: link:../../packages/themes/exosquare
+      '@macro88/theme-nostr':
+        specifier: workspace:*
+        version: link:../../packages/themes/nostr
+      '@macro88/theme-runifly':
+        specifier: workspace:*
+        version: link:../../packages/themes/runifly
+      '@macro88/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
       react:
         specifier: 19.3.1
         version: 19.3.1

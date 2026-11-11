@@ -1,7 +1,7 @@
 {
   "name": "@macro88/motion",
   "version": "0.0.0",
-  "description": "Temporary stub for @macro88/motion.",
+  "description": "Shared motion primitives.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,10 +9,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./tokens.css": "./src/tokens.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/tokens.css"
   ],
   "scripts": {
     "build": "vite build",
