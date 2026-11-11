@@ -91,6 +91,9 @@ export const cssVars = {
   },
 } as const;
 
+/** Animation value for a skeleton. Themes set `none` for a static wash. */
+export const skeletonAnimationVar = "--skeleton-animation";
+
 export type TweenTransition = {
   type: "tween";
   duration: number;

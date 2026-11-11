@@ -42,6 +42,9 @@
   --motion-spring-bouncy-stiffness: 520;
   --motion-spring-bouncy-damping: 26;
   --motion-spring-bouncy-mass: 1;
+
+  /* None until a skeleton component supplies its own keyframes. */
+  --skeleton-animation: none;
 }
 
 @theme inline {
@@ -64,6 +67,7 @@
     --motion-duration-slow: 0ms;
     --motion-duration-slower: 0ms;
     --motion-duration-fade: 120ms;
+    --skeleton-animation: none;
     --motion-ease-standard: var(--motion-ease-linear);
     --motion-ease-exit: var(--motion-ease-linear);
     --motion-ease-emphasis: var(--motion-ease-linear);

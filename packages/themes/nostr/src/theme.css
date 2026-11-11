@@ -1,68 +1,129 @@
-/* TEMPORARY placeholder palette (teal)
- * Not a brand. It exists so the catalogue can switch themes before a
- * visual direction is settled. Light is the default. Dark sets data-scheme="dark".
- * Radius roles are modest and differ per palette so the slots are visible.
- */
+/* Nostr theme. Light is the default. Dark sets data-scheme="dark". */
 
 [data-theme="nostr"] {
   color-scheme: light;
-  --radius-control: 6px;
-  --radius-field: 6px;
-  --radius-panel: 10px;
-  --radius-badge: 4px;
-  --radius-overlay: 12px;
-  --color-bg: #e7f0ec;
-  --color-surface: #f4faf7;
-  --color-text: #12201a;
-  --color-muted: #3c5348;
-  --color-accent: #0f6a52;
-  --color-accent-fg: #0b5340;
+  --font-display: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Literata", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-control: 4px;
+  --radius-field: 4px;
+  --radius-panel: 8px;
+  --radius-badge: 9999px;
+  --radius-overlay: 8px;
+  --radius-full: 9999px;
+  --color-bg: #e6e7e6;
+  --color-surface: #f3f4f3;
+  --color-text: #151616;
+  --color-muted: #404846;
+  --color-accent: #662482;
+  --color-accent-fg: #521c69;
   --color-accent-on: #ffffff;
-  --color-accent-subtle: #d3ebe2;
-  --color-border: #d2e0d8;
-  --color-border-strong: #567468;
-  --color-focus: #0f6a52;
-  --color-status-draft-fg: #2c3832;
-  --color-status-draft-bg: #e0e8e4;
-  --color-status-queued-fg: #1e3a8a;
-  --color-status-queued-bg: #d6e2f8;
-  --color-status-approved-fg: #3f6212;
-  --color-status-approved-bg: #e4eec6;
-  --color-status-signed-fg: #155e75;
-  --color-status-signed-bg: #d0eef4;
-  --color-status-sent-fg: #166534;
-  --color-status-sent-bg: #d0efd8;
-  --color-status-failed-fg: #991b1b;
-  --color-status-failed-bg: #f8d2d2;
-  --color-status-missed-fg: #92400e;
-  --color-status-missed-bg: #f8e4be;
+  --color-accent-subtle: #dbdedc;
+  --color-selected: #dbdedc;
+  --color-today: #eceeec;
+  --color-skeleton: #dbdedc;
+  --color-border: #c8cbc9;
+  --color-border-strong: #6a6e6b;
+  --color-focus: #662482;
+  --color-status-draft-fg: #404846;
+  --color-status-draft-bg: transparent;
+  --color-status-queued-fg: #404846;
+  --color-status-queued-bg: transparent;
+  --color-status-approved-fg: #404846;
+  --color-status-approved-bg: transparent;
+  --color-status-signed-fg: #404846;
+  --color-status-signed-bg: transparent;
+  --color-status-sent-fg: #404846;
+  --color-status-sent-bg: transparent;
+  --color-status-failed-fg: #7a2428;
+  --color-status-failed-bg: #f0d9d8;
+  --color-status-missed-fg: #5c4010;
+  --color-status-missed-bg: #ede3c8;
 }
 
 [data-theme="nostr"][data-scheme="dark"] {
   color-scheme: dark;
-  --color-bg: #101916;
-  --color-surface: #182420;
-  --color-text: #e7f4ee;
-  --color-muted: #b5cdc2;
-  --color-accent: #7ddec0;
-  --color-accent-fg: #b6f0da;
-  --color-accent-on: #101916;
-  --color-accent-subtle: #1a3a30;
-  --color-border: #2a4038;
-  --color-border-strong: #8aada0;
-  --color-focus: #7ddec0;
-  --color-status-draft-fg: #e4f0ea;
-  --color-status-draft-bg: #24342e;
-  --color-status-queued-fg: #c5d8fc;
-  --color-status-queued-bg: #1a3058;
-  --color-status-approved-fg: #d9f99d;
-  --color-status-approved-bg: #2a3a14;
-  --color-status-signed-fg: #a5f3fc;
-  --color-status-signed-bg: #124454;
-  --color-status-sent-fg: #86efac;
-  --color-status-sent-bg: #123822;
-  --color-status-failed-fg: #fecaca;
-  --color-status-failed-bg: #5c2424;
-  --color-status-missed-fg: #fde68a;
-  --color-status-missed-bg: #4a3010;
+  --color-bg: #141515;
+  --color-surface: #1c1e1d;
+  --color-text: #e8ebe9;
+  --color-muted: #a8b0ad;
+  --color-accent: #b373ce;
+  --color-accent-fg: #be82d4;
+  --color-accent-on: #141515;
+  --color-accent-subtle: #262928;
+  --color-selected: #262928;
+  --color-today: #202221;
+  --color-skeleton: #262928;
+  --color-border: #2c2f2e;
+  --color-border-strong: #7e807e;
+  --color-focus: #b373ce;
+  --color-status-draft-fg: #a8b0ad;
+  --color-status-draft-bg: transparent;
+  --color-status-queued-fg: #a8b0ad;
+  --color-status-queued-bg: transparent;
+  --color-status-approved-fg: #a8b0ad;
+  --color-status-approved-bg: transparent;
+  --color-status-signed-fg: #a8b0ad;
+  --color-status-signed-bg: transparent;
+  --color-status-sent-fg: #a8b0ad;
+  --color-status-sent-bg: transparent;
+  --color-status-failed-fg: #e8a8a4;
+  --color-status-failed-bg: #3a2424;
+  --color-status-missed-fg: #e0c98a;
+  --color-status-missed-bg: #3a3320;
+}
+
+[data-theme="nostr"] .motion-shimmer {
+  background-color: var(--color-skeleton);
+  background-image: none;
+  animation: var(--skeleton-animation);
+}
+
+[data-theme="nostr"] .literata-reading,
+[data-theme="nostr"] .literata-excerpt,
+[data-theme="nostr"] .literata-preview {
+  font-family: var(--font-body);
+  font-optical-sizing: auto;
+}
+
+[data-theme="nostr"] .literata-reading {
+  font-variation-settings:
+    "opsz" 22,
+    "wght" 400;
+}
+
+[data-theme="nostr"] .literata-excerpt {
+  font-variation-settings:
+    "opsz" 16,
+    "wght" 400;
+}
+
+[data-theme="nostr"] .literata-preview {
+  font-variation-settings:
+    "opsz" 12,
+    "wght" 400;
+}
+
+/* Nostr only. A 2px accent rule that starts with a 6px square chop. */
+[data-theme="nostr"] .ink-rule {
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+}
+
+[data-theme="nostr"] .ink-rule::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 0;
+  background: var(--color-accent);
+}
+
+[data-theme="nostr"] .ink-rule::after {
+  content: "";
+  height: 2px;
+  flex: 1 1 auto;
+  border-radius: 0;
+  background: var(--color-accent);
 }
