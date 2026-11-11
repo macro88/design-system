@@ -6,14 +6,14 @@ The shared design system stays neutral. This brand lives only in `packages/theme
 
 British English in the product and in this book. Times use the 24-hour clock in the `en-GB` form: `Thu 12 Nov, 09:00`.
 
-The page is cool layout-pad stock. Light is the default. Dark is a first-class green-black desk. The accent is a temporary placeholder, pending a choice.
+The direction is **Nostrich Ink**: the official Nostr logo purple — a flat, deep fill of `#662482` — on a cool, nearly-neutral layout pad. Light is the default. Dark is a first-class near-black desk, with a lifted purple of the same hue.
 
 ---
 
 ## Principles
 
 1. **The writing is the product.** Chrome stays out of the way. The composer is a generous page, not a form in a box. Notes are set in a text face with optical sizes; the rest of the interface is a quieter gothic.
-2. **One pigment, one mark.** The accent is a temporary placeholder, pending a choice, and is reserved for the primary act, the caret, the focus ring, the now line, and the sign-off rule. Each now line and sign-off rule begins with a 6px square ink chop — the mark a nib makes when it first touches the page. Do not tint badges, chips, nav, or selected rows with the accent.
+2. **One pigment, one mark.** The Nostrich Ink accent is reserved for the primary act, the caret, the focus ring, the now line, and the sign-off rule. Each now line and sign-off rule begins with a 6px square ink chop — the mark a nib makes when it first touches the page. Do not tint badges, chips, nav, or selected rows with the accent.
 3. **Status is a word.** Draft, queued, approved, signed, and sent are sentence-case text in the column’s type. Only Failed and Missed may wear a capsule, because they are exceptions the writer must not miss.
 4. **States are designed.** Empty, loading, and error are first-class layouts. Loading never reuses empty copy. Errors are plain language, never raw field or API names.
 5. **Motion confirms the work.** It is playful and noticeable, then it stops. Typing, focus, and section keys stay instant. Reduced motion is honoured. Motion answers something the person did; it does not decorate a page load.
@@ -66,32 +66,32 @@ If a new error appears, write it in this voice. Never show `proposedFireAt`, `In
 
 Light is the default. Dark is first-class and uses the same semantic tokens.
 
-The page is a cool layout pad, slightly green-cast, not fashion cream and not a grey civic stock. Body ink is a green-black. The accent is a temporary placeholder, pending a choice, and is spent only on the primary fill, the caret, the focus ring, the now line, and the sign-off rule. The 6px ink chop at the start of those two rules uses the same accent, never a second colour.
+The page is a cool, nearly-neutral layout pad, not fashion cream and not a green-cast stock. Body ink is a near-black. The accent is the flat fill of the official Nostr logo (`#662482`), and is spent only on the primary fill, the caret, the focus ring, the now line, and the sign-off rule. The 6px ink chop at the start of those two rules uses the same accent, never a second colour.
 
-Muted meets AAA on `bg` and `surface` in both themes, except `muted` on `selected` in light, which meets AA. Do not introduce a weaker “hint” colour.
+Muted meets AAA on `bg` and `surface` in both themes. `muted` on `selected` meets AA in both themes. Do not introduce a weaker “hint” colour.
 
 ### Token table
 
 Semantic names are the design-system contract. The theme only supplies values.
 
-| Semantic token     | CSS custom property        | Light (default) | Dark      | Role                                                               |
-| ------------------ | -------------------------- | --------------- | --------- | ------------------------------------------------------------------ |
-| `bg`               | `--color-bg`               | `#E6E7E6`       | `#141515` | Page paper / layout pad                                            |
-| `surface`          | `--color-surface`          | `#F3F4F3`       | `#1C1E1D` | A fresh sheet: fields, raised event blocks, selected rows          |
-| `text`             | `--color-text`             | `#151616`       | `#E8EBE9` | Body and titles                                                    |
-| `muted`            | `--color-muted`            | `#404846`       | `#A8B0AD` | Secondary text, times, hints, ordinary status words                |
-| `accent`           | `--color-accent`           | `#662482`       | `#B373CE` | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
-| `accent-fg`        | `--color-accent-fg`        | `#521C69`       | `#BE82D4` | Accent as small text, if a link must be accented                   |
-| `accent-on`        | `--color-accent-on`        | `#FFFFFF`       | `#141515` | Label on an accent fill                                            |
-| `selected`         | `--color-selected`         | `#DBDEDC`       | `#262928` | “This row” wash; never an accent tint                              |
-| `today`            | `--color-today`            | `#ECEEEC`       | `#202221` | Today’s column in the week grid                                    |
-| `border`           | `--color-border`           | `#C8CBC9`       | `#2C2F2E` | Decorative hairlines, always paired with spacing                   |
-| `border-strong`    | `--color-border-strong`    | `#6A6E6B`       | `#7E807E` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
-| `focus`            | `--color-focus`            | `#662482`       | `#B373CE` | Focus ring                                                         |
-| `status.failed.fg` | `--color-status-failed-fg` | `#7A2428`       | `#E8A8A4` | Failed label and error text                                        |
-| `status.failed.bg` | `--color-status-failed-bg` | `#F0D9D8`       | `#3A2424` | Failed capsule wash                                                |
-| `status.missed.fg` | `--color-status-missed-fg` | `#5C4010`       | `#E0C98A` | Missed label                                                       |
-| `status.missed.bg` | `--color-status-missed-bg` | `#EDE3C8`       | `#3A3320` | Missed capsule wash                                                |
+| Semantic token     | CSS custom property     | Light (default) | Dark      | Role                                                               |
+| ------------------ | ----------------------- | --------------- | --------- | ------------------------------------------------------------------ |
+| `bg`               | `--color-bg`            | `#E6E7E6`       | `#141515` | Page paper / layout pad                                            |
+| `surface`          | `--color-surface`       | `#F3F4F3`       | `#1C1E1D` | A fresh sheet: fields, raised event blocks, selected rows          |
+| `text`             | `--color-text`          | `#151616`       | `#E8EBE9` | Body and titles                                                    |
+| `muted`            | `--color-muted`         | `#404846`       | `#A8B0AD` | Secondary text, times, hints, ordinary status words                |
+| `accent`           | `--color-accent`        | `#662482`       | `#B373CE` | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
+| `accent-fg`        | `--color-accent-fg`     | `#521C69`       | `#BE82D4` | Accent as small text, if a link must be accented                   |
+| `accent-on`        | `--color-accent-on`     | `#FFFFFF`       | `#141515` | Label on an accent fill                                            |
+| `selected`         | `--color-selected`      | `#DBDEDC`       | `#262928` | “This row” wash; never an accent tint                              |
+| `today`            | `--color-today`         | `#ECEEEC`       | `#202221` | Today’s column in the week grid                                    |
+| `border`           | `--color-border`        | `#C8CBC9`       | `#2C2F2E` | Decorative hairlines, always paired with spacing                   |
+| `border-strong`    | `--color-border-strong` | `#6A6E6B`       | `#7E807E` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
+| `focus`            | `--color-focus`         | `#662482`       | `#B373CE` | Focus ring                                                         |
+| `status.failed.fg` | `--status-failed-fg`    | `#7A2428`       | `#E8A8A4` | Failed label and error text                                        |
+| `status.failed.bg` | `--status-failed-bg`    | `#F0D9D8`       | `#3A2424` | Failed capsule wash                                                |
+| `status.missed.fg` | `--status-missed-fg`    | `#5C4010`       | `#E0C98A` | Missed label                                                       |
+| `status.missed.bg` | `--status-missed-bg`    | `#EDE3C8`       | `#3A3320` | Missed capsule wash                                                |
 
 Draft, queued, approved, signed, sent, rejected, and discarded use `muted` (or `text`) for the word. They have no background token and no capsule. Missed is separate from failed (a relay refusal) and from queued (still waiting).
 
@@ -99,7 +99,7 @@ Draft, queued, approved, signed, sent, rejected, and discarded use `muted` (or `
 
 Do not add an `accent-subtle` wash. Selection uses `selected`. Today uses `today`.
 
-The dark accent is the same temporary placeholder, pending a choice. It is not a mint glow and not neon.
+Dark accent is a lifted purple of the same hue, not neon and not a lavender wash. Labels on a dark accent fill use the dark paper colour (`accent-on`), not white.
 
 ### Contrast results
 
@@ -185,14 +185,6 @@ Load the faces through the theme. Do not rely on system UI fonts in production.
 
 Be Vietnam Pro is for everything that is not the note. Do not introduce a third display face.
 
-Apps load these faces. This repository does not ship a font package. Host Be Vietnam Pro, the Literata variable family (roman and italic, with the `opsz` and `wght` axes), and IBM Plex Mono in the app. The theme only names the stacks, each with a system fallback:
-
-- `--font-display`: Be Vietnam Pro, then `ui-sans-serif, system-ui, sans-serif`
-- `--font-body`: Literata, then `Iowan Old Style, Palatino, Palatino Linotype, serif`
-- `--font-mono`: IBM Plex Mono, then `ui-monospace, monospace`
-
-Long text sets `font-optical-sizing: auto` and `font-variation-settings` so `opsz` matches the size in the scale below. The theme classes are `literata-reading` (`opsz` 22), `literata-excerpt` (`opsz` 16), and `literata-preview` (`opsz` 12).
-
 ### Literata, optical size, and figures
 
 Load the variable family with both the `opsz` (7–72) and `wght` (200–900) axes, in roman and italic. Set `font-optical-sizing: auto`, and also set `font-variation-settings` so the optical size matches the intended pixel size. Do not leave the axis at its default of 12 when the text is 20px or 22px — that is what makes the writing look blotchy and uneven.
@@ -244,8 +236,6 @@ Use it in two places only:
 
 Do not put a chop next to the word Signed, on nav, on the composer date, or on every row. Rarity is what makes it mean something. There is no motion on the chop or the rule.
 
-The nostr-only class is `ink-rule`: a 2px accent rule that starts with a 6px square chop, with square corners and no motion. Nothing in `packages/ui` references it.
-
 ---
 
 ## Spacing, radius, elevation, density
@@ -265,6 +255,8 @@ Typical rhythm: page padding 28px at the 1280×800 reference frame (32px at a wi
 | `radius-badge`   | badge   | 999px | Capsule shape, and only for Failed and Missed. Ordinary status has no container.                                               |
 | `radius-overlay` | menu    | 8px   | Menus, sheets, and toasts                                                                                                      |
 | `radius-full`    | avatar  | 999px | Avatars and true toggles (switches, radios). Not checkboxes, not nav, not buttons, not tags, not the ink chop.                 |
+
+The book's menu role maps to `radius-overlay` and its avatar role to `radius-full` in the design-system contract.
 
 Inner radius equals outer radius minus the padding between them, when a rounded child sits inside a rounded parent.
 
@@ -351,15 +343,15 @@ Reference mocks are drawn at 1280×800.
 
 These are defaults this product does not use. A later change needs a one-sentence reason, specific to Scheduler, written back into this book.
 
-- Any gradient in a fill or in type.
-- Fashion cream near `#F6F1E8` / `#F4F1EA` paired with terracotta, clay, sage, or olive as the accent.
+- The accent is the flat fill of the official Nostr logo (`#662482`). It is used only on the primary fill, the caret, the focus ring, and the ink chop, with no gradients, glow, lavender washes, or a purple selected state. Electric or gradient violets such as `#8E30EB`, and indigo or lavender used as a general accent, stay banned.
+- Fashion cream near `#F6F1E8` / `#F4F1EA` paired with terracotta, clay, sage, or olive as the accent. This theme’s paper is a cool, nearly-neutral layout pad, and the accent is Nostrich Ink, not a mid sage.
 - An `eyebrow` token, or uppercase labels with tracked-out letter-spacing.
 - Inter, Geist, Roboto, Instrument Sans, Instrument Serif, Fraunces, Space Grotesk, Bricolage, Sora, Syne, Young Serif, DM Sans, Public Sans, or Source Serif. This theme’s faces are Be Vietnam Pro, Literata, and IBM Plex Mono.
 - Lists built as a stack of nested cards. Inbox, queue, log, and sign lists are type, a gap or a hairline, and a selected wash.
 - One generous radius on everything, or pill-shaped buttons, nav, chips, and ordinary tags. Full-round is for avatars and true toggles only. Failed and Missed are the only capsules. The ink chop is a square.
 - A tinted badge on every row. Status colour alone is never the only cue.
 - A centred hero, three equal feature cards, or luxury performed as leftover paper.
-- Glass, aurora, neon glows, or mesh backgrounds. Dark is a green-black desk, not a halo.
+- Glass, aurora, neon glows, or mesh backgrounds. Dark is a cool near-black desk, not a halo.
 - Glyphs in tinted circles or rounded squares, and emoji as UI icons.
 - Lyrical interchangeable sample copy. Notes in mocks and tests should be mixed, slightly awkward, and about the work (links, replies, threads, mentions, a long line, a short one).
 - A soft shadow under every surface, or a 1px border around every child of a panel.
