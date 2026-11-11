@@ -1,0 +1,29 @@
+{
+  "name": "@macro88/patterns",
+  "version": "0.0.0",
+  "description": "Temporary stub for @macro88/patterns.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "6.0.3",
+    "vite": "8.3.7",
+    "vite-plugin-dts": "5.1.2",
+    "vitest": "5.1.0"
+  }
+}
