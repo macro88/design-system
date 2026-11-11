@@ -6,14 +6,14 @@ The shared design system stays neutral. This brand lives only in `packages/theme
 
 British English in the product and in this book. Times use the 24-hour clock in the `en-GB` form: `Thu 12 Nov, 09:00`.
 
-The direction is **Barrel Green**: a fountain-pen barrel green on cool layout-pad stock. Light is the default. Dark is a first-class green-black desk.
+The page is cool layout-pad stock. Light is the default. Dark is a first-class green-black desk. The accent is a temporary placeholder, pending a choice.
 
 ---
 
 ## Principles
 
 1. **The writing is the product.** Chrome stays out of the way. The composer is a generous page, not a form in a box. Notes are set in a text face with optical sizes; the rest of the interface is a quieter gothic.
-2. **One pigment, one mark.** The barrel-green accent is reserved for the primary act, the caret, the focus ring, the now line, and the sign-off rule. Each now line and sign-off rule begins with a 6px square ink chop — the mark a nib makes when it first touches the page. Do not tint badges, chips, nav, or selected rows with the accent.
+2. **One pigment, one mark.** The accent is a temporary placeholder, pending a choice, and is reserved for the primary act, the caret, the focus ring, the now line, and the sign-off rule. Each now line and sign-off rule begins with a 6px square ink chop — the mark a nib makes when it first touches the page. Do not tint badges, chips, nav, or selected rows with the accent.
 3. **Status is a word.** Draft, queued, approved, signed, and sent are sentence-case text in the column’s type. Only Failed and Missed may wear a capsule, because they are exceptions the writer must not miss.
 4. **States are designed.** Empty, loading, and error are first-class layouts. Loading never reuses empty copy. Errors are plain language, never raw field or API names.
 5. **Motion confirms the work.** It is playful and noticeable, then it stops. Typing, focus, and section keys stay instant. Reduced motion is honoured. Motion answers something the person did; it does not decorate a page load.
@@ -66,7 +66,7 @@ If a new error appears, write it in this voice. Never show `proposedFireAt`, `In
 
 Light is the default. Dark is first-class and uses the same semantic tokens.
 
-The page is a cool layout pad, slightly green-cast, not fashion cream and not a grey civic stock. Body ink is a green-black. The accent is barrel green, taken from a fountain-pen barrel, and is spent only on the primary fill, the caret, the focus ring, the now line, and the sign-off rule. The 6px ink chop at the start of those two rules uses the same accent, never a second colour.
+The page is a cool layout pad, slightly green-cast, not fashion cream and not a grey civic stock. Body ink is a green-black. The accent is a temporary placeholder, pending a choice, and is spent only on the primary fill, the caret, the focus ring, the now line, and the sign-off rule. The 6px ink chop at the start of those two rules uses the same accent, never a second colour.
 
 Muted meets AAA on `bg` and `surface` in both themes, except `muted` on `selected` in light, which meets AA. Do not introduce a weaker “hint” colour.
 
@@ -99,7 +99,7 @@ Draft, queued, approved, signed, sent, rejected, and discarded use `muted` (or `
 
 Do not add an `accent-subtle` wash. Selection uses `selected`. Today uses `today`.
 
-Dark accent is a dusty lifted viridian, not a mint glow and not neon.
+The dark accent is the same temporary placeholder, pending a choice. It is not a mint glow and not neon.
 
 ### Contrast results
 
@@ -351,8 +351,8 @@ Reference mocks are drawn at 1280×800.
 
 These are defaults this product does not use. A later change needs a one-sentence reason, specific to Scheduler, written back into this book.
 
-- Purple, indigo, or violet accents, and any gradient in a fill or in type.
-- Fashion cream near `#F6F1E8` / `#F4F1EA` paired with terracotta, clay, sage, or olive as the accent. Barrel green is a dark, saturated bottle green, not a dusty mid sage.
+- Any gradient in a fill or in type.
+- Fashion cream near `#F6F1E8` / `#F4F1EA` paired with terracotta, clay, sage, or olive as the accent.
 - An `eyebrow` token, or uppercase labels with tracked-out letter-spacing.
 - Inter, Geist, Roboto, Instrument Sans, Instrument Serif, Fraunces, Space Grotesk, Bricolage, Sora, Syne, Young Serif, DM Sans, Public Sans, or Source Serif. This theme’s faces are Be Vietnam Pro, Literata, and IBM Plex Mono.
 - Lists built as a stack of nested cards. Inbox, queue, log, and sign lists are type, a gap or a hairline, and a selected wash.
