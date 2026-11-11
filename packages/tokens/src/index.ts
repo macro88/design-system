@@ -109,8 +109,17 @@ export const layerVars = {
   base: "--layer-base",
   raised: "--layer-raised",
   overlay: "--layer-overlay",
+  modal: "--layer-modal",
   toast: "--layer-toast",
 } as const;
+
+export const overlayOpacityVar = "--overlay-opacity";
+export const skeletonSizeVars = {
+  line: "--skeleton-line-size",
+  card: "--skeleton-card-size",
+  column: "--skeleton-column-size",
+} as const;
+export const sheetMaxHeightVar = "--sheet-max-height";
 
 export const fontVars = {
   display: "--font-display",

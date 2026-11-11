@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [
     dts({
       entryRoot: "src",
+      tsconfigPath: "tsconfig.dts.json",
       include: ["src"],
       exclude: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test-setup.ts"],
     }),
@@ -21,7 +22,16 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime", /^@radix-ui\//, /^@macro88\//],
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "motion",
+        "motion/react",
+        "sonner",
+        /^@radix-ui\//,
+        /^@macro88\//,
+      ],
     },
     sourcemap: true,
   },

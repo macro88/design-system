@@ -120,7 +120,13 @@
   --layer-base: 0;
   --layer-raised: 1;
   --layer-overlay: 20;
+  --layer-modal: 30;
   --layer-toast: 40;
+  --overlay-opacity: 0.32;
+  --skeleton-line-size: 1rem;
+  --skeleton-card-size: 5rem;
+  --skeleton-column-size: 10rem;
+  --sheet-max-height: 80vh;
 
   --elevation-shadow-colour: 0 0 0;
   --elevation-strength: 1;

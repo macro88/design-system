@@ -1,6 +1,7 @@
 import { focusRingClass } from "@macro88/tokens";
 import { type InputHTMLAttributes, useId } from "react";
 import { cx } from "./cx";
+import { FormMessage } from "./form-message";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -33,14 +34,14 @@ export function Input({ label, hint, error, id, className, ...props }: InputProp
         )}
       />
       {hint ? (
-        <p id={hintId} className="type-caption text-muted">
+        <FormMessage id={hintId} tone="hint">
           {hint}
-        </p>
+        </FormMessage>
       ) : null}
       {error ? (
-        <p id={errorId} className="type-caption text-danger-fg">
+        <FormMessage id={errorId} tone="error">
           {error}
-        </p>
+        </FormMessage>
       ) : null}
     </div>
   );
