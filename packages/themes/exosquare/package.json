@@ -1,6 +1,6 @@
 {
   "name": "@macro88/theme-exosquare",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Temporary placeholder palette. Not a brand.",
   "type": "module",
   "main": "./dist/index.js",
