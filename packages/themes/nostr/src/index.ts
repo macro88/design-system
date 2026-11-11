@@ -1,4 +1,4 @@
-/** Barrel Green theme for the nostr scheduler. */
+/** Nostr theme for the nostr scheduler. */
 export const packageName = "@macro88/theme-nostr";
 
 export const themeId = "nostr";
