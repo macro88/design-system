@@ -171,6 +171,10 @@ Ratios use WCAG 2 relative luminance. **AAA** is 7:1 for normal text. **AA** is 
 
 Use `accent` or `accent-fg` for any small accent text on `bg` and `surface`. Error text uses `status.failed.fg`, which meets AAA on `bg` and `surface` in both themes.
 
+Accent-coloured text or icons on a selected or today wash always use accent-fg, never accent.
+
+Dark accent `#B373CE` on selected `#262928` is 4.38:1 (under AA), while accent-fg `#BE82D4` on it is 5.13:1.
+
 ---
 
 ## Type

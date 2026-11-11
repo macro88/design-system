@@ -139,6 +139,13 @@ describe("nostr theme contract", () => {
     expect(dark.get("--color-skeleton")).toBe(dark.get("--color-selected"));
   });
 
+  it("keeps dark accent text on selected and today at AA", () => {
+    for (const background of ["--color-selected", "--color-today"]) {
+      const ratio = contrast(dark.get("--color-accent-fg") ?? "", dark.get(background) ?? "");
+      expect(ratio, `--color-accent-fg on ${background}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
   it("meets AA for the role pairs in both schemes", () => {
     for (const scheme of [light, dark]) {
       for (const [foreground, background, minimum] of aaPairs) {
