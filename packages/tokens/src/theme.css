@@ -26,6 +26,8 @@
   --color-border: #e4e4e7;
   --color-border-strong: #71717a;
   --color-focus: #3f3f46;
+  --color-danger-fg: #991b1b;
+  --color-danger-bg: #f8d4d4;
 
   --color-status-draft-fg: #3f3f46;
   --color-status-draft-bg: #e4e4e7;
@@ -110,8 +112,15 @@
   --focus-width: 2px;
   --focus-offset: 2px;
   --icon-stroke: 1.5px;
+  --disabled-opacity: 0.6;
   --control-height: 2.75rem;
   --control-height-sm: 2.5rem;
+  --control-height-lg: 3rem;
+  --field-area-min-height: 5rem;
+  --layer-base: 0;
+  --layer-raised: 1;
+  --layer-overlay: 20;
+  --layer-toast: 40;
 
   --elevation-shadow-colour: 0 0 0;
   --elevation-strength: 1;

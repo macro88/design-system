@@ -54,6 +54,7 @@ export function SegmentedControl({
       aria-label={label}
       className="inline-flex flex-wrap gap-1 rounded-control border border-border p-1"
     >
+      {name ? <input type="hidden" name={name} value={selected} /> : null}
       {options.map((option, index) => {
         const checked = option.value === selected;
         return (
@@ -64,7 +65,6 @@ export function SegmentedControl({
             }}
             type="button"
             role="radio"
-            name={name}
             aria-checked={checked}
             data-state={checked ? "checked" : "unchecked"}
             tabIndex={checked ? 0 : -1}

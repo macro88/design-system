@@ -9,7 +9,7 @@
 }
 
 .h-control-lg {
-  min-height: var(--space-48);
+  min-height: var(--control-height-lg);
 }
 
 .icon-button {
@@ -22,17 +22,17 @@
 }
 
 .icon-button-lg {
-  min-width: var(--space-48);
+  min-width: var(--control-height-lg);
 }
 
 .field-area {
-  min-height: var(--space-80);
+  min-height: var(--field-area-min-height);
 }
 
 .field {
   transition-property: border-color, color;
-  transition-duration: var(--motion-duration-fast, 120ms);
-  transition-timing-function: var(--motion-ease-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-ease-standard);
 }
 
 .field::placeholder,
@@ -43,8 +43,8 @@
 .button {
   box-shadow: var(--elevation-rest);
   transition-property: background-color, border-color, box-shadow, color;
-  transition-duration: var(--motion-duration-fast, 120ms);
-  transition-timing-function: var(--motion-ease-standard, cubic-bezier(0.2, 0, 0, 1));
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-ease-standard);
 }
 
 .button:hover:not(:disabled):not([aria-disabled="true"]) {
@@ -62,7 +62,23 @@
 
 .button:disabled,
 .button[aria-disabled="true"] {
-  opacity: 0.6;
+  opacity: var(--disabled-opacity);
+}
+
+.button[aria-busy="true"]::before {
+  content: "";
+  display: inline-block;
+  width: var(--space-16);
+  height: var(--space-4);
+  border-radius: var(--radius-badge);
+  background: currentColor;
+  animation: button-pending var(--motion-duration-slower) var(--motion-ease-linear) infinite;
+}
+
+@keyframes button-pending {
+  50% {
+    opacity: var(--disabled-opacity);
+  }
 }
 
 .icon {
@@ -76,21 +92,21 @@
   height: 100%;
   fill: none;
   stroke: currentColor;
-  stroke-width: var(--icon-stroke, 1.5px);
+  stroke-width: var(--icon-stroke);
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .field[data-invalid="true"] {
-  border-color: var(--color-status-failed-fg);
+  border-color: var(--color-danger-fg);
 }
 
 .field:disabled {
-  opacity: 0.6;
+  opacity: var(--disabled-opacity);
 }
 
 .select-content {
-  z-index: 20;
+  z-index: var(--layer-overlay);
   min-width: var(--radix-select-trigger-width);
 }
 
@@ -225,5 +241,9 @@
   .segmented-item,
   .badge {
     transition: none;
+  }
+
+  .button[aria-busy="true"]::before {
+    animation: none;
   }
 }

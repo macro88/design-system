@@ -13,6 +13,8 @@ export const colorRoles = [
   "border",
   "border-strong",
   "focus",
+  "danger-fg",
+  "danger-bg",
 ] as const;
 
 export type ColorRole = (typeof colorRoles)[number];
@@ -91,6 +93,23 @@ export const focusVars = {
   width: "--focus-width",
   offset: "--focus-offset",
   colour: "--color-focus",
+} as const;
+
+export const iconStrokeVar = "--icon-stroke";
+export const disabledOpacityVar = "--disabled-opacity";
+export const controlHeightVars = {
+  sm: "--control-height-sm",
+  md: "--control-height",
+  lg: "--control-height-lg",
+} as const;
+export const fieldAreaMinHeightVar = "--field-area-min-height";
+
+/** Stacking slots. Components use these instead of raw z-index numbers. */
+export const layerVars = {
+  base: "--layer-base",
+  raised: "--layer-raised",
+  overlay: "--layer-overlay",
+  toast: "--layer-toast",
 } as const;
 
 export const fontVars = {

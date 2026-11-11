@@ -3,8 +3,13 @@ import { describe, expect, it } from "vitest";
 import {
   colorRoles,
   elevationVars,
+  controlHeightVars,
+  disabledOpacityVar,
+  fieldAreaMinHeightVar,
   focusRingClass,
   focusVars,
+  iconStrokeVar,
+  layerVars,
   packageName,
   radiusVars,
   semanticColorVars,
@@ -35,6 +40,8 @@ describe("@macro88/tokens", () => {
       "border",
       "border-strong",
       "focus",
+      "danger-fg",
+      "danger-bg",
     ]);
     expect(statusRoles).toEqual([
       "draft",
@@ -66,6 +73,13 @@ describe("@macro88/tokens", () => {
     }
     expect(themeCss).toContain(`${focusVars.width}: 2px`);
     expect(themeCss).toContain(`${focusVars.offset}: 2px`);
+    expect(themeCss).toContain(`${iconStrokeVar}:`);
+    expect(themeCss).toContain(`${disabledOpacityVar}:`);
+    expect(themeCss).toContain(`${controlHeightVars.lg}:`);
+    expect(themeCss).toContain(`${fieldAreaMinHeightVar}:`);
+    for (const name of Object.values(layerVars)) {
+      expect(themeCss).toContain(`${name}:`);
+    }
     expect(themeCss).toContain(focusRingClass);
   });
 

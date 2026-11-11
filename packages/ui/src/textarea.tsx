@@ -38,7 +38,7 @@ export function Textarea({ label, hint, error, id, className, ...props }: Textar
         </p>
       ) : null}
       {error ? (
-        <p id={errorId} className="type-caption text-status-failed-fg">
+        <p id={errorId} className="type-caption text-danger-fg">
           {error}
         </p>
       ) : null}

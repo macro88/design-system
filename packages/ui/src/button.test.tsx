@@ -40,8 +40,31 @@ describe("Button", () => {
 
     const button = screen.getByRole("button", { name: "Save" });
     expect(button).toHaveAttribute("aria-busy", "true");
+    expect(button).toHaveAttribute("aria-disabled", "true");
+    expect(button).not.toBeDisabled();
     await user.click(button);
     expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it("keeps focus while pending", () => {
+    const view = render(<Button>Save</Button>);
+    const button = screen.getByRole("button", { name: "Save" });
+    button.focus();
+    view.rerender(<Button pending>Save</Button>);
+    expect(button).toHaveFocus();
+    expect(button).not.toBeDisabled();
+  });
+
+  it("stops a pending link from navigating", () => {
+    render(
+      <Button asChild pending>
+        <a href="/next">Next</a>
+      </Button>,
+    );
+    const link = screen.getByRole("link", { name: "Next" });
+    const event = new MouseEvent("click", { bubbles: true, cancelable: true });
+    link.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
   });
 
   it("can render as the child element", () => {

@@ -1,10 +1,10 @@
 /**
  * Reject hard-coded visual values under packages/ui and packages/patterns.
  *
- * Hex colours, colour functions, Tailwind arbitrary visual values, and inline
- * style objects that set colour, font, radius, spacing, or motion all fail
- * the check. Token utility classes, var(--…) references, and composition
- * helpers are allowed.
+ * Hex colours, colour functions, Tailwind arbitrary visual values, inline
+ * style objects that set colour, font, radius, spacing, or motion, and CSS
+ * literals (including a fallback inside var()) all fail the check.
+ * Token utility classes and bare var(--…) references are allowed.
  */
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
@@ -378,6 +378,55 @@ function addFinding(findings, file, source, index, snippet) {
   });
 }
 
+const TOKEN_ONLY_PROPERTIES = new Set(["opacity", "z-index", "stroke-width"]);
+
+function fallbackHasLiteral(fallback) {
+  const stripped = fallback
+    .replace(/var\(\s*--[\w-]+\s*\)/g, "")
+    .replace(/calc\(|\)/g, "")
+    .replace(/[\s,+\-*/]/g, "");
+  return stripped.length > 0;
+}
+
+function cssLiteralFindings(file, source) {
+  if (!file.endsWith(".css")) return [];
+  const findings = [];
+  const masked = maskComments(source);
+  let index = 0;
+
+  while (index < masked.length) {
+    const start = masked.indexOf("var(", index);
+    if (start < 0) break;
+    const open = start + 3;
+    let depth = 1;
+    let cursor = open + 1;
+    let comma = -1;
+
+    while (cursor < masked.length && depth > 0) {
+      const char = masked[cursor];
+      if (char === "(") depth += 1;
+      else if (char === ")") depth -= 1;
+      else if (char === "," && depth === 1 && comma < 0) comma = cursor;
+      cursor += 1;
+    }
+
+    if (comma >= 0 && fallbackHasLiteral(masked.slice(comma + 1, cursor - 1))) {
+      addFinding(findings, file, source, start, masked.slice(start, cursor));
+    }
+    index = Math.max(cursor, start + 4);
+  }
+
+  const property = /(?:^|[;{}])\s*(opacity|z-index|stroke-width)\s*:\s*([^;]+)/g;
+  for (const match of masked.matchAll(property)) {
+    const name = match[1] ?? "";
+    const value = (match[2] ?? "").trim();
+    if (!TOKEN_ONLY_PROPERTIES.has(name) || /^var\(\s*--[\w-]+\s*\)$/.test(value)) continue;
+    addFinding(findings, file, source, match.index ?? 0, `${name}: ${value}`);
+  }
+
+  return findings;
+}
+
 function inspect(file, source) {
   const findings = [];
   const masked = maskComments(source);
@@ -422,8 +471,12 @@ function inspect(file, source) {
     }
   }
 
+  findings.push(...cssLiteralFindings(file, source));
+
   return findings;
 }
+
+export { inspect };
 
 async function main() {
   const files = [];
@@ -449,4 +502,6 @@ async function main() {
   process.exitCode = 1;
 }
 
-await main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await main();
+}

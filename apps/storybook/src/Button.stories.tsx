@@ -15,5 +15,5 @@ export const Outline: Story = { args: { children: "Edit", variant: "outline" } }
 export const Ghost: Story = { args: { children: "Dismiss", variant: "ghost" } };
 export const Pending: Story = { args: { children: "Save", pending: true } };
 export const Disabled: Story = { args: { children: "Save", disabled: true } };
-export const Small: Story = { args: { children: "Save", size: "sm" } };
+export const Small: Story = { args: { children: "Edit", variant: "outline", size: "sm" } };
 export const Large: Story = { args: { children: "Save", size: "lg" } };

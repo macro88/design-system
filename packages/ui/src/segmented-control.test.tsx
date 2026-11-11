@@ -25,4 +25,27 @@ describe("SegmentedControl", () => {
     expect(screen.getByRole("radio", { name: "Grid" })).toBeChecked();
     expect(onValueChange).toHaveBeenCalledWith("grid");
   });
+
+  it("does not change while disabled", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(
+      <SegmentedControl
+        disabled
+        label="Layout"
+        defaultValue="list"
+        name="layout"
+        onValueChange={onValueChange}
+        options={[
+          { value: "list", label: "List" },
+          { value: "grid", label: "Grid" },
+        ]}
+      />,
+    );
+
+    await user.click(screen.getByRole("radio", { name: "Grid" }));
+    expect(onValueChange).not.toHaveBeenCalled();
+    expect(screen.getByRole("radio", { name: "List" })).toBeChecked();
+    expect(document.querySelector('input[name="layout"]')).toHaveValue("list");
+  });
 });

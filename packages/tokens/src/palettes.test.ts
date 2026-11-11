@@ -139,6 +139,9 @@ describe("temporary theme palettes", () => {
           pair("--color-focus", "--color-surface", 3);
           pair("--color-border-strong", "--color-bg", 3);
           pair("--color-border-strong", "--color-surface", 3);
+          pair("--color-danger-fg", "--color-danger-bg", 4.5);
+          pair("--color-danger-fg", "--color-bg", 4.5);
+          pair("--color-danger-fg", "--color-surface", 4.5);
 
           for (const status of statusRoles) {
             pair(`--color-status-${status}-fg`, `--color-status-${status}-bg`, 4.5);

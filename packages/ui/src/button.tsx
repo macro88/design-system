@@ -1,29 +1,43 @@
 import { Slot } from "@radix-ui/react-slot";
 import { focusRingClass } from "@macro88/tokens";
-import { type ButtonHTMLAttributes } from "react";
+import { type ButtonHTMLAttributes, type MouseEvent as ReactMouseEvent } from "react";
 import { cx } from "./cx";
+
+type ButtonBase = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "disabled"> & {
+  pending?: boolean;
+  disabled?: boolean;
+  asChild?: boolean;
+};
+
+export type ButtonProps =
+  | (ButtonBase & {
+      variant?: "primary";
+      size?: "md" | "lg";
+    })
+  | (ButtonBase & {
+      variant: "outline" | "ghost";
+      size?: "sm" | "md" | "lg";
+    });
 
 export type ButtonVariant = "primary" | "outline" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  pending?: boolean;
-  asChild?: boolean;
-};
-
-const variantClass: Record<ButtonVariant, string> = {
+const variantClass = {
   primary: "button-primary border-transparent bg-accent text-accent-on",
   outline: "button-outline border-border-strong bg-surface text-text",
   ghost: "button-ghost border-transparent bg-transparent text-text",
-};
+} as const;
 
-const sizeClass: Record<ButtonSize, string> = {
+const sizeClass = {
   sm: "h-control-sm px-3 type-body-sm",
   md: "h-control px-4 type-body-md",
   lg: "h-control-lg px-5 type-body-md",
-};
+} as const;
+
+function blockActivation(event: { preventDefault(): void; stopPropagation(): void }) {
+  event.preventDefault();
+  event.stopPropagation();
+}
 
 export function Button({
   variant = "primary",
@@ -34,26 +48,31 @@ export function Button({
   children,
   disabled,
   type,
+  onClick,
   ...props
 }: ButtonProps) {
-  const isDisabled = Boolean(disabled || pending);
-  const height =
-    variant === "primary" && size === "sm" ? "h-control px-3 type-body-sm" : sizeClass[size];
+  const blocked = Boolean(disabled || pending);
   const classes = cx(
     "button inline-flex items-center justify-center gap-2 rounded-control border font-display outline-none",
     focusRingClass,
     variantClass[variant],
-    height,
+    sizeClass[size],
     className,
   );
-
   if (asChild) {
     return (
       <Slot
         {...props}
         aria-busy={pending || undefined}
-        aria-disabled={isDisabled || undefined}
+        aria-disabled={blocked || undefined}
         className={classes}
+        onClick={(event) => {
+          if (blocked) {
+            blockActivation(event);
+            return;
+          }
+          onClick?.(event as ReactMouseEvent<HTMLButtonElement>);
+        }}
       >
         {children}
       </Slot>
@@ -64,9 +83,17 @@ export function Button({
     <button
       {...props}
       type={type ?? "button"}
-      disabled={isDisabled}
+      disabled={Boolean(disabled)}
+      aria-disabled={blocked || undefined}
       aria-busy={pending || undefined}
       className={classes}
+      onClick={(event) => {
+        if (blocked) {
+          blockActivation(event);
+          return;
+        }
+        onClick?.(event);
+      }}
     >
       {children}
     </button>
