@@ -1,6 +1,6 @@
 {
   "name": "@macro88/theme-nostr",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Nostr theme for the nostr scheduler.",
   "type": "module",
   "main": "./dist/index.js",
