@@ -374,7 +374,14 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(jsdom@31.0.0)(vite@8.3.7(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/themes/nostr:
+    dependencies:
+      '@macro88/motion':
+        specifier: workspace:*
+        version: link:../../motion
     devDependencies:
+      '@macro88/tokens':
+        specifier: workspace:*
+        version: link:../../tokens
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
