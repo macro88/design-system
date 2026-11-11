@@ -74,24 +74,24 @@ Muted meets AAA on `bg` and `surface` in both themes. `muted` on `selected` meet
 
 Semantic names are the design-system contract. The theme only supplies values.
 
-| Semantic token     | CSS custom property     | Light (default) | Dark      | Role                                                               |
-| ------------------ | ----------------------- | --------------- | --------- | ------------------------------------------------------------------ |
-| `bg`               | `--color-bg`            | `#E6E7E6`       | `#141515` | Page paper / layout pad                                            |
-| `surface`          | `--color-surface`       | `#F3F4F3`       | `#1C1E1D` | A fresh sheet: fields, raised event blocks, selected rows          |
-| `text`             | `--color-text`          | `#151616`       | `#E8EBE9` | Body and titles                                                    |
-| `muted`            | `--color-muted`         | `#404846`       | `#A8B0AD` | Secondary text, times, hints, ordinary status words                |
-| `accent`           | `--color-accent`        | `#662482`       | `#B373CE` | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
-| `accent-fg`        | `--color-accent-fg`     | `#521C69`       | `#BE82D4` | Accent as small text, if a link must be accented                   |
-| `accent-on`        | `--color-accent-on`     | `#FFFFFF`       | `#141515` | Label on an accent fill                                            |
-| `selected`         | `--color-selected`      | `#DBDEDC`       | `#262928` | “This row” wash; never an accent tint                              |
-| `today`            | `--color-today`         | `#ECEEEC`       | `#202221` | Today’s column in the week grid                                    |
-| `border`           | `--color-border`        | `#C8CBC9`       | `#2C2F2E` | Decorative hairlines, always paired with spacing                   |
-| `border-strong`    | `--color-border-strong` | `#6A6E6B`       | `#7E807E` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
-| `focus`            | `--color-focus`         | `#662482`       | `#B373CE` | Focus ring                                                         |
-| `status.failed.fg` | `--status-failed-fg`    | `#7A2428`       | `#E8A8A4` | Failed label and error text                                        |
-| `status.failed.bg` | `--status-failed-bg`    | `#F0D9D8`       | `#3A2424` | Failed capsule wash                                                |
-| `status.missed.fg` | `--status-missed-fg`    | `#5C4010`       | `#E0C98A` | Missed label                                                       |
-| `status.missed.bg` | `--status-missed-bg`    | `#EDE3C8`       | `#3A3320` | Missed capsule wash                                                |
+| Semantic token     | CSS custom property        | Light (default) | Dark      | Role                                                               |
+| ------------------ | -------------------------- | --------------- | --------- | ------------------------------------------------------------------ |
+| `bg`               | `--color-bg`               | `#E6E7E6`       | `#141515` | Page paper / layout pad                                            |
+| `surface`          | `--color-surface`          | `#F3F4F3`       | `#1C1E1D` | A fresh sheet: fields, raised event blocks, selected rows          |
+| `text`             | `--color-text`             | `#151616`       | `#E8EBE9` | Body and titles                                                    |
+| `muted`            | `--color-muted`            | `#404846`       | `#A8B0AD` | Secondary text, times, hints, ordinary status words                |
+| `accent`           | `--color-accent`           | `#662482`       | `#B373CE` | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
+| `accent-fg`        | `--color-accent-fg`        | `#521C69`       | `#BE82D4` | Accent as small text, if a link must be accented                   |
+| `accent-on`        | `--color-accent-on`        | `#FFFFFF`       | `#141515` | Label on an accent fill                                            |
+| `selected`         | `--color-selected`         | `#DBDEDC`       | `#262928` | “This row” wash; never an accent tint                              |
+| `today`            | `--color-today`            | `#ECEEEC`       | `#202221` | Today’s column in the week grid                                    |
+| `border`           | `--color-border`           | `#C8CBC9`       | `#2C2F2E` | Decorative hairlines, always paired with spacing                   |
+| `border-strong`    | `--color-border-strong`    | `#6A6E6B`       | `#7E807E` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
+| `focus`            | `--color-focus`            | `#662482`       | `#B373CE` | Focus ring                                                         |
+| `status.failed.fg` | `--color-status-failed-fg` | `#7A2428`       | `#E8A8A4` | Failed label and error text                                        |
+| `status.failed.bg` | `--color-status-failed-bg` | `#F0D9D8`       | `#3A2424` | Failed capsule wash                                                |
+| `status.missed.fg` | `--color-status-missed-fg` | `#5C4010`       | `#E0C98A` | Missed label                                                       |
+| `status.missed.bg` | `--color-status-missed-bg` | `#EDE3C8`       | `#3A3320` | Missed capsule wash                                                |
 
 Draft, queued, approved, signed, sent, rejected, and discarded use `muted` (or `text`) for the word. They have no background token and no capsule. Missed is separate from failed (a relay refusal) and from queued (still waiting).
 
