@@ -40,7 +40,8 @@ function ruleBodies(source: string): Map<string, string> {
 
 function declarations(body: string): Map<string, string> {
   const values = new Map<string, string>();
-  for (const chunk of body.split(";")) {
+  const source = body.replace(/\/\*[\s\S]*?\*\//g, "");
+  for (const chunk of source.split(";")) {
     const colon = chunk.indexOf(":");
     if (colon === -1) continue;
     const name = chunk.slice(0, colon).trim();

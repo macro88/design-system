@@ -80,14 +80,14 @@ Semantic names are the design-system contract. The theme only supplies values.
 | `surface`          | `--color-surface`          | `#F2F5F3`       | `#1A211F` | A fresh sheet: fields, raised event blocks, selected rows          |
 | `text`             | `--color-text`             | `#141A18`       | `#E4EDE8` | Body and titles                                                    |
 | `muted`            | `--color-muted`            | `#3C4C46`       | `#A8B8B2` | Secondary text, times, hints, ordinary status words                |
-| `accent`           | `--color-accent`           | `#0C5548`       | `#5B9E8A` | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
-| `accent-fg`        | `--color-accent-fg`        | `#0A4A3E`       | `#68A894` | Accent as small text, if a link must be accented                   |
+| `accent`           | `--color-accent`           | pending         | pending   | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
+| `accent-fg`        | `--color-accent-fg`        | pending         | pending   | Accent as small text, if a link must be accented                   |
 | `accent-on`        | `--color-accent-on`        | `#FFFFFF`       | `#121816` | Label on an accent fill                                            |
 | `selected`         | `--color-selected`         | `#D8E0DC`       | `#242C29` | “This row” wash; never an accent tint                              |
 | `today`            | `--color-today`            | `#EAF0EC`       | `#1E2623` | Today’s column in the week grid                                    |
 | `border`           | `--color-border`           | `#C5CDC8`       | `#2A322F` | Decorative hairlines, always paired with spacing                   |
 | `border-strong`    | `--color-border-strong`    | `#68716A`       | `#7E807A` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
-| `focus`            | `--color-focus`            | `#0C5548`       | `#5B9E8A` | Focus ring                                                         |
+| `focus`            | `--color-focus`            | pending         | pending   | Focus ring                                                         |
 | `status.failed.fg` | `--color-status-failed-fg` | `#7A2428`       | `#E8A8A4` | Failed label and error text                                        |
 | `status.failed.bg` | `--color-status-failed-bg` | `#F0D9D8`       | `#3A2424` | Failed capsule wash                                                |
 | `status.missed.fg` | `--color-status-missed-fg` | `#5C4010`       | `#E0C98A` | Missed label                                                       |
@@ -117,13 +117,13 @@ Ratios use WCAG 2 relative luminance. **AAA** is 7:1 for normal text. **AA** is 
 | muted / surface            | `#3C4C46`  | `#F2F5F3`  |  8.27:1 | AAA     |
 | muted / selected           | `#3C4C46`  | `#D8E0DC`  |  6.75:1 | AA      |
 | muted / today              | `#3C4C46`  | `#EAF0EC`  |  7.85:1 | AAA     |
-| accent / bg                | `#0C5548`  | `#E4E9E6`  |  7.10:1 | AAA     |
-| accent / surface           | `#0C5548`  | `#F2F5F3`  |  7.94:1 | AAA     |
-| accent-fg / bg             | `#0A4A3E`  | `#E4E9E6`  |  8.29:1 | AAA     |
-| accent-fg / surface        | `#0A4A3E`  | `#F2F5F3`  |  9.28:1 | AAA     |
-| accent-on / accent         | `#FFFFFF`  | `#0C5548`  |  8.72:1 | AAA     |
-| focus / bg                 | `#0C5548`  | `#E4E9E6`  |  7.10:1 | AA (UI) |
-| focus / surface            | `#0C5548`  | `#F2F5F3`  |  7.94:1 | AA (UI) |
+| accent / bg                | pending    | `#E4E9E6`  | pending | pending |
+| accent / surface           | pending    | `#F2F5F3`  | pending | pending |
+| accent-fg / bg             | pending    | `#E4E9E6`  | pending | pending |
+| accent-fg / surface        | pending    | `#F2F5F3`  | pending | pending |
+| accent-on / accent         | `#FFFFFF`  | pending    | pending | pending |
+| focus / bg                 | pending    | `#E4E9E6`  | pending | pending |
+| focus / surface            | pending    | `#F2F5F3`  | pending | pending |
 | border-strong / bg         | `#68716A`  | `#E4E9E6`  |  4.11:1 | AA (UI) |
 | border-strong / surface    | `#68716A`  | `#F2F5F3`  |  4.60:1 | AA (UI) |
 | status.failed fg / badge   | `#7A2428`  | `#F0D9D8`  |  7.40:1 | AAA     |
@@ -149,13 +149,13 @@ Ratios use WCAG 2 relative luminance. **AAA** is 7:1 for normal text. **AA** is 
 | muted / surface            | `#A8B8B2`  | `#1A211F`  |  7.93:1 | AAA     |
 | muted / selected           | `#A8B8B2`  | `#242C29`  |  6.93:1 | AA      |
 | muted / today              | `#A8B8B2`  | `#1E2623`  |  7.49:1 | AAA     |
-| accent / bg                | `#5B9E8A`  | `#121816`  |  5.74:1 | AA      |
-| accent / surface           | `#5B9E8A`  | `#1A211F`  |  5.23:1 | AA      |
-| accent-fg / bg             | `#68A894`  | `#121816`  |  6.52:1 | AA      |
-| accent-fg / surface        | `#68A894`  | `#1A211F`  |  5.95:1 | AA      |
-| accent-on / accent         | `#121816`  | `#5B9E8A`  |  5.74:1 | AA      |
-| focus / bg                 | `#5B9E8A`  | `#121816`  |  5.74:1 | AA (UI) |
-| focus / surface            | `#5B9E8A`  | `#1A211F`  |  5.23:1 | AA (UI) |
+| accent / bg                | pending    | `#121816`  | pending | pending |
+| accent / surface           | pending    | `#1A211F`  | pending | pending |
+| accent-fg / bg             | pending    | `#121816`  | pending | pending |
+| accent-fg / surface        | pending    | `#1A211F`  | pending | pending |
+| accent-on / accent         | `#121816`  | pending    | pending | pending |
+| focus / bg                 | pending    | `#121816`  | pending | pending |
+| focus / surface            | pending    | `#1A211F`  | pending | pending |
 | border-strong / bg         | `#7E807A`  | `#121816`  |  4.50:1 | AA (UI) |
 | border-strong / surface    | `#7E807A`  | `#1A211F`  |  4.10:1 | AA (UI) |
 | status.failed fg / badge   | `#E8A8A4`  | `#3A2424`  |  7.25:1 | AAA     |
