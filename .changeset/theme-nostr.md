@@ -6,4 +6,6 @@
 "@macro88/tokens": minor
 ---
 
-Add the nostr brand theme, selected, today, and skeleton colours, and a switch for the skeleton animation.
+Add the nostr theme, selected, today, and skeleton colours, and a switch for the skeleton animation.
+
+Out-of-tree themes must now define the colour roles `selected`, `today`, and `skeleton`, and `--font-mono`.

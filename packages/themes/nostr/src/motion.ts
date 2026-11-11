@@ -59,7 +59,7 @@ export const feel = {
   arcSagittaMax: 56,
 } as const;
 
-/** Placeholder elevation token names. Values are owned by design-system. */
+/** Elevation tokens from @macro88/tokens. */
 export const elevation = {
   rest: "var(--elevation-rest)",
   hover: "var(--elevation-hover)",

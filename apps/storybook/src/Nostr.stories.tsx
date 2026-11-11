@@ -1,17 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-function paletteLabel(): string {
-  if (typeof document === "undefined") return "Nostr";
-  const theme = document.documentElement.dataset.theme ?? "nostr";
-  const scheme = document.documentElement.dataset.scheme ?? "light";
-  const name = theme === "nostr" ? "Nostr" : `${theme} (temporary)`;
-  return `${name} · ${scheme}`;
+const themeNames: Record<string, string> = {
+  nostr: "Nostr (temporary)",
+  runifly: "Runifly (temporary)",
+  exosquare: "Exosquare (temporary)",
+};
+
+function paletteLabel(theme: string, scheme: string): string {
+  return `${themeNames[theme] ?? `${theme} (temporary)`} · ${scheme}`;
 }
 
-function NostrMarks() {
+function NostrMarks({ theme, scheme }: { theme: string; scheme: string }) {
   return (
     <div className="bg-bg text-text grid max-w-prose gap-6 p-6">
-      <p className="font-display text-caption text-muted">{paletteLabel()}</p>
+      <p className="font-display text-caption text-muted">{paletteLabel(theme, scheme)}</p>
       <h1 className="font-display text-display-sm">Scheduler</h1>
       <p className="literata-reading max-w-prose">
         The writing is the product. Notes sit in Literata, with the optical size set for reading.
@@ -39,12 +41,18 @@ function NostrMarks() {
 
 const meta = {
   title: "Nostr",
-  component: NostrMarks,
   parameters: { layout: "fullscreen" },
-} satisfies Meta<typeof NostrMarks>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Marks: Story = {};
+export const Marks: Story = {
+  render: (_, { globals }) => (
+    <NostrMarks
+      theme={String(globals.theme ?? "nostr")}
+      scheme={String(globals.scheme ?? "light")}
+    />
+  ),
+};

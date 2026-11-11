@@ -27,15 +27,18 @@ const statuses = [
   ["missed", "bg-status-missed-bg text-status-missed-fg"],
 ] as const;
 
-function Tokens() {
+const themeNames: Record<string, string> = {
+  nostr: "Nostr (temporary)",
+  runifly: "Runifly (temporary)",
+  exosquare: "Exosquare (temporary)",
+};
+
+function Tokens({ theme, scheme }: { theme: string; scheme: string }) {
+  const label = themeNames[theme] ?? `${theme} (temporary)`;
   return (
     <div className="text-text grid max-w-prose gap-8">
       <p className="text-muted font-body text-caption">
-        {(typeof document === "undefined" ? "nostr" : document.documentElement.dataset.theme) ===
-        "nostr"
-          ? "Nostr"
-          : "Temporary palette"}
-        . Switch theme and scheme from the toolbar.
+        {label} · {scheme}. Switch theme and scheme from the toolbar.
       </p>
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {swatches.map(([name, swatch]) => (
@@ -72,11 +75,14 @@ function Tokens() {
 
 const meta = {
   title: "Tokens",
-  component: Tokens,
-} satisfies Meta<typeof Tokens>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Contract: Story = {};
+export const Contract: Story = {
+  render: (_, { globals }) => (
+    <Tokens theme={String(globals.theme ?? "nostr")} scheme={String(globals.scheme ?? "light")} />
+  ),
+};

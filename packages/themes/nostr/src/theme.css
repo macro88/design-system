@@ -39,7 +39,6 @@
   --color-status-failed-bg: #f0d9d8;
   --color-status-missed-fg: #5c4010;
   --color-status-missed-bg: #ede3c8;
-  --skeleton-animation: none;
 }
 
 [data-theme="nostr"][data-scheme="dark"] {

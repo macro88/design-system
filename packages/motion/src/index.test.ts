@@ -52,6 +52,8 @@ describe("@macro88/motion", () => {
     }
     expect(css).toContain("@media (prefers-reduced-motion: reduce)");
     expect(css).toContain("--motion-duration-fade: 120ms");
-    expect(css).toContain(`${skeletonAnimationVar}:`);
+    expect(css).toContain(`${skeletonAnimationVar}: none`);
+    expect(css).toMatch(/prefers-reduced-motion: reduce[\s\S]*--skeleton-animation:\s*none/);
+    expect(css).not.toContain("1.4s");
   });
 });

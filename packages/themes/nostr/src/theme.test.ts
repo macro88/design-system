@@ -1,4 +1,6 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { radiusVars, semanticColorVars } from "@macro88/tokens";
 
@@ -133,7 +135,6 @@ describe("nostr theme contract", () => {
     expect(dark.get("--color-accent-subtle")).toBe(dark.get("--color-selected"));
     expect(light.get("--color-skeleton")).toBe(light.get("--color-selected"));
     expect(dark.get("--color-skeleton")).toBe(dark.get("--color-selected"));
-    expect(light.get("--skeleton-animation")).toBe("none");
   });
 
   it("meets the book's contrast pairs in both schemes", () => {
@@ -145,9 +146,25 @@ describe("nostr theme contract", () => {
     }
   });
 
-  it("keeps the ink chop in the theme and out of the shared UI package", () => {
+  it("defines the ink chop class on the theme", () => {
     expect(css).toContain(".ink-rule");
-    expect(css).not.toContain("#f6f1e8");
-    expect(css).not.toContain("#c0562a");
+  });
+
+  it("leaves the ink chop out of shared components", () => {
+    const uiRoot = fileURLToPath(new URL("../../../ui/src", import.meta.url));
+    const files = collectSources(uiRoot);
+    for (const file of files) {
+      expect(readFileSync(file, "utf8"), path.relative(uiRoot, file)).not.toContain("ink-rule");
+    }
   });
 });
+
+function collectSources(directory: string): string[] {
+  const files: string[] = [];
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...collectSources(fullPath));
+    else if (/\.(tsx?|css)$/.test(entry.name)) files.push(fullPath);
+  }
+  return files;
+}
