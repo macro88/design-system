@@ -1,4 +1,4 @@
-/* Barrel Green. Light is the default. Dark sets data-scheme="dark". */
+/* Nostr theme. Light is the default. Dark sets data-scheme="dark". */
 
 [data-theme="nostr"] {
   color-scheme: light;
@@ -11,31 +11,29 @@
   --radius-badge: 9999px;
   --radius-overlay: 8px;
   --radius-full: 9999px;
-  --color-bg: #e4e9e6;
-  --color-surface: #f2f5f3;
-  --color-text: #141a18;
-  --color-muted: #3c4c46;
-  /* temporary accent, pending choice */
-  --color-accent: #2c4a5e;
-  --color-accent-fg: #1e3646;
+  --color-bg: #e6e7e6;
+  --color-surface: #f3f4f3;
+  --color-text: #151616;
+  --color-muted: #404846;
+  --color-accent: #662482;
+  --color-accent-fg: #521c69;
   --color-accent-on: #ffffff;
-  --color-accent-subtle: #d8e0dc;
-  --color-selected: #d8e0dc;
-  --color-today: #eaf0ec;
-  --color-skeleton: #d8e0dc;
-  --color-border: #c5cdc8;
-  --color-border-strong: #68716a;
-  /* temporary accent, pending choice */
-  --color-focus: #2c4a5e;
-  --color-status-draft-fg: #3c4c46;
+  --color-accent-subtle: #dbdedc;
+  --color-selected: #dbdedc;
+  --color-today: #eceeec;
+  --color-skeleton: #dbdedc;
+  --color-border: #c8cbc9;
+  --color-border-strong: #6a6e6b;
+  --color-focus: #662482;
+  --color-status-draft-fg: #404846;
   --color-status-draft-bg: transparent;
-  --color-status-queued-fg: #3c4c46;
+  --color-status-queued-fg: #404846;
   --color-status-queued-bg: transparent;
-  --color-status-approved-fg: #3c4c46;
+  --color-status-approved-fg: #404846;
   --color-status-approved-bg: transparent;
-  --color-status-signed-fg: #3c4c46;
+  --color-status-signed-fg: #404846;
   --color-status-signed-bg: transparent;
-  --color-status-sent-fg: #3c4c46;
+  --color-status-sent-fg: #404846;
   --color-status-sent-bg: transparent;
   --color-status-failed-fg: #7a2428;
   --color-status-failed-bg: #f0d9d8;
@@ -45,31 +43,29 @@
 
 [data-theme="nostr"][data-scheme="dark"] {
   color-scheme: dark;
-  --color-bg: #121816;
-  --color-surface: #1a211f;
-  --color-text: #e4ede8;
-  --color-muted: #a8b8b2;
-  /* temporary accent, pending choice */
-  --color-accent: #8fb4c9;
-  --color-accent-fg: #b7d0de;
-  --color-accent-on: #121816;
-  --color-accent-subtle: #242c29;
-  --color-selected: #242c29;
-  --color-today: #1e2623;
-  --color-skeleton: #242c29;
-  --color-border: #2a322f;
-  --color-border-strong: #7e807a;
-  /* temporary accent, pending choice */
-  --color-focus: #8fb4c9;
-  --color-status-draft-fg: #a8b8b2;
+  --color-bg: #141515;
+  --color-surface: #1c1e1d;
+  --color-text: #e8ebe9;
+  --color-muted: #a8b0ad;
+  --color-accent: #b373ce;
+  --color-accent-fg: #be82d4;
+  --color-accent-on: #141515;
+  --color-accent-subtle: #262928;
+  --color-selected: #262928;
+  --color-today: #202221;
+  --color-skeleton: #262928;
+  --color-border: #2c2f2e;
+  --color-border-strong: #7e807e;
+  --color-focus: #b373ce;
+  --color-status-draft-fg: #a8b0ad;
   --color-status-draft-bg: transparent;
-  --color-status-queued-fg: #a8b8b2;
+  --color-status-queued-fg: #a8b0ad;
   --color-status-queued-bg: transparent;
-  --color-status-approved-fg: #a8b8b2;
+  --color-status-approved-fg: #a8b0ad;
   --color-status-approved-bg: transparent;
-  --color-status-signed-fg: #a8b8b2;
+  --color-status-signed-fg: #a8b0ad;
   --color-status-signed-bg: transparent;
-  --color-status-sent-fg: #a8b8b2;
+  --color-status-sent-fg: #a8b0ad;
   --color-status-sent-bg: transparent;
   --color-status-failed-fg: #e8a8a4;
   --color-status-failed-bg: #3a2424;

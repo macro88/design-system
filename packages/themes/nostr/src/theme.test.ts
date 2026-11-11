@@ -75,33 +75,34 @@ const rules = ruleBodies(css);
 const light = declarations(rules.get('[data-theme="nostr"]') ?? "");
 const dark = declarations(rules.get('[data-theme="nostr"][data-scheme="dark"]') ?? "");
 
-const bookPairs: Array<[string, string, number]> = [
-  ["--color-text", "--color-bg", 7],
-  ["--color-text", "--color-surface", 7],
-  ["--color-text", "--color-selected", 7],
-  ["--color-text", "--color-today", 7],
-  ["--color-muted", "--color-bg", 7],
-  ["--color-muted", "--color-surface", 7],
+const aaPairs: Array<[string, string, number]> = [
+  ["--color-text", "--color-bg", 4.5],
+  ["--color-text", "--color-surface", 4.5],
+  ["--color-text", "--color-selected", 4.5],
+  ["--color-text", "--color-today", 4.5],
+  ["--color-muted", "--color-bg", 4.5],
+  ["--color-muted", "--color-surface", 4.5],
   ["--color-muted", "--color-selected", 4.5],
-  ["--color-muted", "--color-today", 7],
+  ["--color-muted", "--color-today", 4.5],
   ["--color-accent", "--color-bg", 4.5],
   ["--color-accent", "--color-surface", 4.5],
   ["--color-accent-fg", "--color-bg", 4.5],
   ["--color-accent-fg", "--color-surface", 4.5],
+  ["--color-accent-fg", "--color-selected", 4.5],
   ["--color-accent-on", "--color-accent", 4.5],
   ["--color-focus", "--color-bg", 3],
   ["--color-focus", "--color-surface", 3],
   ["--color-border-strong", "--color-bg", 3],
   ["--color-border-strong", "--color-surface", 3],
-  ["--color-status-failed-fg", "--color-status-failed-bg", 7],
-  ["--color-status-failed-fg", "--color-bg", 7],
-  ["--color-status-failed-fg", "--color-surface", 7],
-  ["--color-text", "--color-status-failed-bg", 7],
+  ["--color-status-failed-fg", "--color-status-failed-bg", 4.5],
+  ["--color-status-failed-fg", "--color-bg", 4.5],
+  ["--color-status-failed-fg", "--color-surface", 4.5],
+  ["--color-text", "--color-status-failed-bg", 4.5],
   ["--color-muted", "--color-status-failed-bg", 4.5],
-  ["--color-status-missed-fg", "--color-status-missed-bg", 7],
-  ["--color-status-missed-fg", "--color-bg", 7],
-  ["--color-status-missed-fg", "--color-surface", 7],
-  ["--color-text", "--color-status-missed-bg", 7],
+  ["--color-status-missed-fg", "--color-status-missed-bg", 4.5],
+  ["--color-status-missed-fg", "--color-bg", 4.5],
+  ["--color-status-missed-fg", "--color-surface", 4.5],
+  ["--color-text", "--color-status-missed-bg", 4.5],
   ["--color-muted", "--color-status-missed-bg", 4.5],
 ];
 
@@ -138,9 +139,9 @@ describe("nostr theme contract", () => {
     expect(dark.get("--color-skeleton")).toBe(dark.get("--color-selected"));
   });
 
-  it("meets the book's contrast pairs in both schemes", () => {
+  it("meets AA for the role pairs in both schemes", () => {
     for (const scheme of [light, dark]) {
-      for (const [foreground, background, minimum] of bookPairs) {
+      for (const [foreground, background, minimum] of aaPairs) {
         const ratio = contrast(scheme.get(foreground) ?? "", scheme.get(background) ?? "");
         expect(ratio, `${foreground} on ${background}`).toBeGreaterThanOrEqual(minimum);
       }

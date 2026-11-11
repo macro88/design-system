@@ -76,18 +76,18 @@ Semantic names are the design-system contract. The theme only supplies values.
 
 | Semantic token     | CSS custom property        | Light (default) | Dark      | Role                                                               |
 | ------------------ | -------------------------- | --------------- | --------- | ------------------------------------------------------------------ |
-| `bg`               | `--color-bg`               | `#E4E9E6`       | `#121816` | Page paper / layout pad                                            |
-| `surface`          | `--color-surface`          | `#F2F5F3`       | `#1A211F` | A fresh sheet: fields, raised event blocks, selected rows          |
-| `text`             | `--color-text`             | `#141A18`       | `#E4EDE8` | Body and titles                                                    |
-| `muted`            | `--color-muted`            | `#3C4C46`       | `#A8B8B2` | Secondary text, times, hints, ordinary status words                |
-| `accent`           | `--color-accent`           | pending         | pending   | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
-| `accent-fg`        | `--color-accent-fg`        | pending         | pending   | Accent as small text, if a link must be accented                   |
-| `accent-on`        | `--color-accent-on`        | `#FFFFFF`       | `#121816` | Label on an accent fill                                            |
-| `selected`         | `--color-selected`         | `#D8E0DC`       | `#242C29` | “This row” wash; never an accent tint                              |
-| `today`            | `--color-today`            | `#EAF0EC`       | `#1E2623` | Today’s column in the week grid                                    |
-| `border`           | `--color-border`           | `#C5CDC8`       | `#2A322F` | Decorative hairlines, always paired with spacing                   |
-| `border-strong`    | `--color-border-strong`    | `#68716A`       | `#7E807A` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
-| `focus`            | `--color-focus`            | pending         | pending   | Focus ring                                                         |
+| `bg`               | `--color-bg`               | `#E6E7E6`       | `#141515` | Page paper / layout pad                                            |
+| `surface`          | `--color-surface`          | `#F3F4F3`       | `#1C1E1D` | A fresh sheet: fields, raised event blocks, selected rows          |
+| `text`             | `--color-text`             | `#151616`       | `#E8EBE9` | Body and titles                                                    |
+| `muted`            | `--color-muted`            | `#404846`       | `#A8B0AD` | Secondary text, times, hints, ordinary status words                |
+| `accent`           | `--color-accent`           | `#662482`       | `#B373CE` | Primary fill, caret, focus ring, now line, sign-off rule, ink chop |
+| `accent-fg`        | `--color-accent-fg`        | `#521C69`       | `#BE82D4` | Accent as small text, if a link must be accented                   |
+| `accent-on`        | `--color-accent-on`        | `#FFFFFF`       | `#141515` | Label on an accent fill                                            |
+| `selected`         | `--color-selected`         | `#DBDEDC`       | `#262928` | “This row” wash; never an accent tint                              |
+| `today`            | `--color-today`            | `#ECEEEC`       | `#202221` | Today’s column in the week grid                                    |
+| `border`           | `--color-border`           | `#C8CBC9`       | `#2C2F2E` | Decorative hairlines, always paired with spacing                   |
+| `border-strong`    | `--color-border-strong`    | `#6A6E6B`       | `#7E807E` | Inputs and outlined controls (3:1 against `bg` and `surface`)      |
+| `focus`            | `--color-focus`            | `#662482`       | `#B373CE` | Focus ring                                                         |
 | `status.failed.fg` | `--color-status-failed-fg` | `#7A2428`       | `#E8A8A4` | Failed label and error text                                        |
 | `status.failed.bg` | `--color-status-failed-bg` | `#F0D9D8`       | `#3A2424` | Failed capsule wash                                                |
 | `status.missed.fg` | `--color-status-missed-fg` | `#5C4010`       | `#E0C98A` | Missed label                                                       |
@@ -109,65 +109,65 @@ Ratios use WCAG 2 relative luminance. **AAA** is 7:1 for normal text. **AA** is 
 
 | Pair                       | Foreground | Background |   Ratio | Result  |
 | -------------------------- | ---------- | ---------- | ------: | ------- |
-| text / bg                  | `#141A18`  | `#E4E9E6`  | 14.36:1 | AAA     |
-| text / surface             | `#141A18`  | `#F2F5F3`  | 16.07:1 | AAA     |
-| text / selected            | `#141A18`  | `#D8E0DC`  | 13.11:1 | AAA     |
-| text / today               | `#141A18`  | `#EAF0EC`  | 15.26:1 | AAA     |
-| muted / bg                 | `#3C4C46`  | `#E4E9E6`  |  7.39:1 | AAA     |
-| muted / surface            | `#3C4C46`  | `#F2F5F3`  |  8.27:1 | AAA     |
-| muted / selected           | `#3C4C46`  | `#D8E0DC`  |  6.75:1 | AA      |
-| muted / today              | `#3C4C46`  | `#EAF0EC`  |  7.85:1 | AAA     |
-| accent / bg                | pending    | `#E4E9E6`  | pending | pending |
-| accent / surface           | pending    | `#F2F5F3`  | pending | pending |
-| accent-fg / bg             | pending    | `#E4E9E6`  | pending | pending |
-| accent-fg / surface        | pending    | `#F2F5F3`  | pending | pending |
-| accent-on / accent         | `#FFFFFF`  | pending    | pending | pending |
-| focus / bg                 | pending    | `#E4E9E6`  | pending | pending |
-| focus / surface            | pending    | `#F2F5F3`  | pending | pending |
-| border-strong / bg         | `#68716A`  | `#E4E9E6`  |  4.11:1 | AA (UI) |
-| border-strong / surface    | `#68716A`  | `#F2F5F3`  |  4.60:1 | AA (UI) |
+| text / bg                  | `#151616`  | `#E6E7E6`  | 14.62:1 | AAA     |
+| text / surface             | `#151616`  | `#F3F4F3`  | 16.44:1 | AAA     |
+| text / selected            | `#151616`  | `#DBDEDC`  | 13.38:1 | AAA     |
+| text / today               | `#151616`  | `#ECEEEC`  | 15.55:1 | AAA     |
+| muted / bg                 | `#404846`  | `#E6E7E6`  |  7.58:1 | AAA     |
+| muted / surface            | `#404846`  | `#F3F4F3`  |  8.53:1 | AAA     |
+| muted / selected           | `#404846`  | `#DBDEDC`  |  6.94:1 | AA      |
+| muted / today              | `#404846`  | `#ECEEEC`  |  8.06:1 | AAA     |
+| accent / bg                | `#662482`  | `#E6E7E6`  |  7.92:1 | AAA     |
+| accent / surface           | `#662482`  | `#F3F4F3`  |  8.90:1 | AAA     |
+| accent-fg / bg             | `#521C69`  | `#E6E7E6`  |  9.80:1 | AAA     |
+| accent-fg / surface        | `#521C69`  | `#F3F4F3`  | 11.02:1 | AAA     |
+| accent-on / accent         | `#FFFFFF`  | `#662482`  |  9.81:1 | AAA     |
+| focus / bg                 | `#662482`  | `#E6E7E6`  |  7.92:1 | AA (UI) |
+| focus / surface            | `#662482`  | `#F3F4F3`  |  8.90:1 | AA (UI) |
+| border-strong / bg         | `#6A6E6B`  | `#E6E7E6`  |  4.18:1 | AA (UI) |
+| border-strong / surface    | `#6A6E6B`  | `#F3F4F3`  |  4.70:1 | AA (UI) |
 | status.failed fg / badge   | `#7A2428`  | `#F0D9D8`  |  7.40:1 | AAA     |
-| status.failed fg / bg      | `#7A2428`  | `#E4E9E6`  |  8.10:1 | AAA     |
-| status.failed fg / surface | `#7A2428`  | `#F2F5F3`  |  9.06:1 | AAA     |
-| text / status.failed bg    | `#141A18`  | `#F0D9D8`  | 13.12:1 | AAA     |
-| muted / status.failed bg   | `#3C4C46`  | `#F0D9D8`  |  6.75:1 | AA      |
+| status.failed fg / bg      | `#7A2428`  | `#E6E7E6`  |  8.03:1 | AAA     |
+| status.failed fg / surface | `#7A2428`  | `#F3F4F3`  |  9.02:1 | AAA     |
+| text / status.failed bg    | `#151616`  | `#F0D9D8`  | 13.49:1 | AAA     |
+| muted / status.failed bg   | `#404846`  | `#F0D9D8`  |  6.99:1 | AA      |
 | status.missed fg / badge   | `#5C4010`  | `#EDE3C8`  |  7.48:1 | AAA     |
-| status.missed fg / bg      | `#5C4010`  | `#E4E9E6`  |  7.79:1 | AAA     |
-| status.missed fg / surface | `#5C4010`  | `#F2F5F3`  |  8.71:1 | AAA     |
-| text / status.missed bg    | `#141A18`  | `#EDE3C8`  | 13.79:1 | AAA     |
-| muted / status.missed bg   | `#3C4C46`  | `#EDE3C8`  |  7.10:1 | AAA     |
+| status.missed fg / bg      | `#5C4010`  | `#E6E7E6`  |  7.71:1 | AAA     |
+| status.missed fg / surface | `#5C4010`  | `#F3F4F3`  |  8.67:1 | AAA     |
+| text / status.missed bg    | `#151616`  | `#EDE3C8`  | 14.18:1 | AAA     |
+| muted / status.missed bg   | `#404846`  | `#EDE3C8`  |  7.35:1 | AAA     |
 
 #### Dark
 
 | Pair                       | Foreground | Background |   Ratio | Result  |
 | -------------------------- | ---------- | ---------- | ------: | ------- |
-| text / bg                  | `#E4EDE8`  | `#121816`  | 15.05:1 | AAA     |
-| text / surface             | `#E4EDE8`  | `#1A211F`  | 13.72:1 | AAA     |
-| text / selected            | `#E4EDE8`  | `#242C29`  | 11.98:1 | AAA     |
-| text / today               | `#E4EDE8`  | `#1E2623`  | 12.96:1 | AAA     |
-| muted / bg                 | `#A8B8B2`  | `#121816`  |  8.70:1 | AAA     |
-| muted / surface            | `#A8B8B2`  | `#1A211F`  |  7.93:1 | AAA     |
-| muted / selected           | `#A8B8B2`  | `#242C29`  |  6.93:1 | AA      |
-| muted / today              | `#A8B8B2`  | `#1E2623`  |  7.49:1 | AAA     |
-| accent / bg                | pending    | `#121816`  | pending | pending |
-| accent / surface           | pending    | `#1A211F`  | pending | pending |
-| accent-fg / bg             | pending    | `#121816`  | pending | pending |
-| accent-fg / surface        | pending    | `#1A211F`  | pending | pending |
-| accent-on / accent         | `#121816`  | pending    | pending | pending |
-| focus / bg                 | pending    | `#121816`  | pending | pending |
-| focus / surface            | pending    | `#1A211F`  | pending | pending |
-| border-strong / bg         | `#7E807A`  | `#121816`  |  4.50:1 | AA (UI) |
-| border-strong / surface    | `#7E807A`  | `#1A211F`  |  4.10:1 | AA (UI) |
+| text / bg                  | `#E8EBE9`  | `#141515`  | 15.24:1 | AAA     |
+| text / surface             | `#E8EBE9`  | `#1C1E1D`  | 13.96:1 | AAA     |
+| text / selected            | `#E8EBE9`  | `#262928`  | 12.23:1 | AAA     |
+| text / today               | `#E8EBE9`  | `#202221`  | 13.33:1 | AAA     |
+| muted / bg                 | `#A8B0AD`  | `#141515`  |  8.26:1 | AAA     |
+| muted / surface            | `#A8B0AD`  | `#1C1E1D`  |  7.57:1 | AAA     |
+| muted / selected           | `#A8B0AD`  | `#262928`  |  6.63:1 | AA      |
+| muted / today              | `#A8B0AD`  | `#202221`  |  7.22:1 | AAA     |
+| accent / bg                | `#B373CE`  | `#141515`  |  5.45:1 | AA      |
+| accent / surface           | `#B373CE`  | `#1C1E1D`  |  5.00:1 | AA      |
+| accent-fg / bg             | `#BE82D4`  | `#141515`  |  6.39:1 | AA      |
+| accent-fg / surface        | `#BE82D4`  | `#1C1E1D`  |  5.85:1 | AA      |
+| accent-on / accent         | `#141515`  | `#B373CE`  |  5.45:1 | AA      |
+| focus / bg                 | `#B373CE`  | `#141515`  |  5.45:1 | AA (UI) |
+| focus / surface            | `#B373CE`  | `#1C1E1D`  |  5.00:1 | AA (UI) |
+| border-strong / bg         | `#7E807E`  | `#141515`  |  4.60:1 | AA (UI) |
+| border-strong / surface    | `#7E807E`  | `#1C1E1D`  |  4.21:1 | AA (UI) |
 | status.failed fg / badge   | `#E8A8A4`  | `#3A2424`  |  7.25:1 | AAA     |
-| status.failed fg / bg      | `#E8A8A4`  | `#121816`  |  9.05:1 | AAA     |
-| status.failed fg / surface | `#E8A8A4`  | `#1A211F`  |  8.25:1 | AAA     |
-| text / status.failed bg    | `#E4EDE8`  | `#3A2424`  | 12.06:1 | AAA     |
-| muted / status.failed bg   | `#A8B8B2`  | `#3A2424`  |  6.97:1 | AA      |
+| status.failed fg / bg      | `#E8A8A4`  | `#141515`  |  9.21:1 | AAA     |
+| status.failed fg / surface | `#E8A8A4`  | `#1C1E1D`  |  8.44:1 | AAA     |
+| text / status.failed bg    | `#E8EBE9`  | `#3A2424`  | 12.00:1 | AAA     |
+| muted / status.failed bg   | `#A8B0AD`  | `#3A2424`  |  6.50:1 | AA      |
 | status.missed fg / badge   | `#E0C98A`  | `#3A3320`  |  7.70:1 | AAA     |
-| status.missed fg / bg      | `#E0C98A`  | `#121816`  | 11.04:1 | AAA     |
-| status.missed fg / surface | `#E0C98A`  | `#1A211F`  | 10.06:1 | AAA     |
-| text / status.missed bg    | `#E4EDE8`  | `#3A3320`  | 10.50:1 | AAA     |
-| muted / status.missed bg   | `#A8B8B2`  | `#3A3320`  |  6.07:1 | AA      |
+| status.missed fg / bg      | `#E0C98A`  | `#141515`  | 11.23:1 | AAA     |
+| status.missed fg / surface | `#E0C98A`  | `#1C1E1D`  | 10.29:1 | AAA     |
+| text / status.missed bg    | `#E8EBE9`  | `#3A3320`  | 10.45:1 | AAA     |
+| muted / status.missed bg   | `#A8B0AD`  | `#3A3320`  |  5.66:1 | AA      |
 
 Use `accent` or `accent-fg` for any small accent text on `bg` and `surface`. Error text uses `status.failed.fg`, which meets AAA on `bg` and `surface` in both themes.
 
