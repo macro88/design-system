@@ -26,7 +26,7 @@ const statuses = [
 
 function Tokens() {
   return (
-    <div className="text-text grid w-[640px] max-w-full gap-8">
+    <div className="text-text grid max-w-prose gap-8">
       <p className="text-muted font-body text-caption">
         Temporary palette. Switch theme and scheme from the toolbar.
       </p>

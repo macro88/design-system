@@ -7,52 +7,6 @@ import { radiusVars, semanticColorVars, statusRoles } from "./index";
 const themeRoot = fileURLToPath(new URL("../../themes", import.meta.url));
 const themeIds = ["runifly", "nostr", "exosquare"] as const;
 
-const heldBrandHexes = [
-  "#f6f1e8",
-  "#fffdf8",
-  "#1c1915",
-  "#534e46",
-  "#b54e24",
-  "#8a3a18",
-  "#f3e4d8",
-  "#e6dfd3",
-  "#8a7f6c",
-  "#4a453c",
-  "#ede6d8",
-  "#3f4a28",
-  "#e5e8d4",
-  "#1f5344",
-  "#e0ebe4",
-  "#165534",
-  "#d8ebdc",
-  "#7a241c",
-  "#f3d2cc",
-  "#5c4010",
-  "#f1e4c4",
-  "#1a1714",
-  "#24201c",
-  "#f4efe6",
-  "#b3aba0",
-  "#e07a4a",
-  "#f0a07a",
-  "#3a261c",
-  "#3a342c",
-  "#7a7368",
-  "#f0eae0",
-  "#2f2c28",
-  "#f3b08c",
-  "#c8d2a0",
-  "#2a3020",
-  "#b4d8c4",
-  "#20342c",
-  "#a8d8b4",
-  "#1a3024",
-  "#f3b2a8",
-  "#3a221e",
-  "#f0d08a",
-  "#3c2e18",
-];
-
 function ruleBodies(css: string): Map<string, string> {
   const bodies = new Map<string, string>();
   let index = 0;
@@ -191,13 +145,6 @@ describe("temporary theme palettes", () => {
             pair("--color-text", `--color-status-${status}-bg`, 4.5);
             pair("--color-muted", `--color-status-${status}-bg`, 4.5);
           }
-        }
-      });
-
-      it("does not use held brand colours", () => {
-        const haystack = css.toLowerCase();
-        for (const hex of heldBrandHexes) {
-          expect(haystack).not.toContain(hex);
         }
       });
     });

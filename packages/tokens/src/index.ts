@@ -34,7 +34,7 @@ export const radiusRoles = ["control", "field", "panel", "badge", "overlay", "fu
 
 export type RadiusRole = (typeof radiusRoles)[number];
 
-/** 4px scale, including the 2px half-step. */
+/** Spacing steps in rem. Names match a 4px base at the default root font size. */
 export const spaceSteps = [2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80] as const;
 
 export type SpaceStep = (typeof spaceSteps)[number];

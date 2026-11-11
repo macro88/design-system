@@ -1,6 +1,4 @@
-/* Intended path: packages/motion/src/tokens.css
- *
- * Shared motion primitives for @macro88/motion. Neutral names only.
+/* Shared motion primitives for @macro88/motion. Neutral names only.
  * Theme personality (roles, distances, scales) lives in the theme package.
  *
  * CSS values are milliseconds and cubic-bezier(…). Framer Motion exports in
@@ -9,9 +7,6 @@
  * Tailwind 4: the @theme block maps these to duration-* and ease-* utilities.
  * packages/ui must use those utilities or var(--motion-…) —
  * see scripts/lint-visuals.mjs.
- *
- * When committing, add an export to packages/motion/package.json:
- *   "./tokens.css": "./src/tokens.css"
  */
 
 :root {

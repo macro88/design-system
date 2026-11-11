@@ -1,5 +1,3 @@
-/** Intended path: packages/motion/src/index.ts */
-
 export const packageName = "@macro88/motion";
 
 /** Durations in milliseconds. Matches --motion-duration-* in tokens.css. */
