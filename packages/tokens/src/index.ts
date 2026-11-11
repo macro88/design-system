@@ -114,6 +114,16 @@ export const layerVars = {
 } as const;
 
 export const overlayOpacityVar = "--overlay-opacity";
+export const borderWidthVar = "--border-width";
+export const scrimVar = "--color-scrim";
+export const toastLayoutVars = {
+  gap: "--toast-gap",
+  offset: "--toast-offset",
+} as const;
+export const sheetTravelVars = {
+  enter: "--sheet-enter",
+  exit: "--sheet-exit",
+} as const;
 export const skeletonSizeVars = {
   line: "--skeleton-line-size",
   card: "--skeleton-card-size",

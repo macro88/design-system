@@ -2,4 +2,4 @@
 "@macro88/tokens": minor
 ---
 
-Add overlay opacity, skeleton and sheet sizes, and a modal layer.
+Add overlay, scrim, border width, toast layout, sheet travel, skeleton sizes, and a modal layer.

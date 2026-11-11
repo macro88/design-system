@@ -9,8 +9,12 @@ import {
   focusRingClass,
   focusVars,
   iconStrokeVar,
+  borderWidthVar,
   layerVars,
   packageName,
+  scrimVar,
+  sheetTravelVars,
+  toastLayoutVars,
   radiusVars,
   semanticColorVars,
   spaceSteps,
@@ -78,6 +82,14 @@ describe("@macro88/tokens", () => {
     expect(themeCss).toContain(`${controlHeightVars.lg}:`);
     expect(themeCss).toContain(`${fieldAreaMinHeightVar}:`);
     for (const name of Object.values(layerVars)) {
+      expect(themeCss).toContain(`${name}:`);
+    }
+    expect(themeCss).toContain(`${borderWidthVar}:`);
+    expect(themeCss).toContain(`${scrimVar}:`);
+    for (const name of Object.values(toastLayoutVars)) {
+      expect(themeCss).toContain(`${name}:`);
+    }
+    for (const name of Object.values(sheetTravelVars)) {
       expect(themeCss).toContain(`${name}:`);
     }
     expect(themeCss).toContain(focusRingClass);

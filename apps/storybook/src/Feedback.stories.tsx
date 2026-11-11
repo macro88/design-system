@@ -12,13 +12,23 @@ import {
   showUndo,
 } from "@macro88/ui";
 
+const paletteLabel: Record<string, string> = {
+  nostr: "Nostr (temporary)",
+  runifly: "Runifly (temporary)",
+  exosquare: "Exosquare (temporary)",
+};
+
 function FeedbackGallery() {
   const [open, setOpen] = useState(false);
+  const theme = document.documentElement.dataset.theme ?? "nostr";
+  const scheme = document.documentElement.dataset.scheme ?? "light";
   return (
     <div className="bg-bg text-text grid gap-6 p-6">
       <Toaster />
       <header className="grid gap-1">
-        <p className="type-eyebrow text-muted">Temporary palette</p>
+        <p className="type-eyebrow text-muted">
+          {paletteLabel[theme] ?? `${theme} (temporary)`} · {scheme}
+        </p>
         <h1 className="type-display-md">Feedback</h1>
       </header>
       <div className="grid max-w-prose gap-3">

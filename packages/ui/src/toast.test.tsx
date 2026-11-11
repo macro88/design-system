@@ -1,84 +1,131 @@
 import { act, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { toast } from "sonner";
 import { Toaster, showError, showSuccess, showUndo } from "./toast";
 
+async function settle() {
+  await act(async () => {
+    for (let step = 0; step < 6; step += 1) {
+      await vi.advanceTimersByTimeAsync(0);
+    }
+  });
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(250);
+  });
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(250);
+  });
+}
+
 describe("Toaster", () => {
-  afterEach(() => {
-    document.documentElement.style.removeProperty("--toast-duration-success");
-    document.documentElement.style.removeProperty("--toast-duration-undo");
+  beforeEach(() => {
+    vi.useFakeTimers();
   });
 
-  it("dismisses a success message and keeps an error", async () => {
-    document.documentElement.style.setProperty("--toast-duration-success", "30ms");
-    const user = userEvent.setup();
-    render(
-      <>
-        <Toaster />
-        <button type="button" onClick={() => showSuccess("Saved")}>
-          Succeed
-        </button>
-        <button type="button" onClick={() => showError("Failed")}>
-          Fail
-        </button>
-      </>,
+  afterEach(async () => {
+    toast.dismiss();
+    await settle();
+    vi.useRealTimers();
+  });
+
+  it("dismisses a success message and keeps an error until it is closed", async () => {
+    render(<Toaster />);
+
+    await act(async () => {
+      showSuccess("Saved");
+    });
+    await settle();
+    expect(screen.getByText("Saved")).toBeInTheDocument();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(4000);
+    });
+    await settle();
+    expect(screen.queryByText("Saved")).not.toBeInTheDocument();
+
+    await act(async () => {
+      showError("Failed");
+    });
+    await settle();
+    expect(screen.getByRole("alert")).toHaveTextContent("Failed");
+    expect(screen.getByRole("button", { name: "Close" })).toHaveAccessibleName("Close");
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(10000);
+    });
+    await settle();
+    expect(screen.getByText("Failed")).toBeInTheDocument();
+    expect(screen.getByText("Failed").closest("[data-sonner-toast]")).toHaveAttribute(
+      "data-removed",
+      "false",
     );
 
-    await user.click(screen.getByRole("button", { name: "Succeed" }));
-    expect(await screen.findByText("Saved")).toBeInTheDocument();
-    await act(() => new Promise((resolve) => setTimeout(resolve, 80)));
-    expect(document.querySelector("[data-sonner-toast]")).toHaveAttribute("data-removed", "true");
-
-    await user.click(screen.getByRole("button", { name: "Fail" }));
-    expect(await screen.findByText("Failed")).toBeInTheDocument();
-    await act(() => new Promise((resolve) => setTimeout(resolve, 80)));
-    expect(screen.getByText("Failed")).toBeInTheDocument();
+    screen.getByRole("button", { name: "Close" }).click();
+    await settle();
+    expect(screen.queryByText("Failed")).not.toBeInTheDocument();
   });
 
   it("runs undo and pauses while hovered", async () => {
-    document.documentElement.style.setProperty("--toast-duration-undo", "40ms");
-    const user = userEvent.setup();
     const onUndo = vi.fn();
-    render(
-      <>
-        <Toaster />
-        <button type="button" onClick={() => showUndo("Removed", onUndo)}>
-          Remove
-        </button>
-      </>,
-    );
+    render(<Toaster />);
 
-    await user.click(screen.getByRole("button", { name: "Remove" }));
-    const message = await screen.findByText("Removed");
+    await act(async () => {
+      showUndo("Removed", onUndo);
+    });
+    await settle();
+    const message = screen.getByText("Removed");
     message.dispatchEvent(new PointerEvent("pointerover", { bubbles: true }));
-    await act(() => new Promise((resolve) => setTimeout(resolve, 80)));
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(6000);
+    });
+    await settle();
     expect(screen.getByText("Removed")).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(message.closest("[data-sonner-toast]")).toHaveAttribute("data-removed", "false");
+
+    screen.getByRole("button", { name: "Undo" }).click();
     expect(onUndo).toHaveBeenCalledOnce();
   });
 
-  it("keeps at most three messages", async () => {
-    const user = userEvent.setup();
-    render(
-      <>
-        <Toaster />
-        <button
-          type="button"
-          onClick={() => {
-            showSuccess("One");
-            showSuccess("Two");
-            showSuccess("Three");
-            showSuccess("Four");
-          }}
-        >
-          Stack
-        </button>
-      </>,
-    );
+  it("keeps at most three messages and does not evict an undo toast first", async () => {
+    render(<Toaster />);
+    await act(async () => {
+      showUndo("Keep this", () => undefined);
+      showSuccess("One");
+      showSuccess("Two");
+      showSuccess("Three");
+    });
+    await settle();
 
-    await user.click(screen.getByRole("button", { name: "Stack" }));
-    expect(await screen.findByText("Four")).toBeInTheDocument();
-    const visible = document.querySelectorAll('[data-sonner-toast][data-visible="true"]');
+    const undo = screen.getByText("Keep this").closest("[data-sonner-toast]");
+    expect(undo).toHaveAttribute("data-removed", "false");
+    expect(undo).toHaveAttribute("data-visible", "true");
+    expect(screen.queryByText("One")).not.toBeInTheDocument();
+    const visible = document.querySelectorAll(
+      '[data-sonner-toast][data-visible="true"]:not([data-removed="true"])',
+    );
     expect(visible.length).toBeLessThanOrEqual(3);
+  });
+
+  it("does not let an undo toast expire while it is hidden", async () => {
+    render(<Toaster />);
+    let id = "";
+    await act(async () => {
+      id = showUndo("Keep this", () => undefined);
+    });
+    await settle();
+
+    const undo = document.querySelector(`[data-toast-id="${id}"]`)?.closest("[data-sonner-toast]");
+    expect(undo).not.toBeNull();
+    await act(async () => {
+      undo?.setAttribute("data-visible", "false");
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(20000);
+    });
+    await settle();
+
+    expect(document.querySelector(`[data-toast-id="${id}"]`)).toBeInTheDocument();
+    expect(undo).toHaveAttribute("data-removed", "false");
   });
 });

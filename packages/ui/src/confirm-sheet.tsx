@@ -1,19 +1,9 @@
 import { reducedMotion, spring } from "@macro88/motion";
-import * as Dialog from "@radix-ui/react-dialog";
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef } from "react";
 import { Button } from "./button";
-
-function readPx(name: string, fallback: number): number {
-  if (typeof window === "undefined") return fallback;
-  const raw = window.getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  if (raw.endsWith("rem")) {
-    const root =
-      Number.parseFloat(window.getComputedStyle(document.documentElement).fontSize) || 16;
-    return Number.parseFloat(raw) * root;
-  }
-  const value = Number.parseFloat(raw);
-  return Number.isFinite(value) ? value : fallback;
-}
+import { readToken } from "./read-token";
 
 export type ConfirmSheetProps = {
   open: boolean;
@@ -22,6 +12,7 @@ export type ConfirmSheetProps = {
   description: string;
   confirmLabel?: string;
   cancelLabel?: string;
+  destructive?: boolean;
   onConfirm: () => void;
 };
 
@@ -32,19 +23,32 @@ export function ConfirmSheet({
   description,
   confirmLabel = "Confirm",
   cancelLabel = "Cancel",
+  destructive = false,
   onConfirm,
 }: ConfirmSheetProps) {
   const reduced = useReducedMotion() === true;
-  const enter = reduced ? 0 : readPx("--sheet-enter", 28);
-  const exit = reduced ? 0 : readPx("--sheet-exit", 16);
+  const enter = reduced ? 0 : readToken("--sheet-enter");
+  const exit = reduced ? 0 : readToken("--sheet-exit");
+  const cancelRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (open) cancelRef.current?.focus();
+  }, [open]);
 
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+    <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
       <AnimatePresence>
         {open ? (
-          <Dialog.Portal forceMount>
-            <Dialog.Overlay className="sheet-overlay" />
-            <Dialog.Content asChild forceMount>
+          <AlertDialog.Portal forceMount>
+            <AlertDialog.Overlay forceMount className="sheet-overlay" />
+            <AlertDialog.Content
+              asChild
+              forceMount
+              onOpenAutoFocus={(event) => {
+                event.preventDefault();
+                cancelRef.current?.focus();
+              }}
+            >
               <motion.div
                 className="sheet"
                 initial={reduced ? { opacity: 0 } : { opacity: 0, y: enter }}
@@ -56,28 +60,27 @@ export function ConfirmSheet({
                   reduced ? "opacity" : "transform",
                 )}
               >
-                <Dialog.Title className="type-display-sm">{title}</Dialog.Title>
-                <Dialog.Description className="type-body-md mt-2 text-muted">
+                <AlertDialog.Title className="type-display-sm">{title}</AlertDialog.Title>
+                <AlertDialog.Description className="type-body-md mt-2 text-muted">
                   {description}
-                </Dialog.Description>
+                </AlertDialog.Description>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <Button variant="outline" onClick={() => onOpenChange(false)}>
-                    {cancelLabel}
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      onConfirm();
-                      onOpenChange(false);
-                    }}
-                  >
-                    {confirmLabel}
-                  </Button>
+                  <AlertDialog.Cancel asChild>
+                    <Button ref={cancelRef} variant="outline">
+                      {cancelLabel}
+                    </Button>
+                  </AlertDialog.Cancel>
+                  <AlertDialog.Action asChild>
+                    <Button variant={destructive ? "danger" : "primary"} onClick={onConfirm}>
+                      {confirmLabel}
+                    </Button>
+                  </AlertDialog.Action>
                 </div>
               </motion.div>
-            </Dialog.Content>
-          </Dialog.Portal>
+            </AlertDialog.Content>
+          </AlertDialog.Portal>
         ) : null}
       </AnimatePresence>
-    </Dialog.Root>
+    </AlertDialog.Root>
   );
 }

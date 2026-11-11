@@ -4,8 +4,23 @@ import dts from "vite-plugin-dts";
 import { defineConfig } from "vitest/config";
 
 const packageRoot = fileURLToPath(new URL(".", import.meta.url));
+const testing = process.env.VITEST === "true";
 
 export default defineConfig({
+  resolve: testing
+    ? {
+        alias: [
+          {
+            find: /^@macro88\/tokens$/,
+            replacement: path.resolve(packageRoot, "../tokens/src/index.ts"),
+          },
+          {
+            find: /^@macro88\/motion$/,
+            replacement: path.resolve(packageRoot, "../motion/src/index.ts"),
+          },
+        ],
+      }
+    : undefined,
   plugins: [
     dts({
       entryRoot: "src",

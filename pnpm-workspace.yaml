@@ -14,6 +14,3 @@ minimumReleaseAgeExclude:
   - "@storybook/react@10.6.7"
   - eslint-plugin-storybook@10.6.7
   - storybook@10.6.7
-  - framer-motion@14.12.0
-  - motion-dom@14.12.0
-  - motion@14.12.0

@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
+  componentTimingVars,
   cssVars,
   duration,
   durationMs,
@@ -51,5 +52,9 @@ describe("@macro88/motion", () => {
     }
     expect(css).toContain("@media (prefers-reduced-motion: reduce)");
     expect(css).toContain("--motion-duration-fade: 120ms");
+    for (const name of Object.values(componentTimingVars)) {
+      expect(css).toContain(`${name}:`);
+    }
+    expect(css).toContain("--shimmer-duration: 0ms");
   });
 });

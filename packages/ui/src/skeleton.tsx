@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { cx } from "./cx";
+import { readToken } from "./read-token";
 
 export type SkeletonVariant = "line" | "card" | "column";
 
@@ -8,15 +9,6 @@ const variantClass: Record<SkeletonVariant, string> = {
   card: "skeleton-card rounded-panel",
   column: "skeleton-column rounded-panel",
 };
-
-function readMs(name: string, fallback: number): number {
-  if (typeof window === "undefined") return fallback;
-  const inline = document.documentElement.style.getPropertyValue(name).trim();
-  const raw =
-    inline || window.getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  const value = Number.parseFloat(raw);
-  return Number.isFinite(value) ? value : fallback;
-}
 
 function useMinimumPresence(active: boolean, delay: number, minimum: number): boolean {
   const [visible, setVisible] = useState(false);
@@ -62,8 +54,8 @@ export function Skeleton({
   label = "Loading",
   children,
 }: SkeletonProps) {
-  const delay = readMs("--skeleton-delay", 200);
-  const minimum = readMs("--skeleton-min", 400);
+  const delay = readToken("--skeleton-delay");
+  const minimum = readToken("--skeleton-min");
   const waiting = useMinimumPresence(pending === true, delay, minimum);
   const show = pending === undefined ? true : waiting;
 

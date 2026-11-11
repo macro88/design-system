@@ -14,9 +14,14 @@ describe("EmptyState", () => {
       </EmptyState>,
     );
 
-    expect(screen.getByRole("heading", { name: "Nothing here" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Nothing here" })).toBeInTheDocument();
     expect(screen.getByText("Try another step.")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(onClick).toHaveBeenCalledOnce();
+  });
+
+  it("uses the requested heading level", () => {
+    render(<EmptyState title="Nothing here" headingLevel={3} />);
+    expect(screen.getByRole("heading", { level: 3, name: "Nothing here" })).toBeInTheDocument();
   });
 });

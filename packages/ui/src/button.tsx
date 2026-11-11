@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot";
 import { focusRingClass } from "@macro88/tokens";
-import { type ButtonHTMLAttributes, type MouseEvent as ReactMouseEvent } from "react";
+import { forwardRef, type ButtonHTMLAttributes, type MouseEvent as ReactMouseEvent } from "react";
 import { cx } from "./cx";
 
 type ButtonBase = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "disabled"> & {
@@ -15,17 +15,18 @@ export type ButtonProps =
       size?: "md" | "lg";
     })
   | (ButtonBase & {
-      variant: "outline" | "ghost";
+      variant: "outline" | "ghost" | "danger";
       size?: "sm" | "md" | "lg";
     });
 
-export type ButtonVariant = "primary" | "outline" | "ghost";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const variantClass = {
   primary: "button-primary border-transparent bg-accent text-accent-on",
   outline: "button-outline border-border-strong bg-surface text-text",
   ghost: "button-ghost border-transparent bg-transparent text-text",
+  danger: "button-danger border-transparent bg-danger-bg text-danger-fg",
 } as const;
 
 const sizeClass = {
@@ -39,18 +40,21 @@ function blockActivation(event: { preventDefault(): void; stopPropagation(): voi
   event.stopPropagation();
 }
 
-export function Button({
-  variant = "primary",
-  size = "md",
-  pending = false,
-  asChild = false,
-  className,
-  children,
-  disabled,
-  type,
-  onClick,
-  ...props
-}: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    variant = "primary",
+    size = "md",
+    pending = false,
+    asChild = false,
+    className,
+    children,
+    disabled,
+    type,
+    onClick,
+    ...props
+  },
+  ref,
+) {
   const blocked = Boolean(disabled || pending);
   const classes = cx(
     "button inline-flex items-center justify-center gap-2 rounded-control border font-display outline-none",
@@ -63,6 +67,7 @@ export function Button({
     return (
       <Slot
         {...props}
+        ref={ref}
         aria-busy={pending || undefined}
         aria-disabled={blocked || undefined}
         className={classes}
@@ -82,6 +87,7 @@ export function Button({
   return (
     <button
       {...props}
+      ref={ref}
       type={type ?? "button"}
       disabled={Boolean(disabled)}
       aria-disabled={blocked || undefined}
@@ -98,4 +104,4 @@ export function Button({
       {children}
     </button>
   );
-}
+});

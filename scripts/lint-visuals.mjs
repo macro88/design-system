@@ -424,7 +424,33 @@ function cssLiteralFindings(file, source) {
     addFinding(findings, file, source, match.index ?? 0, `${name}: ${value}`);
   }
 
+  for (const match of masked.matchAll(UNIT_LITERAL)) {
+    const index = match.index ?? 0;
+    if (insideVar(masked, index)) continue;
+    addFinding(findings, file, source, index, match[0]);
+  }
+
   return findings;
+}
+
+const UNIT_LITERAL = /(?<![\w.-])\d*\.?\d+(?:px|rem|em|ms|s|vh|vw)\b/g;
+
+function insideVar(source, index) {
+  let depth = 0;
+  let cursor = 0;
+
+  while (cursor < index) {
+    if (source.startsWith("var(", cursor)) {
+      depth += 1;
+      cursor += 4;
+      continue;
+    }
+    if (depth > 0 && source[cursor] === "(") depth += 1;
+    if (depth > 0 && source[cursor] === ")") depth -= 1;
+    cursor += 1;
+  }
+
+  return depth > 0;
 }
 
 function inspect(file, source) {
