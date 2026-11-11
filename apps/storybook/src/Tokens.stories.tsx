@@ -28,7 +28,7 @@ const statuses = [
 ] as const;
 
 const themeNames: Record<string, string> = {
-  nostr: "Nostr (temporary)",
+  nostr: "Nostr",
   runifly: "Runifly (temporary)",
   exosquare: "Exosquare (temporary)",
 };

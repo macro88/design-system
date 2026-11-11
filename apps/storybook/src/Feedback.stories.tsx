@@ -13,7 +13,7 @@ import {
 } from "@macro88/ui";
 
 const paletteLabel: Record<string, string> = {
-  nostr: "Nostr (temporary)",
+  nostr: "Nostr",
   runifly: "Runifly (temporary)",
   exosquare: "Exosquare (temporary)",
 };
