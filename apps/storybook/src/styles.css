@@ -4,8 +4,10 @@
 @import "@macro88/theme-runifly/theme.css";
 @import "@macro88/theme-nostr/theme.css";
 @import "@macro88/theme-exosquare/theme.css";
+@import "@macro88/ui/styles.css";
 
 @source "../src";
+@source "../../../packages/ui/src";
 
 html,
 body {

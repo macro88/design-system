@@ -6,7 +6,13 @@ import { defineConfig } from "vitest/config";
 const packageRoot = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
-  plugins: [dts({ entryRoot: "src", include: ["src"] })],
+  plugins: [
+    dts({
+      entryRoot: "src",
+      include: ["src"],
+      exclude: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test-setup.ts"],
+    }),
+  ],
   build: {
     emptyOutDir: true,
     lib: {
@@ -14,10 +20,14 @@ export default defineConfig({
       fileName: "index",
       formats: ["es"],
     },
+    rollupOptions: {
+      external: ["react", "react-dom", "react/jsx-runtime", /^@radix-ui\//, /^@macro88\//],
+    },
     sourcemap: true,
   },
   test: {
-    environment: "node",
-    include: ["src/**/*.test.ts"],
+    environment: "jsdom",
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+    setupFiles: ["./src/test-setup.ts"],
   },
 });
