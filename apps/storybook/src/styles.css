@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@import "@macro88/tokens/theme.css";
+@import "@macro88/motion/tokens.css";
+@import "@macro88/theme-runifly/theme.css";
+@import "@macro88/theme-nostr/theme.css";
+@import "@macro88/theme-exosquare/theme.css";
+
+@source "../src";
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}

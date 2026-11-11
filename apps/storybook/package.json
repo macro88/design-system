@@ -10,6 +10,11 @@
   },
   "dependencies": {
     "@macro88/design-system": "workspace:*",
+    "@macro88/motion": "workspace:*",
+    "@macro88/theme-exosquare": "workspace:*",
+    "@macro88/theme-nostr": "workspace:*",
+    "@macro88/theme-runifly": "workspace:*",
+    "@macro88/tokens": "workspace:*",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },

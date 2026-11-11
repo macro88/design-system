@@ -1,7 +1,7 @@
 {
   "name": "@macro88/tokens",
   "version": "0.0.0",
-  "description": "Temporary stub for @macro88/tokens.",
+  "description": "Neutral semantic token contract.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,10 +9,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./theme.css": "./src/theme.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/theme.css"
   ],
   "scripts": {
     "build": "vite build",
