@@ -42,6 +42,9 @@
   --motion-spring-bouncy-stiffness: 520;
   --motion-spring-bouncy-damping: 26;
   --motion-spring-bouncy-mass: 1;
+
+  /* Themes may set this to none for a static skeleton wash. */
+  --skeleton-animation: shimmer 1.4s linear infinite;
 }
 
 @theme inline {

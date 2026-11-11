@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   cssVars,
   duration,
+  skeletonAnimationVar,
   durationMs,
   ease,
   packageName,
@@ -51,5 +52,6 @@ describe("@macro88/motion", () => {
     }
     expect(css).toContain("@media (prefers-reduced-motion: reduce)");
     expect(css).toContain("--motion-duration-fade: 120ms");
+    expect(css).toContain(`${skeletonAnimationVar}:`);
   });
 });

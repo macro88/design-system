@@ -19,6 +19,9 @@
   --color-accent-fg: #0a4663;
   --color-accent-on: #ffffff;
   --color-accent-subtle: #d3e4ee;
+  --color-selected: #d3dde5;
+  --color-today: #eef3f6;
+  --color-skeleton: #d3dde5;
   --color-border: #d3dde5;
   --color-border-strong: #56707f;
   --color-focus: #0e5c80;
@@ -48,6 +51,9 @@
   --color-accent-fg: #b6e2f4;
   --color-accent-on: #0e171d;
   --color-accent-subtle: #1c3a4c;
+  --color-selected: #2a3c48;
+  --color-today: #1c2c36;
+  --color-skeleton: #2a3c48;
   --color-border: #2a3c48;
   --color-border-strong: #8aa0ae;
   --color-focus: #7cc4e4;

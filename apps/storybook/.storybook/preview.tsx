@@ -30,7 +30,7 @@ const preview: Preview = {
         title: "Theme",
         icon: "paintbrush",
         items: [
-          { value: "nostr", title: "Nostr (temporary)" },
+          { value: "nostr", title: "Nostr" },
           { value: "runifly", title: "Runifly (temporary)" },
           { value: "exosquare", title: "Exosquare (temporary)" },
         ],

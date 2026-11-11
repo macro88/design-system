@@ -9,6 +9,9 @@ const swatches = [
   ["accent-fg", "bg-accent-fg"],
   ["accent-on", "bg-accent-on"],
   ["accent-subtle", "bg-accent-subtle"],
+  ["selected", "bg-selected"],
+  ["today", "bg-today"],
+  ["skeleton", "bg-skeleton"],
   ["border", "bg-border"],
   ["border-strong", "bg-border-strong"],
   ["focus", "bg-focus"],
@@ -28,7 +31,11 @@ function Tokens() {
   return (
     <div className="text-text grid max-w-prose gap-8">
       <p className="text-muted font-body text-caption">
-        Temporary palette. Switch theme and scheme from the toolbar.
+        {(typeof document === "undefined" ? "nostr" : document.documentElement.dataset.theme) ===
+        "nostr"
+          ? "Nostr"
+          : "Temporary palette"}
+        . Switch theme and scheme from the toolbar.
       </p>
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {swatches.map(([name, swatch]) => (
