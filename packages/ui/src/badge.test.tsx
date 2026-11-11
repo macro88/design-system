@@ -3,8 +3,13 @@ import { describe, expect, it } from "vitest";
 import { Badge } from "./badge";
 
 describe("Badge", () => {
-  it("shows the status name", () => {
-    render(<Badge status="failed">Failed</Badge>);
-    expect(screen.getByText("Failed")).toBeInTheDocument();
+  it("shows the tone", () => {
+    render(<Badge tone="danger">Danger</Badge>);
+    expect(screen.getByText("Danger")).toHaveAttribute("data-tone", "danger");
+  });
+
+  it("defaults to neutral", () => {
+    render(<Badge>Note</Badge>);
+    expect(screen.getByText("Note")).toHaveAttribute("data-tone", "neutral");
   });
 });

@@ -19,7 +19,7 @@ import {
   semanticColorVars,
   spaceSteps,
   spaceVars,
-  statusRoles,
+  statusTones,
   typeRoles,
   typeVars,
 } from "./index";
@@ -31,7 +31,7 @@ describe("@macro88/tokens", () => {
     expect(packageName).toBe("@macro88/tokens");
   });
 
-  it("names the semantic colour roles and the status roles", () => {
+  it("names the semantic colour roles and the status tones", () => {
     expect(colorRoles).toEqual([
       "bg",
       "surface",
@@ -50,16 +50,8 @@ describe("@macro88/tokens", () => {
       "danger-fg",
       "danger-bg",
     ]);
-    expect(statusRoles).toEqual([
-      "draft",
-      "queued",
-      "approved",
-      "signed",
-      "sent",
-      "failed",
-      "missed",
-    ]);
-    expect(semanticColorVars).toHaveLength(colorRoles.length + statusRoles.length * 2);
+    expect(statusTones).toEqual(["neutral", "accent", "success", "warning", "danger", "info"]);
+    expect(semanticColorVars).toHaveLength(colorRoles.length + statusTones.length * 2);
   });
 
   it("declares every semantic colour, radius role, space step, and type role", () => {

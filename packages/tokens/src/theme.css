@@ -32,20 +32,18 @@
   --color-danger-fg: #991b1b;
   --color-danger-bg: #f8d4d4;
 
-  --color-status-draft-fg: #3f3f46;
-  --color-status-draft-bg: #e4e4e7;
-  --color-status-queued-fg: #1e3a8a;
-  --color-status-queued-bg: #dbe4f8;
-  --color-status-approved-fg: #3f6212;
-  --color-status-approved-bg: #e4edc8;
-  --color-status-signed-fg: #155e75;
-  --color-status-signed-bg: #d4f0f6;
-  --color-status-sent-fg: #166534;
-  --color-status-sent-bg: #d1f0dc;
-  --color-status-failed-fg: #991b1b;
-  --color-status-failed-bg: #f8d4d4;
-  --color-status-missed-fg: #92400e;
-  --color-status-missed-bg: #f8e6c4;
+  --color-status-neutral-fg: #52525b;
+  --color-status-neutral-bg: #ffffff;
+  --color-status-accent-fg: #27272a;
+  --color-status-accent-bg: #e4e4e7;
+  --color-status-success-fg: #166534;
+  --color-status-success-bg: #d1f0dc;
+  --color-status-warning-fg: #92400e;
+  --color-status-warning-bg: #f8e6c4;
+  --color-status-danger-fg: #991b1b;
+  --color-status-danger-bg: #f8d4d4;
+  --color-status-info-fg: #155e75;
+  --color-status-info-bg: #d4f0f6;
 
   --font-display: ui-sans-serif, system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, sans-serif;

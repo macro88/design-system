@@ -25,22 +25,20 @@
   --color-border: #d3dde5;
   --color-border-strong: #56707f;
   --color-focus: #0e5c80;
-  --color-status-draft-fg: #24323c;
-  --color-status-draft-bg: #e0e7ec;
-  --color-status-queued-fg: #1e3a8a;
-  --color-status-queued-bg: #d6e2f8;
-  --color-status-approved-fg: #3f6212;
-  --color-status-approved-bg: #e3eec4;
-  --color-status-signed-fg: #155e75;
-  --color-status-signed-bg: #d0eef4;
-  --color-status-sent-fg: #166534;
-  --color-status-sent-bg: #d0efd8;
   --color-danger-fg: #991b1b;
   --color-danger-bg: #f8d2d2;
-  --color-status-failed-fg: #991b1b;
-  --color-status-failed-bg: #f8d2d2;
-  --color-status-missed-fg: #92400e;
-  --color-status-missed-bg: #f8e4be;
+  --color-status-neutral-fg: #24323c;
+  --color-status-neutral-bg: #e0e7ec;
+  --color-status-accent-fg: #0a4663;
+  --color-status-accent-bg: #d3e4ee;
+  --color-status-success-fg: #166534;
+  --color-status-success-bg: #d0efd8;
+  --color-status-warning-fg: #92400e;
+  --color-status-warning-bg: #f8e4be;
+  --color-status-danger-fg: #991b1b;
+  --color-status-danger-bg: #f8d2d2;
+  --color-status-info-fg: #155e75;
+  --color-status-info-bg: #d0eef4;
 }
 
 [data-theme="runifly"][data-scheme="dark"] {
@@ -59,20 +57,18 @@
   --color-border: #2a3c48;
   --color-border-strong: #8aa0ae;
   --color-focus: #7cc4e4;
-  --color-status-draft-fg: #e4eef4;
-  --color-status-draft-bg: #2a3944;
-  --color-status-queued-fg: #c5d8fc;
-  --color-status-queued-bg: #1e3058;
-  --color-status-approved-fg: #d9f99d;
-  --color-status-approved-bg: #2c3c14;
-  --color-status-signed-fg: #a5f3fc;
-  --color-status-signed-bg: #124858;
-  --color-status-sent-fg: #86efac;
-  --color-status-sent-bg: #123822;
   --color-danger-fg: #fecaca;
   --color-danger-bg: #5c2424;
-  --color-status-failed-fg: #fecaca;
-  --color-status-failed-bg: #5c2424;
-  --color-status-missed-fg: #fde68a;
-  --color-status-missed-bg: #4a3010;
+  --color-status-neutral-fg: #e4eef4;
+  --color-status-neutral-bg: #2a3944;
+  --color-status-accent-fg: #b6e2f4;
+  --color-status-accent-bg: #1c3a4c;
+  --color-status-success-fg: #86efac;
+  --color-status-success-bg: #123822;
+  --color-status-warning-fg: #fde68a;
+  --color-status-warning-bg: #4a3010;
+  --color-status-danger-fg: #fecaca;
+  --color-status-danger-bg: #5c2424;
+  --color-status-info-fg: #a5f3fc;
+  --color-status-info-bg: #124858;
 }
