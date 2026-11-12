@@ -51,6 +51,8 @@ In the Tailwind 4 entry file (Vite: `@tailwindcss/vite`):
 
 `@source` is required. Component class names such as `bg-accent` live in the packed JavaScript, and Tailwind does not scan that file unless this line is present. The path is relative to the stylesheet. The example above assumes the stylesheet is in `src/` and `node_modules` is one directory up. Change the relative path if yours differs.
 
+App resets such as `* { margin: 0; padding: 0 }` and `button { background: none; border: 0; font: inherit }` must go in `@layer base`. Outside that layer they override the library's utility classes.
+
 ## Theme
 
 Set both attributes on `<html>` or `<body>`:

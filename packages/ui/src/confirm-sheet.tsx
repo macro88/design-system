@@ -61,7 +61,7 @@ export function ConfirmSheet({
                 )}
               >
                 <AlertDialog.Title className="type-display-sm">{title}</AlertDialog.Title>
-                <AlertDialog.Description className="type-body-md mt-2 text-muted">
+                <AlertDialog.Description className="type-body-md font-body mt-2 text-muted">
                   {description}
                 </AlertDialog.Description>
                 <div className="mt-4 flex flex-wrap gap-2">
