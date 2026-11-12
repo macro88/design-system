@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const themeNames: Record<string, string> = {
-  nostr: "Nostr (temporary)",
+  nostr: "Nostr",
   runifly: "Runifly (temporary)",
   exosquare: "Exosquare (temporary)",
 };
