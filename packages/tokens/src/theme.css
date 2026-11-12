@@ -99,6 +99,15 @@
   --radius-full: 999px;
 }
 
+/* Redeclare the aliases where a theme or scheme is applied.
+   var() on :root is already resolved, so an inner data-theme would otherwise
+   inherit the base fill. A theme can still override these two properties. */
+[data-theme],
+[data-scheme] {
+  --color-disabled-bg: var(--color-status-neutral-bg);
+  --color-disabled-fg: var(--color-muted);
+}
+
 :root {
   --space-2: 0.125rem;
   --space-4: 0.25rem;

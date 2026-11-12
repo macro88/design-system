@@ -427,6 +427,8 @@ function cssLiteralFindings(file, source) {
   for (const match of masked.matchAll(UNIT_LITERAL)) {
     const index = match.index ?? 0;
     if (insideVar(masked, index)) continue;
+    // 1em is the element's own font size, so a spinner can match the label.
+    if (match[0] === "1em") continue;
     addFinding(findings, file, source, index, match[0]);
   }
 

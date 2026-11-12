@@ -13,8 +13,19 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = { args: { children: "Save", variant: "primary" } };
 export const Outline: Story = { args: { children: "Edit", variant: "outline" } };
 export const Ghost: Story = { args: { children: "Dismiss", variant: "ghost" } };
-export const Pending: Story = { args: { children: "Save", pending: true } };
 const variants = ["primary", "outline", "ghost", "danger"] as const;
+
+export const Pending: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-3">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} pending>
+          {variant}
+        </Button>
+      ))}
+    </div>
+  ),
+};
 
 export const Disabled: Story = {
   render: () => (
@@ -25,7 +36,7 @@ export const Disabled: Story = {
             {variant} disabled
           </Button>
           <Button variant={variant} pending>
-            {variant} aria-disabled
+            {variant} pending
           </Button>
         </div>
       ))}

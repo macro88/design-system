@@ -11,6 +11,15 @@ test("flags a literal fallback inside var()", () => {
   assert.match(findings[0].snippet, /120ms/);
 });
 
+test("allows 1em as the current font size and still flags other lengths", () => {
+  const findings = inspect(
+    "packages/ui/src/fixture.css",
+    ".mark { width: 1em; height: 1em; } .other { width: 2em; }",
+  );
+  assert.equal(findings.length, 1);
+  assert.match(findings[0].snippet, /2em/);
+});
+
 test("allows a bare var()", () => {
   const findings = inspect("packages/ui/src/fixture.css", ".a { transition-duration: var(--x); }");
   assert.deepEqual(findings, []);

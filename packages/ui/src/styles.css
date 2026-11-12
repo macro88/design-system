@@ -60,12 +60,12 @@
   background-color: var(--color-accent-subtle);
 }
 
-.button:disabled,
-.button[aria-disabled="true"],
-.button:disabled:hover,
-.button[aria-disabled="true"]:hover,
-.button:disabled:active,
-.button[aria-disabled="true"]:active {
+.button:disabled:not([aria-busy="true"]),
+.button[aria-disabled="true"]:not([aria-busy="true"]),
+.button:disabled:not([aria-busy="true"]):hover,
+.button[aria-disabled="true"]:not([aria-busy="true"]):hover,
+.button:disabled:not([aria-busy="true"]):active,
+.button[aria-disabled="true"]:not([aria-busy="true"]):active {
   background-color: var(--color-disabled-bg);
   color: var(--color-disabled-fg);
   border-color: var(--color-border);
@@ -74,12 +74,21 @@
   cursor: not-allowed;
 }
 
+.button[aria-busy="true"],
+.button[aria-busy="true"]:hover,
+.button[aria-busy="true"]:active {
+  position: relative;
+  cursor: progress;
+}
+
 .button[aria-busy="true"]::before {
   content: "";
-  display: inline-block;
-  width: var(--space-16);
-  height: var(--space-4);
-  border-radius: var(--radius-badge);
+  position: absolute;
+  inset: 0;
+  width: 1em;
+  height: 1em;
+  margin: auto;
+  border-radius: var(--radius-full);
   background: currentColor;
   animation: button-pending var(--motion-duration-slower) var(--motion-ease-linear) infinite;
 }
