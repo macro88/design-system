@@ -1,0 +1,80 @@
+# Nostr design conventions
+
+A record of what the Nostr ecosystem expects in colour, icons, terms and patterns, and how the approved Nostrich Ink design for the scheduler follows, breaks, or sits outside each point. Every claim is cited. Confidence is high, medium or low as labelled; contrast figures are an **Estimate** from the WCAG 2 sRGB formula. Evidence was opened on 11 Nov 2026.
+
+The accent decision of 11 Nov 2026 stands and is not open for a re-vote.
+
+## Colour
+
+`#662482` is the fill in the community Nostrich logo pack, released [CC0 1.0](https://github.com/mbarulli/nostr-logo/blob/main/LICENSE). It is not a protocol colour, and clients do not share a purple. The scheduler’s flat accent follows that logo mark, not a client norm. Decided 11 Nov 2026; the decision stands.
+
+| Convention | Evidence | Confidence | Nostrich Ink | Why |
+| --- | --- | --- | --- | --- |
+| The widely used community Nostrich pack fills purple paths with `#662482`. The README calls the pack a proposal, not a protocol mandate. | Hex read from [`nostr-icon-purple-transparent.svg`](https://raw.githubusercontent.com/mbarulli/nostr-logo/main/SVG/nostr-icon-purple-transparent.svg) and siblings in [mbarulli/nostr-logo](https://github.com/mbarulli/nostr-logo). | High (hex from the SVG). Low for any “official” purple. | Follows | Light accent is the flat logo-pack fill `#662482`. Dark uses a lifted `#B373CE` of the same hue. |
+| No colour is defined in the NIPs or the protocol README. Simple Icons declined a brand icon because “Nostr doesn't have a logo that everyone can agree on.” | [nostr-protocol README](https://github.com/nostr-protocol/nostr/blob/master/README.md); [Simple Icons #9381](https://github.com/simple-icons/simple-icons/issues/9381); [Nostr Design, Resources](https://nostrdesign.org/docs/resources/). | High | Follows | The accent is taken from the community pack, not from a protocol brand that does not exist. |
+| Clients do not share a purple. [nostr.com](https://nostr.com/) is not a protocol home and sets `--accent: #1d9bf0`. Other opened accents include Damus `#CC43C5`, Primal `#2394EF` (with a `#14B9FF`–`#690DFF` gradient), Amethyst Material `#BB86FC` / `#6200EE` (user-customisable), Snort `#ff3f15`, Coracle `#FC560E`, noStrudel `#8DB600`, and Iris `#702ace` (its light theme is `#1d9bf0`). Earlier packs and comments also differ: satscoffee `#A915FF`; a 2024 r/nostr comment cited `#8D45FF`. Nostr Design’s purple palettes are ideas, not a brand. | [nostr.com CSS](https://nostr.com/_app/immutable/assets/0.DAFEL4U9.css); [DamusPurple](https://raw.githubusercontent.com/damus-io/damus/master/damus/Assets.xcassets/Colors/DamusPurple.colorset/Contents.json); [Primal palette](https://raw.githubusercontent.com/PrimalHQ/primal-web-app/main/src/palette.scss); [Amethyst Color.kt](https://raw.githubusercontent.com/vitorpamplona/amethyst/main/commonsUI/src/commonMain/kotlin/com/vitorpamplona/amethyst/commons/ui/theme/Color.kt); [Snort CSS](https://raw.githubusercontent.com/v0l/snort/main/packages/app/src/index.css); [Coracle .env](https://raw.githubusercontent.com/coracle-social/coracle/master/.env.template); [noStrudel theme](https://raw.githubusercontent.com/hzrd149/nostrudel/master/src/theme/index.ts); [Iris tailwind config](https://raw.githubusercontent.com/irislib/iris-client/master/tailwind.config.js); [satscoffee/nostr_icons](https://github.com/satscoffee/nostr_icons); [r/nostr comment](https://www.reddit.com/r/nostr/comments/1fgxb6w/wondering_if_we_should_reevaluate_the_logo_color/) (medium); [Nostr Design palettes](https://nostrdesign.org/docs/reference-designs/color-palette-ideas/). | High for opened files. Medium for the Reddit hex. | N/A | There is no client accent to follow. The scheduler does not use Damus, Amethyst, or any other client purple. |
+
+## Icons and marks
+
+The purple ostrich wordmark and icon were designed by Andrea Nicolini (Bembureda), commissioned for [mbarulli/nostr-logo](https://github.com/mbarulli/nostr-logo), announced 30 May 2023, and released [CC0 1.0](https://github.com/mbarulli/nostr-logo/blob/main/LICENSE). [Announcement](https://www.reddit.com/r/nostr/comments/13vsc10/wouldnt_it_be_nice_if_nostr_had_a_cool_logo_here/). [Sample asset](https://raw.githubusercontent.com/mbarulli/nostr-logo/main/PNG/nostr-icon-purple-transparent-256x256.png).
+
+| Convention | Evidence | Confidence | Nostrich Ink | Why |
+| --- | --- | --- | --- | --- |
+| There is no logo everyone agrees on; “it is up to the app developer to decide which icon they wish to use.” | [Nostr Design, Resources](https://nostrdesign.org/docs/resources/); [Simple Icons #9381](https://github.com/simple-icons/simple-icons/issues/9381). | High | Follows | The wordmark is “Scheduler” alone, with no nostrich, lightning bolt, or borrowed social-network glyph. |
+| There is no protocol-standard zap, key, or relay glyph. [NIP-57](https://github.com/nostr-protocol/nips/blob/master/57.md) mentions a “lightning zap button” but does not specify a mark. | NIP-57; no key or relay glyph was found in the NIPs or the logo pack. | High | N/A | The scheduler has no zap, key, or relay icon in chrome. “Zap” appears only inside sample note text. |
+| Clients use mixed icon sets (Material 3, Font Awesome, Remix Icon, Untitled UI-style, and custom assets). | Opened client sources: Amethyst (Material 3), Coracle (Font Awesome), Iris (Remix Icon), noStrudel (Untitled UI-style / Chakra), Primal and Damus (custom assets). [Nostr Design, Resources](https://nostrdesign.org/docs/resources/) lists further community sets. | High | N/A | A single open stroke set sits beside labels and never replaces a primary-action label. The specific library is an implementation detail. |
+
+## Terms
+
+NIP wording is from the [NIPs repository](https://github.com/nostr-protocol/nips). Clients mix some of these strings; sources for client labels are [Amethyst strings.xml](https://raw.githubusercontent.com/vitorpamplona/amethyst/main/commonsUI/src/commonMain/composeResources/values/strings.xml), [Damus Localizable.xcstrings](https://raw.githubusercontent.com/damus-io/damus/master/damus/en-US.xcloc/Source%20Contents/damus/Resources/Localizable.xcstrings), [Snort en.json](https://raw.githubusercontent.com/v0l/snort/main/packages/app/src/translations/en.json), [Primal translations.ts](https://raw.githubusercontent.com/PrimalHQ/primal-web-app/main/src/translations.ts), [Coracle Login.svelte](https://raw.githubusercontent.com/coracle-social/coracle/master/src/app/views/Login.svelte), [Iris SignIn.tsx](https://raw.githubusercontent.com/irislib/iris-client/master/src/shared/components/user/SignIn.tsx), and [noStrudel start.tsx](https://raw.githubusercontent.com/hzrd149/nostrudel/master/src/views/signin/start.tsx).
+
+| Convention | Evidence | Confidence | Nostrich Ink | Why |
+| --- | --- | --- | --- | --- |
+| NIP-01 / NIP-10 call `kind:1` a “text note”. Clients mix “note” and “post”. | [NIPs](https://github.com/nostr-protocol/nips); client strings above. | High | Follows | Chrome uses “note”: “Write a note”, “Sign {n} notes”, “The relay refused this note.” Kind tabs are Note, Thread, and Reply. “Post” is not used in chrome. |
+| NIP-19: `npub` is a public key, `nsec` a private key, `note` a note id. Bech32 forms are for display, copy and input. | [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md). | High | Follows | The profile control is a truncated npub, in mono as a copyable value. The product never asks for or shows an nsec. |
+| NIP-46 is “Nostr Remote Signing”; the remote signer is “also known as ‘bunker’.” | [NIPs](https://github.com/nostr-protocol/nips). | High | Follows | The Sign surface uses “Bunker”, “Sign with bunker”, “Pair a remote signer when you do not want to use the browser,” a `bunker://` field, and Paired / Not paired. |
+| NIP-07 is the browser `window.nostr` signer. Client labels include “Use Browser Extension”, “Sign in with Nostr Extension”, and “Browser Extension”. | [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md); client strings above. | High | Follows | The primary action is “Sign {n} notes” with the browser signer. If none is available: “No browser signer is available. Pair a bunker, or install a signer for this page.” |
+| NIP-05 maps keys to DNS identifiers. It is not “verification”. [Nostr Design](https://nostrdesign.org/docs/how-to/impostor-prevention/) says a Nostr Address “should not be used as any form of identification or verification.” Clients disagree: Amethyst says “Nostr Address”; Primal and Snort say “Verified” / “Get Verified.” | [NIPs](https://github.com/nostr-protocol/nips); [Nostr Design FAQ](https://nostrdesign.org/docs/faq/); [“NIP-05 is not Verification”](https://www.stacker.news/items/173439); client strings above. | High | N/A | The scheduler has no NIP-05 address or “verified” badge. |
+| NIP-57 is “Lightning Zaps”. | [NIP-57](https://github.com/nostr-protocol/nips/blob/master/57.md). | High | N/A | There is no zap control. |
+| NIP-18 calls them “Reposts”. Amethyst’s button says “Boost”; Damus, Snort and Primal say “Repost”. | [NIPs](https://github.com/nostr-protocol/nips); client strings above. | High | N/A | The scheduler has no repost action. |
+| Inbox, Queue, Log, Sign, Schedule, Approve, Discard, Publish due, and the status words Draft, Queued, Approved, Signed, Sent, Failed and Missed. | This product’s approved copy. | — | N/A | App vocabulary, not NIP or shared client terms. Only Failed and Missed may wear a capsule. |
+
+## Patterns
+
+| Convention | Evidence | Confidence | Nostrich Ink | Why |
+| --- | --- | --- | --- | --- |
+| Clients shorten npubs for display. Damus uses `prefix:suffix` with a colon (default 8; 16, or 12 in the sidemenu). Iris ships `truncateMiddle` as `slice + "..." + slice` (defaults 12 + 12; whether every npub in that UI uses those defaults was not exhaustively checked). | [Damus DisplayName.swift](https://raw.githubusercontent.com/damus-io/damus/master/damus/Shared/Utilities/DisplayName.swift), [PubkeyView.swift](https://raw.githubusercontent.com/damus-io/damus/master/damus/Shared/Components/PubkeyView.swift); [Iris utils.ts](https://raw.githubusercontent.com/irislib/iris-client/master/src/utils/utils.ts). Other clients were not opened (see Gaps). | High for those helpers. Medium for clients in general. | Follows | Approved screens show a short middle-ellipsis form (for example `npub13mpx...zmr8`), not Damus’s colon. The visible length is shorter than Iris’s documented defaults; that count is not a protocol rule. |
+| One sourced scheduler, Amethyst, signs at compose time, holds the event locally, and broadcasts later. YakiHonne records “Scheduled notes”; Postiz is a calendar and draft flow with a Nostr provider. | [Amethyst PR #2765](https://github.com/vitorpamplona/amethyst/pull/2765); [YakiHonne changelog](https://raw.githubusercontent.com/YakiHonne/web-app/main/CHANGELOG.md); [Postiz scheduling](https://docs.postiz.com/general/composer/scheduling), [Nostr provider](https://docs.postiz.com/public-api/providers/nostr). | High for those products. | Breaks | The writer composes and schedules first. Signing is a later batch on the Sign surface, and only for times within the next seven days (“This time is further ahead than you can sign. Choose a time within the next seven days.”). After signing, items are Queued until publish. This is an approved product difference, not a defect. |
+| Amethyst colours relay connection status green / yellow / red / gray. NIP-65 is the relay list event, not a UI spec. | [Amethyst Color.kt](https://raw.githubusercontent.com/vitorpamplona/amethyst/main/commonsUI/src/commonMain/kotlin/com/vitorpamplona/amethyst/commons/ui/theme/Color.kt); [NIP-65](https://github.com/nostr-protocol/nips/blob/master/65.md). | High | N/A | The log reports publish outcomes in words (“Accepted on the local relay”, “The relay refused this note.”), not a connection-status rainbow. |
+
+## Do-nots and accessibility
+
+| Convention | Evidence | Confidence | Nostrich Ink | Why |
+| --- | --- | --- | --- | --- |
+| Do not ask people to paste secret keys, and do not reveal an nsec in the UI. Prefer a signer. | [Nostr Design, private-key safeguarding](https://nostrdesign.org/docs/how-to/private-key-safeguarding/); [sign-in guidance](https://nostrdesign.org/docs/how-to/sign-in-sign-up/). | High | Follows | There is no nsec field. Profiles come from the data directory (“Add a profile in the data directory to begin.”). Signing uses a browser signer or a bunker. |
+| Do not let a note publish with `nsec1` in the body. Damus warns: “Note contains “nsec1” private key. Are you sure?” | [Nostr Design, private-key safeguarding](https://nostrdesign.org/docs/how-to/private-key-safeguarding/), which also cites Damus’s warning. | High | Open | The approved screens and copy do not include this safeguard. |
+| Do not present a NIP-05 tick as an authority badge. Prefer “Nostr Address” and a “Following” label over a bare tick. | [Nostr Design, impostor prevention](https://nostrdesign.org/docs/how-to/impostor-prevention/). | High | N/A | No NIP-05 badge is shown. |
+| Deletion is not guaranteed. “Deletion request” is the recommended term, not “delete”. | [Nostr Design, unique design challenges](https://nostrdesign.org/docs/unique-design-challenges/). | High | N/A | The confirm sheet is “Discard this item from the queue?” for a local queued or signed item. The log has no retract action for a sent note. |
+| Aim for WCAG AA contrast at minimum; use readable UI fonts, not decorative body type. | [Nostr Design, guiding principles](https://nostrdesign.org/docs/guiding-principles/); [Resources](https://nostrdesign.org/docs/resources/). | High | Follows | Text pairs in the theme meet AA (AAA on many pairs). UI type is Be Vietnam Pro; the note is Literata, a screen text face; IBM Plex Mono is only for copyable values. |
+| `#662482` on `#FFFFFF` is 9.81:1 (passes AA and AAA). `#662482` on `#000000` is 2.14:1 (fails AA, including large text). | **Estimate**, WCAG 2 relative-luminance, sRGB, `(L1+0.05)/(L2+0.05)`. | High for the method. | Follows | White on the light accent is the same 9.81:1 pair. The dark theme does not put `#662482` on near-black; it uses the lifted `#B373CE`. |
+
+## Open items for the design
+
+These should change the UI, or constrain a later change. They are not a re-opening of the accent or of when signing happens.
+
+1. Warn or block when a note body contains `nsec1`, as [Nostr Design](https://nostrdesign.org/docs/how-to/private-key-safeguarding/) and Damus advise.
+2. If a later change lets writers retract a sent note, call that action a “deletion request”, not “delete”.
+
+## Gaps
+
+- Live Alby / nos2x popup wording and screenshots (only the nos2x README and NIP-07 were opened).
+- Amber’s in-app approval screens (README only).
+- Emanator, Schedulin, and Typefully-itself UI screenshots.
+- Exhaustive npub truncation in Primal, Snort, Amethyst, Coracle, noStrudel (only Damus and Iris helpers were opened).
+- Snort and Damus custom icon-set provenance (no package-name match).
+- An official protocol colour or logo — none found.
+- A primary source that names “casino styling” as a community dislike.
+
+## Overall confidence
+
+**High** for the `#662482` SVG fill, the CC0 logo origin, NIP titles, Nostr Design guidance, and the client hex values and English strings cited from opened files. **Medium** for “clients in general” behaviour (truncation, checkmarks, extension prompts) where only some code paths were opened. **Low** for undocumented visual taboos and for any single “official Nostr purple” beyond the community logo pack.

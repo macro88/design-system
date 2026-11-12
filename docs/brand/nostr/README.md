@@ -1,5 +1,7 @@
 # Scheduler brand book
 
+Ecosystem conventions and how this theme follows or breaks them: [conventions.md](./conventions.md).
+
 The visual and verbal identity for the local Nostr composer and scheduler. Keep this document at `docs/brand/nostr`.
 
 The shared design system stays neutral. This brand lives only in `packages/themes/nostr`. Do not borrow colour, type, or decoration from other product themes.
