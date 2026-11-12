@@ -52,18 +52,18 @@ NIP wording is from the [NIPs repository](https://github.com/nostr-protocol/nips
 | Convention | Evidence | Confidence | Nostrich Ink | Why |
 | --- | --- | --- | --- | --- |
 | Do not ask people to paste secret keys, and do not reveal an nsec in the UI. Prefer a signer. | [Nostr Design, private-key safeguarding](https://nostrdesign.org/docs/how-to/private-key-safeguarding/); [sign-in guidance](https://nostrdesign.org/docs/how-to/sign-in-sign-up/). | High | Follows | There is no nsec field. Profiles come from the data directory (“Add a profile in the data directory to begin.”). Signing uses a browser signer or a bunker. |
-| Do not let a note publish with `nsec1` in the body. Damus warns: “Note contains “nsec1” private key. Are you sure?” | [Nostr Design, private-key safeguarding](https://nostrdesign.org/docs/how-to/private-key-safeguarding/), which also cites Damus’s warning. | High | Open | The approved screens and copy do not include this safeguard. |
+| Do not let a note publish with `nsec1` in the body. Damus warns: “Note contains “nsec1” private key. Are you sure?” | [Nostr Design, private-key safeguarding](https://nostrdesign.org/docs/how-to/private-key-safeguarding/), which also cites Damus’s warning. | High | Follows (stricter) | Decided 12 Nov 2026: a hard block, not a warning. While the body contains `nsec1`, the composer will not schedule or sign the note, and shows: “This note contains a private key (nsec). Remove it before queuing. Never share your nsec: anyone who has it controls your account.” There is no “send anyway”. |
 | Do not present a NIP-05 tick as an authority badge. Prefer “Nostr Address” and a “Following” label over a bare tick. | [Nostr Design, impostor prevention](https://nostrdesign.org/docs/how-to/impostor-prevention/). | High | N/A | No NIP-05 badge is shown. |
-| Deletion is not guaranteed. “Deletion request” is the recommended term, not “delete”. | [Nostr Design, unique design challenges](https://nostrdesign.org/docs/unique-design-challenges/). | High | N/A | The confirm sheet is “Discard this item from the queue?” for a local queued or signed item. The log has no retract action for a sent note. |
+| Deletion is not guaranteed. “Deletion request” is the recommended term, not “delete”. | [Nostr Design, unique design challenges](https://nostrdesign.org/docs/unique-design-challenges/). | High | Follows | Decided 12 Nov 2026: any action that retracts a sent note is called a “deletion request”, never “delete”, and its copy says relays may keep the note. Today the log has no such action; “Discard this item from the queue?” stays for local queued or signed items, which were never published. |
 | Aim for WCAG AA contrast at minimum; use readable UI fonts, not decorative body type. | [Nostr Design, guiding principles](https://nostrdesign.org/docs/guiding-principles/); [Resources](https://nostrdesign.org/docs/resources/). | High | Follows | Text pairs in the theme meet AA (AAA on many pairs). UI type is Be Vietnam Pro; the note is Literata, a screen text face; IBM Plex Mono is only for copyable values. |
 | `#662482` on `#FFFFFF` is 9.81:1 (passes AA and AAA). `#662482` on `#000000` is 2.14:1 (fails AA, including large text). | **Estimate**, WCAG 2 relative-luminance, sRGB, `(L1+0.05)/(L2+0.05)`. | High for the method. | Follows | White on the light accent is the same 9.81:1 pair. The dark theme does not put `#662482` on near-black; it uses the lifted `#B373CE`. |
 
-## Open items for the design
+## Resolved items
 
-These should change the UI, or constrain a later change. They are not a re-opening of the accent or of when signing happens.
+Both open items were decided on 12 Nov 2026. Neither re-opens the accent or when signing happens.
 
-1. Warn or block when a note body contains `nsec1`, as [Nostr Design](https://nostrdesign.org/docs/how-to/private-key-safeguarding/) and Damus advise.
-2. If a later change lets writers retract a sent note, call that action a “deletion request”, not “delete”.
+1. A note body containing `nsec1` is blocked in the composer, as [Nostr Design](https://nostrdesign.org/docs/how-to/private-key-safeguarding/) advises; this is stricter than Damus’s warning.
+2. A future action that retracts a sent note is a “deletion request”, not “delete”, per [Nostr Design](https://nostrdesign.org/docs/unique-design-challenges/).
 
 ## Gaps
 
