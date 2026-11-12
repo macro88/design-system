@@ -36,3 +36,7 @@ pnpm --filter @macro88/storybook build
 ```
 
 `pnpm lint` runs ESLint, a Prettier check, and `lint:visuals`. `pnpm build` builds the library packages. Build the Storybook catalogue separately with the filter above.
+
+## Releasing
+
+Bump versions with changesets and merge that to main. Add `.github/release-notes/vX.Y.Z.md`, then push the tag `vX.Y.Z` on main. The Release workflow packs the tarballs and creates the GitHub release. To publish an existing tag without a new push, run the Release workflow and pass that tag.

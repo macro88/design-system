@@ -1,0 +1,110 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag, for example v0.1.0
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Pack and publish the release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+    steps:
+      - name: Check out the tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build libraries
+        run: pnpm build
+
+      - name: Check the tag matches package versions
+        run: node scripts/release-version.mjs
+
+      - name: Require release notes
+        run: |
+          if [ ! -f ".github/release-notes/${TAG}.md" ]; then
+            echo "Missing release notes at .github/release-notes/${TAG}.md. Add that file on the tag, then run again."
+            exit 1
+          fi
+
+      - name: Pack the packages
+        run: |
+          mkdir -p dist-release
+          for package in tokens motion ui patterns themes/runifly themes/nostr themes/exosquare; do
+            pnpm --dir "packages/${package}" pack --pack-destination "${PWD}/dist-release"
+          done
+          (
+            cd dist-release
+            sha256sum *.tgz > SHA256SUMS
+          )
+
+      - name: Render the install guide
+        run: |
+          VERSION="${TAG#v}"
+          sed "s/{{VERSION}}/${VERSION}/g" docs/install.md > dist-release/INSTALL.md
+          if grep -q '{{' dist-release/INSTALL.md; then
+            echo "dist-release/INSTALL.md still contains an unreplaced {{ placeholder."
+            exit 1
+          fi
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "A release for ${TAG} already exists. Refusing to overwrite it."
+            exit 1
+          fi
+          args=(
+            release create "$TAG"
+            dist-release/*.tgz
+            dist-release/SHA256SUMS
+            dist-release/INSTALL.md
+            --title "$TAG"
+            --notes-file ".github/release-notes/${TAG}.md"
+            --verify-tag
+          )
+          if [[ "$TAG" == *-* ]]; then
+            args+=(--prerelease)
+          fi
+          gh "${args[@]}"
