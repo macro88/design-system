@@ -14,6 +14,23 @@ export const Primary: Story = { args: { children: "Save", variant: "primary" } }
 export const Outline: Story = { args: { children: "Edit", variant: "outline" } };
 export const Ghost: Story = { args: { children: "Dismiss", variant: "ghost" } };
 export const Pending: Story = { args: { children: "Save", pending: true } };
-export const Disabled: Story = { args: { children: "Save", disabled: true } };
+const variants = ["primary", "outline", "ghost", "danger"] as const;
+
+export const Disabled: Story = {
+  render: () => (
+    <div className="grid gap-3">
+      {variants.map((variant) => (
+        <div key={variant} className="flex flex-wrap items-center gap-3">
+          <Button variant={variant} disabled>
+            {variant} disabled
+          </Button>
+          <Button variant={variant} pending>
+            {variant} aria-disabled
+          </Button>
+        </div>
+      ))}
+    </div>
+  ),
+};
 export const Small: Story = { args: { children: "Edit", variant: "outline", size: "sm" } };
 export const Large: Story = { args: { children: "Save", size: "lg" } };

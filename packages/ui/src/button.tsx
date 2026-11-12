@@ -1,6 +1,11 @@
 import { Slot } from "@radix-ui/react-slot";
 import { focusRingClass } from "@macro88/tokens";
-import { forwardRef, type ButtonHTMLAttributes, type MouseEvent as ReactMouseEvent } from "react";
+import {
+  forwardRef,
+  type ButtonHTMLAttributes,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import { cx } from "./cx";
 
 type ButtonBase = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "disabled"> & {
@@ -51,11 +56,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     disabled,
     type,
     onClick,
+    onKeyDown,
     ...props
   },
   ref,
 ) {
   const blocked = Boolean(disabled || pending);
+  const stopKeys = (event: ReactKeyboardEvent<HTMLElement>) => {
+    onKeyDown?.(event as ReactKeyboardEvent<HTMLButtonElement>);
+    if (event.defaultPrevented || !blocked) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
   const classes = cx(
     "button inline-flex items-center justify-center gap-2 rounded-control border font-display outline-none",
     focusRingClass,
@@ -71,6 +85,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         aria-busy={pending || undefined}
         aria-disabled={blocked || undefined}
         className={classes}
+        onKeyDown={stopKeys}
         onClick={(event) => {
           if (blocked) {
             blockActivation(event);
@@ -93,6 +108,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       aria-disabled={blocked || undefined}
       aria-busy={pending || undefined}
       className={classes}
+      onKeyDown={stopKeys}
       onClick={(event) => {
         if (blocked) {
           blockActivation(event);

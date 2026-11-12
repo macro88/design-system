@@ -81,6 +81,12 @@ function contrast(foreground: string, background: string): number {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
+function resolveColor(values: Map<string, string>, name: string, fallback: string): string {
+  const value = values.get(name);
+  if (value && /^#[0-9a-f]{6}$/i.test(value)) return value;
+  return requireHex(values, fallback);
+}
+
 function requireHex(values: Map<string, string>, name: string): string {
   const value = values.get(name);
   if (!value || !/^#[0-9a-f]{6}$/i.test(value)) {
@@ -154,6 +160,25 @@ describe("temporary theme palettes", () => {
             pair("--color-text", `--color-status-${tone}-bg`, 4.5);
             pair("--color-muted", `--color-status-${tone}-bg`, 4.5);
           }
+        }
+      });
+
+      it("keeps disabled text at 3:1 on the disabled fill in both schemes", () => {
+        for (const [scheme, schemeName] of [
+          [light, "light"],
+          [dark, "dark"],
+        ] as const) {
+          const foreground = resolveColor(scheme, "--color-disabled-fg", "--color-muted");
+          const background = resolveColor(
+            scheme,
+            "--color-disabled-bg",
+            "--color-status-neutral-bg",
+          );
+          const ratio = contrast(foreground, background);
+          expect(
+            ratio,
+            `${schemeName} ${foreground} on ${background} is ${ratio.toFixed(2)}:1`,
+          ).toBeGreaterThanOrEqual(3);
         }
       });
 

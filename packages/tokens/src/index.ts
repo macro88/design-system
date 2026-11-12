@@ -92,6 +92,10 @@ export const focusVars = {
 
 export const iconStrokeVar = "--icon-stroke";
 export const disabledOpacityVar = "--disabled-opacity";
+export const disabledColorVars = {
+  bg: "--color-disabled-bg",
+  fg: "--color-disabled-fg",
+} as const;
 export const controlHeightVars = {
   sm: "--control-height-sm",
   md: "--control-height",

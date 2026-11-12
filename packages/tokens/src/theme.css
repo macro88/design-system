@@ -44,6 +44,8 @@
   --color-status-danger-bg: #f8d4d4;
   --color-status-info-fg: #155e75;
   --color-status-info-bg: #d4f0f6;
+  --color-disabled-bg: var(--color-status-neutral-bg);
+  --color-disabled-fg: var(--color-muted);
 
   --font-display: ui-sans-serif, system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, sans-serif;

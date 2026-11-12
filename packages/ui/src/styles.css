@@ -61,8 +61,17 @@
 }
 
 .button:disabled,
-.button[aria-disabled="true"] {
-  opacity: var(--disabled-opacity);
+.button[aria-disabled="true"],
+.button:disabled:hover,
+.button[aria-disabled="true"]:hover,
+.button:disabled:active,
+.button[aria-disabled="true"]:active {
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled-fg);
+  border-color: var(--color-border);
+  border-width: var(--border-width);
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 .button[aria-busy="true"]::before {

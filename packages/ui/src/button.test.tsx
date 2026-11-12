@@ -1,7 +1,11 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Button } from "./button";
+
+const styles = readFileSync(path.join(process.cwd(), "src/styles.css"), "utf8");
 
 describe("Button", () => {
   it("runs its action from a click and from the keyboard", async () => {
@@ -16,6 +20,32 @@ describe("Button", () => {
     expect(onClick).toHaveBeenCalledTimes(2);
   });
 
+  it("uses the same neutral fill for native disabled and aria-disabled", () => {
+    const rule =
+      styles.match(
+        /\.button:disabled,\s*\.button\[aria-disabled="true"\][\s\S]*?\{([^}]+)\}/,
+      )?.[1] ?? "";
+    expect(rule).toContain("background-color: var(--color-disabled-bg)");
+    expect(rule).toContain("color: var(--color-disabled-fg)");
+    expect(rule).toContain("border-color: var(--color-border)");
+    expect(rule).toContain("border-width: var(--border-width)");
+    expect(rule).toContain("box-shadow: none");
+    expect(rule).toContain("cursor: not-allowed");
+    expect(rule).not.toContain("opacity");
+
+    const { rerender } = render(<Button disabled>Save</Button>);
+    const native = screen.getByRole("button", { name: "Save" });
+    expect(native).toBeDisabled();
+    expect(native).toHaveAttribute("aria-disabled", "true");
+    expect(native).toHaveClass("button");
+
+    rerender(<Button pending>Save</Button>);
+    const held = screen.getByRole("button", { name: "Save" });
+    expect(held).not.toBeDisabled();
+    expect(held).toHaveAttribute("aria-disabled", "true");
+    expect(held).toHaveClass("button");
+  });
+
   it("does not run its action when disabled", async () => {
     const user = userEvent.setup();
     const onClick = vi.fn();
@@ -26,6 +56,24 @@ describe("Button", () => {
     );
 
     await user.click(screen.getByRole("button", { name: "Save" }));
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it("stays focusable and ignores click, Enter, and Space while aria-disabled", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(
+      <Button pending onClick={onClick}>
+        Save
+      </Button>,
+    );
+
+    const button = screen.getByRole("button", { name: "Save" });
+    button.focus();
+    expect(button).toHaveFocus();
+    await user.click(button);
+    await user.keyboard("{Enter}");
+    await user.keyboard(" ");
     expect(onClick).not.toHaveBeenCalled();
   });
 
