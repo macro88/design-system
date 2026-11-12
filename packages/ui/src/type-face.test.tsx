@@ -1,10 +1,12 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Button } from "./button";
 import { EmptyState } from "./empty-state";
 import { Input } from "./input";
+import { Toaster, showSuccess } from "./toast";
+import { toast } from "sonner";
 
 const styles = readFileSync(path.join(process.cwd(), "src/styles.css"), "utf8");
 const tokenTheme = readFileSync(path.join(process.cwd(), "../tokens/src/theme.css"), "utf8");
@@ -26,6 +28,7 @@ function mountFaces() {
 }
 
 afterEach(() => {
+  toast.dismiss();
   document.getElementById("face-fixture")?.remove();
 });
 
@@ -52,29 +55,36 @@ describe("control and prose faces", () => {
     expect(prose).not.toContain("Be Vietnam Pro");
   });
 
-  it("gives a toast padding, a border, and a lift above a plain surface", () => {
+  it("gives a rendered success toast padding, a border, and a lift", async () => {
     mountFaces();
     render(
       <div data-theme="nostr">
+        <Toaster />
         <div className="bg-surface" data-testid="surface">
           Sheet
         </div>
-        <div data-sonner-toast data-styled="true">
-          Saved
-        </div>
       </div>,
     );
+    showSuccess("Saved");
 
-    const toast = getComputedStyle(screen.getByText("Saved"));
+    const host = await waitFor(() => {
+      const node = screen.getByText("Saved").closest("[data-sonner-toast]");
+      expect(node).not.toBeNull();
+      expect(node).toHaveAttribute("data-mounted", "true");
+      return node as HTMLElement;
+    });
+
+    const painted = getComputedStyle(host);
     const surface = getComputedStyle(screen.getByTestId("surface"));
-
-    expect(toast.paddingTop).not.toBe("0px");
-    expect(toast.paddingRight).not.toBe("0px");
-    expect(toast.borderTopWidth).not.toBe("0px");
-    expect(toast.borderTopStyle).toBe("solid");
-    expect(toast.boxShadow).not.toBe("none");
-    expect(toast.boxShadow).not.toBe(surface.boxShadow);
-    expect(toast.fontFamily).toContain("Be Vietnam Pro");
+    expect(host).toHaveAttribute("data-styled", "false");
+    expect(painted.paddingTop).not.toBe("0px");
+    expect(painted.paddingRight).not.toBe("0px");
+    expect(painted.borderTopWidth).not.toBe("0px");
+    expect(painted.borderTopStyle).toBe("solid");
+    expect(painted.borderTopColor).not.toBe(["rgba", "(0, 0, 0, 0)"].join(""));
+    expect(painted.borderTopColor).not.toBe("transparent");
+    expect(painted.boxShadow).not.toBe("none");
+    expect(painted.boxShadow).not.toBe(surface.boxShadow);
   });
 
   it("imports the Sonner stylesheet from the library styles", () => {

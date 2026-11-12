@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   ConfirmSheet,
@@ -74,33 +74,28 @@ type Story = StoryObj<typeof meta>;
 
 export const Gallery: Story = {};
 
-const themes = ["nostr", "runifly", "exosquare"] as const;
+function OpenSheetWithToast() {
+  const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    showSuccess("Saved");
+  }, []);
+
+  return (
+    <>
+      <Toaster />
+      <ConfirmSheet
+        open={open}
+        onOpenChange={setOpen}
+        title="Remove this item?"
+        description="This cannot be undone."
+        confirmLabel="Remove"
+        onConfirm={() => undefined}
+      />
+    </>
+  );
+}
 
 export const ToastOverSheet: Story = {
-  render: () => (
-    <div className="grid gap-8 p-6">
-      {themes.map((theme) => (
-        <section
-          key={theme}
-          data-theme={theme}
-          data-scheme="light"
-          className="bg-bg relative grid gap-4 p-4"
-        >
-          <p className="font-display type-caption text-muted">{theme}</p>
-          <div className="bg-surface border-border relative rounded-overlay border p-4 shadow-lift">
-            <p className="font-body type-body-md">A sheet on the page surface.</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button>Confirm</Button>
-              <Button variant="outline">Cancel</Button>
-            </div>
-            <div className="absolute right-4 bottom-4 left-4" data-sonner-toaster>
-              <div data-sonner-toast data-styled="true">
-                Saved
-              </div>
-            </div>
-          </div>
-        </section>
-      ))}
-    </div>
-  ),
+  render: () => <OpenSheetWithToast />,
 };
