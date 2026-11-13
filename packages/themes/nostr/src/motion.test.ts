@@ -39,6 +39,7 @@ const feelCss = {
   panelEnterY: ["--motion-panel-enter-y", "px"],
   sheetEnterY: ["--motion-sheet-enter-y", "px"],
   sheetExitY: ["--motion-sheet-exit-y", "px"],
+  detailX: ["--motion-detail-x", "px"],
   toastEnterY: ["--motion-toast-enter-y", "px"],
   toastExitY: ["--motion-toast-exit-y", "px"],
   toastDropY: ["--motion-toast-drop-y", "px"],
@@ -111,8 +112,8 @@ describe("nostr motion parity", () => {
     expect(motion.surface).toEqual({ type: "tween", duration: duration.base, ease: ease.standard });
 
     expect(theme.get("--motion-exit-duration")).toBe(milliseconds(motion.exit.duration));
-    expect(theme.get("--motion-exit-ease")).toBe("var(--motion-ease-exit)");
-    expect(motion.exit.ease).toEqual(ease.exit);
+    expect(theme.get("--motion-exit-ease")).toBe("var(--motion-ease-out)");
+    expect(motion.exit.ease).toEqual(ease.out);
 
     expect(theme.get("--motion-press-duration")).toBe(milliseconds(motion.press.duration));
     expect(theme.get("--motion-press-ease")).toBe("var(--motion-ease-standard)");

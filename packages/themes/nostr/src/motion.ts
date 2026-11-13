@@ -11,7 +11,7 @@ export const motion = {
   move: { type: "tween", duration: 0.24, ease: ease.inOut },
   surface: { type: "tween", duration: duration.base, ease: ease.standard },
   sheet: { type: "tween", duration: 0.28, ease: ease.drawer },
-  exit: { type: "tween", duration: 0.16, ease: ease.exit },
+  exit: { type: "tween", duration: 0.16, ease: ease.out },
   press: { type: "tween", duration: 0.08, ease: ease.standard },
   reorder: spring.lively,
   celebrate: spring.bouncy,
@@ -22,6 +22,7 @@ export const feel = {
   panelEnterY: 12,
   sheetEnterY: 28,
   sheetExitY: 16,
+  detailX: 28,
   toastEnterY: 12,
   toastExitY: 8,
   toastDropY: -8,
@@ -210,21 +211,21 @@ export const fieldExpand = {
 /** Push from a list into a detail. Detail enters from the right; the list leaves left. */
 export const detailPush = {
   detail: {
-    initial: { x: 28, opacity: 0 },
+    initial: { x: feel.detailX, opacity: 0 },
     animate: { x: 0, opacity: 1, transition: tweenMove },
   },
   list: {
-    exit: { x: -28, opacity: 0, transition: tweenExit },
+    exit: { x: -feel.detailX, opacity: 0, transition: tweenExit },
   },
 } as const;
 
 /** Pop from a detail back to the list. The mirror of detailPush. */
 export const detailPop = {
   detail: {
-    exit: { x: 28, opacity: 0, transition: tweenExit },
+    exit: { x: feel.detailX, opacity: 0, transition: tweenExit },
   },
   list: {
-    initial: { x: -28, opacity: 0 },
+    initial: { x: -feel.detailX, opacity: 0 },
     animate: { x: 0, opacity: 1, transition: tweenMove },
   },
 } as const;

@@ -20,6 +20,7 @@
 
   --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --motion-ease-linear: cubic-bezier(0, 0, 1, 1);
   /* Visible overshoot. y > 1 is valid in cubic-bezier(). */
   --motion-ease-emphasis: cubic-bezier(0.22, 1.35, 0.36, 1);
@@ -65,6 +66,7 @@
   --duration-fade: var(--motion-duration-fade);
   --ease-standard: var(--motion-ease-standard);
   --ease-exit: var(--motion-ease-exit);
+  --ease-out: var(--motion-ease-out);
   --ease-linear: var(--motion-ease-linear);
   --ease-emphasis: var(--motion-ease-emphasis);
   --ease-in-out: var(--motion-ease-in-out);
@@ -83,6 +85,7 @@
     --skeleton-animation: none;
     --motion-ease-standard: var(--motion-ease-linear);
     --motion-ease-exit: var(--motion-ease-linear);
+    --motion-ease-out: var(--motion-ease-linear);
     --motion-ease-emphasis: var(--motion-ease-linear);
     --motion-ease-in-out: var(--motion-ease-linear);
     --motion-ease-drawer: var(--motion-ease-linear);

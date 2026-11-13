@@ -15,7 +15,7 @@
   --motion-sheet-duration: 280ms;
   --motion-sheet-ease: var(--motion-ease-drawer);
   --motion-exit-duration: 160ms;
-  --motion-exit-ease: var(--motion-ease-exit);
+  --motion-exit-ease: var(--motion-ease-out);
   --motion-press-duration: 80ms;
   --motion-press-ease: var(--motion-ease-standard);
   --motion-reorder-stiffness: var(--motion-spring-lively-stiffness);
@@ -29,6 +29,7 @@
   --motion-panel-enter-y: 12px;
   --motion-sheet-enter-y: 28px;
   --motion-sheet-exit-y: 16px;
+  --motion-detail-x: 28px;
   --motion-toast-enter-y: 12px;
   --motion-toast-exit-y: 8px;
   --motion-toast-drop-y: -8px;
@@ -114,6 +115,7 @@
     --motion-panel-enter-y: 0px;
     --motion-sheet-enter-y: 0px;
     --motion-sheet-exit-y: 0px;
+    --motion-detail-x: 0px;
     --motion-toast-enter-y: 0px;
     --motion-toast-exit-y: 0px;
     --motion-toast-drop-y: 0px;
