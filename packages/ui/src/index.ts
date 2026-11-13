@@ -19,8 +19,8 @@ export {
   type SegmentedOption,
 } from "./segmented-control";
 export { Select, type SelectOption, type SelectProps } from "./select";
-export { Switch, type SwitchProps } from "./switch";
 export { Skeleton, type SkeletonProps, type SkeletonVariant } from "./skeleton";
+export { Switch, type SwitchProps } from "./switch";
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 export { Textarea, type TextareaProps } from "./textarea";
 export { Toaster, showError, showSuccess, showUndo } from "./toast";

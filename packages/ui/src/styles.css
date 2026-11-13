@@ -141,7 +141,6 @@
 .radio,
 .switch {
   border: var(--border-width) solid var(--color-border-strong);
-  border-radius: var(--radius-control);
   background: var(--color-surface);
 }
 
@@ -152,6 +151,7 @@
   justify-content: center;
   width: var(--space-20);
   height: var(--space-20);
+  border-radius: var(--radius-full);
 }
 
 .radio[data-state="checked"] {
@@ -162,7 +162,7 @@
 .radio-dot {
   width: var(--space-8);
   height: var(--space-8);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-full);
   background: var(--color-accent-on);
   transform: scale(0);
   transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
@@ -177,13 +177,16 @@
 }
 
 .switch {
-  --switch-travel: var(--space-16);
+  --switch-travel: calc(
+    var(--space-40) - 2 * var(--border-width) - 2 * var(--space-4) - var(--space-16)
+  );
   display: inline-flex;
   flex: none;
   align-items: center;
   width: var(--space-40);
-  height: var(--space-24);
+  height: calc(var(--space-16) + 2 * var(--space-4) + 2 * var(--border-width));
   padding: var(--space-4);
+  border-radius: var(--radius-control);
 }
 
 .switch[data-state="checked"] {
