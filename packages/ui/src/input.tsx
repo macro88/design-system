@@ -18,7 +18,7 @@ export function Input({ label, hint, error, id, className, ...props }: InputProp
 
   return (
     <div className="grid gap-2">
-      <label htmlFor={fieldId} className="type-body-sm text-text">
+      <label htmlFor={fieldId} className="type-body-sm font-display text-text">
         {label}
       </label>
       <input
@@ -28,7 +28,7 @@ export function Input({ label, hint, error, id, className, ...props }: InputProp
         aria-describedby={describedBy}
         data-invalid={error ? "true" : undefined}
         className={cx(
-          "field h-control w-full rounded-field border border-border-strong bg-surface px-3 text-text outline-none",
+          "field h-control w-full rounded-field border border-border-strong bg-surface px-3 font-display text-text outline-none",
           focusRingClass,
           className,
         )}

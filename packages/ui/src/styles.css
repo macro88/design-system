@@ -1,3 +1,5 @@
+@import "sonner/dist/styles.css";
+
 /* Unbranded component styles. Colour, radius, type, and motion come from tokens. */
 
 .h-control {
@@ -183,9 +185,6 @@
   font-family: var(--font-display);
 }
 
-.type-body-lg,
-.type-body-md,
-.type-body-sm,
 .type-caption {
   font-family: var(--font-body);
 }
@@ -306,15 +305,20 @@
 }
 
 [data-sonner-toaster] {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
 }
 
-[data-sonner-toast] {
+.toast-surface {
+  width: var(--width);
+  font-family: var(--font-display);
+  font-size: var(--text-body-sm);
+  line-height: var(--text-body-sm--line-height);
   background: var(--color-surface);
   color: var(--color-text);
-  border-color: var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-control);
-  box-shadow: var(--elevation-rest);
+  box-shadow: var(--elevation-lift);
+  padding: var(--space-12) var(--space-16);
 }
 
 [data-sonner-toast].toast-error,

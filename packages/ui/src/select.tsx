@@ -44,7 +44,11 @@ export function Select({
 
   return (
     <div className="grid gap-2">
-      <label id={`${fieldId}-label`} htmlFor={fieldId} className="type-body-sm text-text">
+      <label
+        id={`${fieldId}-label`}
+        htmlFor={fieldId}
+        className="type-body-sm font-display text-text"
+      >
         {label}
       </label>
       <SelectPrimitive.Root
@@ -60,7 +64,7 @@ export function Select({
           aria-invalid={error ? true : undefined}
           data-invalid={error ? "true" : undefined}
           className={cx(
-            "field inline-flex h-control w-full items-center justify-between rounded-field border border-border-strong bg-surface px-3 text-left text-text outline-none",
+            "field inline-flex h-control w-full items-center justify-between rounded-field border border-border-strong bg-surface px-3 text-left font-display text-text outline-none",
             focusRingClass,
           )}
         >
@@ -77,7 +81,7 @@ export function Select({
                   key={option.value}
                   value={option.value}
                   className={cx(
-                    "select-item type-body-md cursor-default rounded-field px-3 py-2 text-text outline-none",
+                    "select-item type-body-md font-display cursor-default rounded-field px-3 py-2 text-text outline-none",
                     focusRingClass,
                   )}
                 >

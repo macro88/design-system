@@ -201,7 +201,9 @@ function show(kind: Kind, message: string, action?: { label: string; onClick: ()
     {
       id,
       duration: Number.POSITIVE_INFINITY,
-      classNames: kind === "error" ? { toast: "toast-error" } : undefined,
+      classNames: {
+        toast: kind === "error" ? "toast-surface toast-error" : "toast-surface",
+      },
     },
   );
   register(id, kind);

@@ -28,7 +28,11 @@ export function TabsContent({ className, ...props }: ComponentProps<typeof TabsP
   return (
     <TabsPrimitive.Content
       {...props}
-      className={cx("type-body-md pt-3 text-text outline-none", focusRingClass, className)}
+      className={cx(
+        "type-body-md font-body pt-3 text-text outline-none",
+        focusRingClass,
+        className,
+      )}
     />
   );
 }

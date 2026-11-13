@@ -18,7 +18,7 @@ export function Textarea({ label, hint, error, id, className, ...props }: Textar
 
   return (
     <div className="grid gap-2">
-      <label htmlFor={fieldId} className="type-body-sm text-text">
+      <label htmlFor={fieldId} className="type-body-sm font-display text-text">
         {label}
       </label>
       <textarea
@@ -28,7 +28,7 @@ export function Textarea({ label, hint, error, id, className, ...props }: Textar
         aria-describedby={describedBy}
         data-invalid={error ? "true" : undefined}
         className={cx(
-          "field field-area w-full rounded-field border border-border-strong bg-surface px-3 py-3 text-text outline-none",
+          "field field-area w-full rounded-field border border-border-strong bg-surface px-3 py-3 font-display text-text outline-none",
           focusRingClass,
           className,
         )}

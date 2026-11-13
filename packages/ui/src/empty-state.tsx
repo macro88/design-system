@@ -15,7 +15,7 @@ export function EmptyState({ title, headingLevel = 2, children, action }: EmptyS
   return (
     <div className="grid max-w-prose gap-3">
       <Heading className="type-display-sm text-text">{title}</Heading>
-      {children ? <p className="type-body-md text-muted">{children}</p> : null}
+      {children ? <p className="type-body-md font-body text-muted">{children}</p> : null}
       {action ? <div>{action}</div> : null}
     </div>
   );

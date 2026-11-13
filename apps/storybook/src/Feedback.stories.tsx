@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   ConfirmSheet,
@@ -73,3 +73,29 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Gallery: Story = {};
+
+function OpenSheetWithToast() {
+  const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    showSuccess("Saved");
+  }, []);
+
+  return (
+    <>
+      <Toaster />
+      <ConfirmSheet
+        open={open}
+        onOpenChange={setOpen}
+        title="Remove this item?"
+        description="This cannot be undone."
+        confirmLabel="Remove"
+        onConfirm={() => undefined}
+      />
+    </>
+  );
+}
+
+export const ToastOverSheet: Story = {
+  render: () => <OpenSheetWithToast />,
+};
