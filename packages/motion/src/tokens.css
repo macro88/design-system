@@ -61,6 +61,8 @@
   --motion-surface-ease: var(--motion-ease-standard);
   --motion-sheet-duration: var(--motion-duration-base);
   --motion-sheet-ease: var(--motion-ease-standard);
+  --motion-sheet-enter-y: var(--sheet-enter);
+  --motion-sheet-exit-y: var(--sheet-exit);
   --motion-exit-duration: var(--motion-duration-base);
   --motion-exit-ease: var(--motion-ease-exit);
 }

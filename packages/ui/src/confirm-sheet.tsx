@@ -1,4 +1,4 @@
-import { ease, reducedMotion } from "@macro88/motion";
+import { ease, reducedMotion, tween } from "@macro88/motion";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
@@ -19,7 +19,7 @@ export type ConfirmSheetProps = {
 type ThemeTween = {
   type: "tween";
   duration: number;
-  ease: [number, number, number, number];
+  ease: readonly [number, number, number, number];
 };
 
 function themeTween(durationToken: string, easeToken: string): ThemeTween {
@@ -31,12 +31,11 @@ function themeTween(durationToken: string, easeToken: string): ThemeTween {
 }
 
 function reducedFade(): ThemeTween {
-  const fade = reducedMotion({ type: "tween", duration: 0, ease: ease.linear }, true, "opacity");
-  return {
-    type: "tween",
-    duration: fade.type === "tween" ? fade.duration : 0,
-    ease: [0, 0, 1, 1],
-  };
+  const fade = reducedMotion(tween("fade", "linear"), true, "opacity");
+  if (fade.type !== "tween") {
+    return { type: "tween", duration: tween("fade").duration, ease: ease.linear };
+  }
+  return { type: "tween", duration: fade.duration, ease: ease.linear };
 }
 
 /** Distances and timings for the sheet and its backdrop, from the active theme. */
@@ -54,8 +53,8 @@ export function sheetTiming(reduced: boolean) {
   }
   const exit = themeTween("--motion-exit-duration", "--motion-exit-ease");
   return {
-    enterY: readToken("--sheet-enter"),
-    exitY: readToken("--sheet-exit"),
+    enterY: readToken("--motion-sheet-enter-y"),
+    exitY: readToken("--motion-sheet-exit-y"),
     sheetEnter: themeTween("--motion-sheet-duration", "--motion-sheet-ease"),
     sheetExit: exit,
     backdropEnter: themeTween("--motion-surface-duration", "--motion-surface-ease"),

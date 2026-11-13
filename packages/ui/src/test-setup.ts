@@ -11,6 +11,8 @@ const tokenDefaults: Record<string, string> = {
   "--toast-duration-undo": "6000ms",
   "--sheet-enter": "1.75rem",
   "--sheet-exit": "1rem",
+  "--motion-sheet-enter-y": "var(--sheet-enter)",
+  "--motion-sheet-exit-y": "var(--sheet-exit)",
   "--motion-sheet-duration": "280ms",
   "--motion-sheet-ease": "cubic-bezier(0.32, 0.72, 0, 1)",
   "--motion-exit-duration": "160ms",
