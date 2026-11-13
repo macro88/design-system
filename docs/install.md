@@ -17,7 +17,7 @@ These packages are not published to npm. Install the tarballs attached to the Gi
 }
 ```
 
-`@macro88/ui` depends on `@macro88/tokens@0.1.0` and `@macro88/motion@0.1.0`. `@macro88/theme-nostr` depends on `@macro88/motion@0.1.0`. Point every `@macro88/*` package at its release tarball so pnpm does not look for them on npm.
+`@macro88/ui` depends on `@macro88/tokens@0.2.0` and `@macro88/motion@0.1.0`. `@macro88/theme-nostr` depends on `@macro88/motion@0.1.0`. Point every `@macro88/*` package at its release tarball so pnpm does not look for them on npm.
 
 pnpm 12 reads overrides from `pnpm-workspace.yaml`. It does not read a `pnpm` field in `package.json`.
 
