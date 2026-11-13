@@ -20,6 +20,7 @@ const paletteLabel: Record<string, string> = {
 
 function FeedbackGallery() {
   const [open, setOpen] = useState(false);
+  const [destructiveOpen, setDestructiveOpen] = useState(false);
   const theme = document.documentElement.dataset.theme ?? "nostr";
   const scheme = document.documentElement.dataset.scheme ?? "light";
   return (
@@ -49,6 +50,9 @@ function FeedbackGallery() {
           Show undo
         </Button>
         <Button onClick={() => setOpen(true)}>Open sheet</Button>
+        <Button variant="danger" onClick={() => setDestructiveOpen(true)}>
+          Open destructive sheet
+        </Button>
       </div>
       <ConfirmSheet
         open={open}
@@ -56,6 +60,15 @@ function FeedbackGallery() {
         title="Remove this item?"
         description="This cannot be undone."
         confirmLabel="Remove"
+        onConfirm={() => undefined}
+      />
+      <ConfirmSheet
+        open={destructiveOpen}
+        onOpenChange={setDestructiveOpen}
+        title="Remove this item?"
+        description="This cannot be undone."
+        confirmLabel="Remove"
+        destructive
         onConfirm={() => undefined}
       />
     </div>
