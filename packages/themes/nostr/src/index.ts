@@ -6,8 +6,12 @@ export const themeId = "nostr";
 export {
   chipArc,
   colour,
+  detailPop,
+  detailPush,
   elevation,
   feel,
+  fieldCollapse,
+  fieldExpand,
   motion,
   scheduleChipReduced,
   scheduleChipToNav,

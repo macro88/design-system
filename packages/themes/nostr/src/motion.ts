@@ -7,8 +7,10 @@ import { duration, ease, spring } from "@macro88/motion";
  */
 export const motion = {
   navigate: { type: "tween", duration: duration.base, ease: ease.standard },
-  feedback: { type: "tween", duration: duration.fast, ease: ease.standard },
+  feedback: { type: "tween", duration: duration.fast, ease: ease.hover },
+  move: { type: "tween", duration: 0.24, ease: ease.inOut },
   surface: { type: "tween", duration: duration.base, ease: ease.standard },
+  sheet: { type: "tween", duration: 0.28, ease: ease.drawer },
   exit: { type: "tween", duration: 0.16, ease: ease.exit },
   press: { type: "tween", duration: 0.08, ease: ease.standard },
   reorder: spring.lively,
@@ -73,7 +75,9 @@ export const colour = {
 
 const tweenNav = motion.navigate;
 const tweenFeedback = motion.feedback;
+const tweenMove = motion.move;
 const tweenSurface = motion.surface;
+const tweenSheet = motion.sheet;
 const tweenExit = motion.exit;
 const tweenPress = motion.press;
 
@@ -189,6 +193,42 @@ export function scheduleChipReduced() {
   };
 }
 
+/** Collapse a field. Opacity only, plus an optional container height. */
+export const fieldCollapse = {
+  outgoing: { opacity: 0, transition: tweenExit },
+  incoming: { opacity: 1, transition: tweenFeedback },
+  container: { height: "auto", transition: tweenSurface },
+} as const;
+
+/** Expand a field. The collapse pair, reversed. */
+export const fieldExpand = {
+  outgoing: { opacity: 0, transition: tweenFeedback },
+  incoming: { opacity: 1, transition: tweenExit },
+  container: { height: "auto", transition: tweenSurface },
+} as const;
+
+/** Push from a list into a detail. Detail enters from the right; the list leaves left. */
+export const detailPush = {
+  detail: {
+    initial: { x: 28, opacity: 0 },
+    animate: { x: 0, opacity: 1, transition: tweenMove },
+  },
+  list: {
+    exit: { x: -28, opacity: 0, transition: tweenExit },
+  },
+} as const;
+
+/** Pop from a detail back to the list. The mirror of detailPush. */
+export const detailPop = {
+  detail: {
+    exit: { x: 28, opacity: 0, transition: tweenExit },
+  },
+  list: {
+    initial: { x: -28, opacity: 0 },
+    animate: { x: 0, opacity: 1, transition: tweenMove },
+  },
+} as const;
+
 /** Exact Framer Motion variants and transitions. Use with `mode="sync"`, never `mode="wait"`. */
 export const transitions = {
   section: {
@@ -207,7 +247,7 @@ export const transitions = {
   },
   sheet: {
     initial: { opacity: 0, y: feel.sheetEnterY },
-    animate: { opacity: 1, y: 0, transition: motion.reorder },
+    animate: { opacity: 1, y: 0, transition: tweenSheet },
     exit: {
       opacity: 0,
       y: feel.sheetExitY,
@@ -363,6 +403,10 @@ export const transitions = {
     layout: true,
     transition: motion.reorder,
   },
+  fieldCollapse,
+  fieldExpand,
+  detailPush,
+  detailPop,
 } as const;
 
 const reducedTween = {
@@ -474,4 +518,32 @@ export const transitionsReduced = {
   },
   errorNudge: { x: 0, transition: reducedInstant },
   layout: { layout: false, transition: reducedInstant },
+  fieldCollapse: {
+    outgoing: { opacity: 0, transition: reducedTween },
+    incoming: { opacity: 1, transition: reducedTween },
+    container: { transition: reducedInstant },
+  },
+  fieldExpand: {
+    outgoing: { opacity: 0, transition: reducedTween },
+    incoming: { opacity: 1, transition: reducedTween },
+    container: { transition: reducedInstant },
+  },
+  detailPush: {
+    detail: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1, transition: reducedTween },
+    },
+    list: {
+      exit: { opacity: 0, transition: reducedTween },
+    },
+  },
+  detailPop: {
+    detail: {
+      exit: { opacity: 0, transition: reducedTween },
+    },
+    list: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1, transition: reducedTween },
+    },
+  },
 } as const;
