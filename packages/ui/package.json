@@ -29,8 +29,10 @@
     "@macro88/motion": "workspace:*",
     "@macro88/tokens": "workspace:*",
     "@radix-ui/react-alert-dialog": "1.2.1",
+    "@radix-ui/react-radio-group": "1.5.1",
     "@radix-ui/react-select": "2.4.1",
     "@radix-ui/react-slot": "1.5.0",
+    "@radix-ui/react-switch": "1.4.1",
     "@radix-ui/react-tabs": "1.2.1",
     "motion": "12.23.24",
     "sonner": "2.0.8"

@@ -138,6 +138,84 @@
   color: var(--color-accent-fg);
 }
 
+.radio,
+.switch {
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+}
+
+.radio {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-20);
+  height: var(--space-20);
+}
+
+.radio[data-state="checked"] {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.radio-dot {
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-control);
+  background: var(--color-accent-on);
+  transform: scale(0);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.radio[data-state="checked"] .radio-dot {
+  transform: scale(1);
+}
+
+.radio-description {
+  padding-inline-start: calc(var(--space-20) + var(--space-12));
+}
+
+.switch {
+  --switch-travel: var(--space-16);
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: var(--space-40);
+  height: var(--space-24);
+  padding: var(--space-4);
+}
+
+.switch[data-state="checked"] {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.switch-thumb {
+  width: var(--space-16);
+  height: var(--space-16);
+  border-radius: var(--radius-control);
+  background: var(--color-text);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.switch[data-state="checked"] .switch-thumb {
+  background: var(--color-accent-on);
+  transform: translateX(var(--switch-travel));
+}
+
+.radio:disabled,
+.switch:disabled {
+  background: var(--color-disabled-bg);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+.radio:disabled .radio-dot,
+.switch:disabled .switch-thumb {
+  background: var(--color-disabled-fg);
+}
+
 .tabs-trigger[data-state="active"],
 .segmented-item[data-state="checked"] {
   background-color: var(--color-accent-subtle);
@@ -347,7 +425,9 @@
   .tabs-trigger,
   .segmented-item,
   .badge,
-  .sheet {
+  .sheet,
+  .radio-dot,
+  .switch-thumb {
     transition: none;
   }
 
