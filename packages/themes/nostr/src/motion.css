@@ -7,11 +7,15 @@
   --motion-navigate-duration: var(--motion-duration-base);
   --motion-navigate-ease: var(--motion-ease-standard);
   --motion-feedback-duration: var(--motion-duration-fast);
-  --motion-feedback-ease: var(--motion-ease-standard);
+  --motion-feedback-ease: var(--motion-ease-hover);
+  --motion-move-duration: 240ms;
+  --motion-move-ease: var(--motion-ease-in-out);
   --motion-surface-duration: var(--motion-duration-base);
   --motion-surface-ease: var(--motion-ease-standard);
+  --motion-sheet-duration: 280ms;
+  --motion-sheet-ease: var(--motion-ease-drawer);
   --motion-exit-duration: 160ms;
-  --motion-exit-ease: var(--motion-ease-exit);
+  --motion-exit-ease: var(--motion-ease-out);
   --motion-press-duration: 80ms;
   --motion-press-ease: var(--motion-ease-standard);
   --motion-reorder-stiffness: var(--motion-spring-lively-stiffness);
@@ -25,6 +29,7 @@
   --motion-panel-enter-y: 12px;
   --motion-sheet-enter-y: 28px;
   --motion-sheet-exit-y: 16px;
+  --motion-detail-x: 28px;
   --motion-toast-enter-y: 12px;
   --motion-toast-exit-y: 8px;
   --motion-toast-drop-y: -8px;
@@ -71,7 +76,9 @@
 @theme inline {
   --duration-navigate: var(--motion-navigate-duration);
   --duration-feedback: var(--motion-feedback-duration);
+  --duration-move: var(--motion-move-duration);
   --duration-surface: var(--motion-surface-duration);
+  --duration-sheet: var(--motion-sheet-duration);
   --duration-exit: var(--motion-exit-duration);
   --duration-press: var(--motion-press-duration);
   --duration-chip: var(--motion-chip-duration);
@@ -82,7 +89,9 @@
   --duration-skeleton-min: var(--motion-skeleton-min);
   --ease-navigate: var(--motion-navigate-ease);
   --ease-feedback: var(--motion-feedback-ease);
+  --ease-move: var(--motion-move-ease);
   --ease-surface: var(--motion-surface-ease);
+  --ease-sheet: var(--motion-sheet-ease);
   --ease-exit-role: var(--motion-exit-ease);
   --scale-hover: var(--motion-hover-scale);
   --scale-press: var(--motion-press-scale);
@@ -95,7 +104,9 @@
   [data-theme="nostr"] {
     --motion-navigate-duration: 0ms;
     --motion-feedback-duration: 0ms;
+    --motion-move-duration: 0ms;
     --motion-surface-duration: 0ms;
+    --motion-sheet-duration: 0ms;
     --motion-exit-duration: 0ms;
     --motion-press-duration: 0ms;
     --motion-chip-duration: 0ms;
@@ -104,6 +115,7 @@
     --motion-panel-enter-y: 0px;
     --motion-sheet-enter-y: 0px;
     --motion-sheet-exit-y: 0px;
+    --motion-detail-x: 0px;
     --motion-toast-enter-y: 0px;
     --motion-toast-exit-y: 0px;
     --motion-toast-drop-y: 0px;

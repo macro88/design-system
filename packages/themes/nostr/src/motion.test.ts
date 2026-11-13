@@ -1,7 +1,16 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { duration, ease, spring } from "@macro88/motion";
-import { feel, motion } from "./motion";
+import {
+  detailPop,
+  detailPush,
+  feel,
+  fieldCollapse,
+  fieldExpand,
+  motion,
+  transitions,
+  transitionsReduced,
+} from "./motion";
 
 const css = readFileSync(new URL("./motion.css", import.meta.url), "utf8");
 
@@ -30,6 +39,7 @@ const feelCss = {
   panelEnterY: ["--motion-panel-enter-y", "px"],
   sheetEnterY: ["--motion-sheet-enter-y", "px"],
   sheetExitY: ["--motion-sheet-exit-y", "px"],
+  detailX: ["--motion-detail-x", "px"],
   toastEnterY: ["--motion-toast-enter-y", "px"],
   toastExitY: ["--motion-toast-exit-y", "px"],
   toastDropY: ["--motion-toast-drop-y", "px"],
@@ -82,20 +92,28 @@ describe("nostr motion parity", () => {
     });
 
     expect(theme.get("--motion-feedback-duration")).toBe("var(--motion-duration-fast)");
-    expect(theme.get("--motion-feedback-ease")).toBe("var(--motion-ease-standard)");
+    expect(theme.get("--motion-feedback-ease")).toBe("var(--motion-ease-hover)");
     expect(motion.feedback).toEqual({
       type: "tween",
       duration: duration.fast,
-      ease: ease.standard,
+      ease: ease.hover,
     });
+
+    expect(theme.get("--motion-move-duration")).toBe(milliseconds(motion.move.duration));
+    expect(theme.get("--motion-move-ease")).toBe("var(--motion-ease-in-out)");
+    expect(motion.move).toEqual({ type: "tween", duration: 0.24, ease: ease.inOut });
+
+    expect(theme.get("--motion-sheet-duration")).toBe(milliseconds(motion.sheet.duration));
+    expect(theme.get("--motion-sheet-ease")).toBe("var(--motion-ease-drawer)");
+    expect(motion.sheet).toEqual({ type: "tween", duration: 0.28, ease: ease.drawer });
 
     expect(theme.get("--motion-surface-duration")).toBe("var(--motion-duration-base)");
     expect(theme.get("--motion-surface-ease")).toBe("var(--motion-ease-standard)");
     expect(motion.surface).toEqual({ type: "tween", duration: duration.base, ease: ease.standard });
 
     expect(theme.get("--motion-exit-duration")).toBe(milliseconds(motion.exit.duration));
-    expect(theme.get("--motion-exit-ease")).toBe("var(--motion-ease-exit)");
-    expect(motion.exit.ease).toEqual(ease.exit);
+    expect(theme.get("--motion-exit-ease")).toBe("var(--motion-ease-out)");
+    expect(motion.exit.ease).toEqual(ease.out);
 
     expect(theme.get("--motion-press-duration")).toBe(milliseconds(motion.press.duration));
     expect(theme.get("--motion-press-ease")).toBe("var(--motion-ease-standard)");
@@ -124,6 +142,49 @@ describe("nostr motion parity", () => {
         unit === "s" ? milliseconds(value) : unit === "ms" ? `${value}ms` : `${value}${unit}`;
       expect(theme.get(name), name).toBe(expected);
     }
+  });
+
+  it("enters the sheet with the drawer tween", () => {
+    expect(transitions.sheet.animate.transition).toBe(motion.sheet);
+    expect(transitions.sheet.exit.transition).toBe(motion.exit);
+    expect(transitions.sheet.animate.transition).not.toHaveProperty("stiffness");
+  });
+
+  it("keeps reduced profile moves free of travel", () => {
+    const reduced = {
+      fieldCollapse: transitionsReduced.fieldCollapse,
+      fieldExpand: transitionsReduced.fieldExpand,
+      detailPush: transitionsReduced.detailPush,
+      detailPop: transitionsReduced.detailPop,
+    };
+    const hits: string[] = [];
+    const walk = (value: unknown, path: string) => {
+      if (value === null || typeof value !== "object") return;
+      if (Array.isArray(value)) {
+        value.forEach((item, index) => walk(item, `${path}[${index}]`));
+        return;
+      }
+      for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+        if (key === "x" || key === "y" || key === "scale" || key === "height")
+          hits.push(`${path}.${key}`);
+        walk(child, `${path}.${key}`);
+      }
+    };
+    walk(reduced, "reduced");
+    expect(hits).toEqual([]);
+    expect(fieldCollapse.outgoing.transition).toBe(motion.exit);
+    expect(fieldCollapse.incoming.transition).toBe(motion.feedback);
+    expect(fieldExpand.incoming.transition).toBe(motion.feedback);
+    expect(fieldExpand.outgoing.transition).toBe(motion.exit);
+    expect(detailPush.detail.animate.transition).toBe(motion.move);
+    expect(detailPop.list.animate.transition).toBe(motion.move);
+  });
+
+  it("collapses a field to height 0 and expands it to auto", () => {
+    expect(fieldCollapse.container.height).toBe(0);
+    expect(fieldCollapse.container.transition).toBe(motion.surface);
+    expect(fieldExpand.container.height).toBe("auto");
+    expect(fieldExpand.container.transition).toBe(motion.surface);
   });
 
   it("keeps the skeleton wash static", () => {
