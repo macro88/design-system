@@ -12,6 +12,7 @@ export { FormMessage, InlineError, type FormMessageProps } from "./form-message"
 export { Icon, type IconProps, type IconSize } from "./icon";
 export { IconButton, type IconButtonProps } from "./icon-button";
 export { Input, type InputProps } from "./input";
+export { RadioGroup, type RadioGroupProps, type RadioOption } from "./radio-group";
 export {
   SegmentedControl,
   type SegmentedControlProps,
@@ -19,6 +20,7 @@ export {
 } from "./segmented-control";
 export { Select, type SelectOption, type SelectProps } from "./select";
 export { Skeleton, type SkeletonProps, type SkeletonVariant } from "./skeleton";
+export { Switch, type SwitchProps } from "./switch";
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 export { Textarea, type TextareaProps } from "./textarea";
 export { Toaster, showError, showSuccess, showUndo } from "./toast";
