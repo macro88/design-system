@@ -55,6 +55,14 @@
   --shimmer-duration: 1.4s;
   /* None until a theme opts into the shimmer keyframes. */
   --skeleton-animation: none;
+
+  /* Role timings. A theme may override these. */
+  --motion-surface-duration: var(--motion-duration-base);
+  --motion-surface-ease: var(--motion-ease-standard);
+  --motion-sheet-duration: var(--motion-duration-base);
+  --motion-sheet-ease: var(--motion-ease-standard);
+  --motion-exit-duration: var(--motion-duration-base);
+  --motion-exit-ease: var(--motion-ease-exit);
 }
 
 @theme inline {
