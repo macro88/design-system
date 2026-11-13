@@ -4,6 +4,7 @@ import {
   colorRoles,
   elevationVars,
   controlHeightVars,
+  disabledColorVars,
   disabledOpacityVar,
   fieldAreaMinHeightVar,
   focusRingClass,
@@ -74,6 +75,8 @@ describe("@macro88/tokens", () => {
     expect(themeCss).toContain(`${focusVars.offset}: 2px`);
     expect(themeCss).toContain(`${iconStrokeVar}:`);
     expect(themeCss).toContain(`${disabledOpacityVar}:`);
+    expect(themeCss).toContain(`${disabledColorVars.bg}: var(--color-status-neutral-bg)`);
+    expect(themeCss).toContain(`${disabledColorVars.fg}: var(--color-muted)`);
     expect(themeCss).toContain(`${controlHeightVars.lg}:`);
     expect(themeCss).toContain(`${fieldAreaMinHeightVar}:`);
     for (const name of Object.values(layerVars)) {
