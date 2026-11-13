@@ -1,5 +1,14 @@
 # @macro88/design-system
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [990c388]
+- Updated dependencies [5ee4ae9]
+  - @macro88/ui@0.2.0
+  - @macro88/tokens@0.2.0
+
 ## 0.0.1
 
 ### Patch Changes
