@@ -16,6 +16,7 @@
     "@macro88/theme-runifly": "workspace:*",
     "@macro88/tokens": "workspace:*",
     "@macro88/ui": "workspace:*",
+    "motion": "12.23.24",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },

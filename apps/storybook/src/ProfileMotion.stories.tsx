@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { Button } from "@macro88/ui";
 import {
   detailPop,
   detailPush,
@@ -7,180 +7,207 @@ import {
   fieldExpand,
   transitionsReduced,
 } from "@macro88/theme-nostr";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useState } from "react";
 
-type Ease = readonly [number, number, number, number];
-
-function curve(ease: Ease) {
-  return `cubic-bezier(${ease.join(", ")})`;
-}
-
-function fade(duration: number, ease: Ease) {
-  return `opacity ${duration}s ${curve(ease)}`;
+function useQuietMotion() {
+  const osReduced = useReducedMotion() === true;
+  const [forced, setForced] = useState(false);
+  return { quiet: osReduced || forced, osReduced, setForced };
 }
 
 function ReducedToggle({
   quiet,
+  osReduced,
   onChange,
 }: {
   quiet: boolean;
+  osReduced: boolean;
   onChange: (quiet: boolean) => void;
 }) {
   return (
     <label className="font-display type-caption flex items-center gap-2">
-      <input type="checkbox" checked={quiet} onChange={(event) => onChange(event.target.checked)} />
+      <input
+        type="checkbox"
+        checked={quiet}
+        disabled={osReduced}
+        onChange={(event) => onChange(event.target.checked)}
+      />
       Reduced motion
     </label>
   );
 }
 
 function FieldCollapseStory() {
+  const { quiet, osReduced, setForced } = useQuietMotion();
   const [open, setOpen] = useState(true);
-  const [quiet, setQuiet] = useState(false);
   const move = quiet ? transitionsReduced.fieldCollapse : fieldCollapse;
-  const shown = open ? move.incoming : move.outgoing;
   return (
-    <section className="bg-bg text-text grid max-w-prose gap-3 p-4">
+    <section className="bg-bg text-text grid w-80 gap-3 p-4">
       <h2 className="font-display type-body-md">Field collapse</h2>
-      <ReducedToggle quiet={quiet} onChange={setQuiet} />
-      <button
-        type="button"
-        className="font-display type-body-sm"
-        onClick={() => setOpen((value) => !value)}
-      >
+      <ReducedToggle quiet={quiet} osReduced={osReduced} onChange={setForced} />
+      <Button variant="outline" type="button" onClick={() => setOpen((value) => !value)}>
         {open ? "Collapse" : "Expand"}
-      </button>
-      <p
-        className="font-body type-body-md"
-        style={{
-          opacity: shown.opacity,
-          transition: fade(shown.transition.duration, shown.transition.ease),
-        }}
+      </Button>
+      <motion.div
+        className="overflow-hidden"
+        initial={false}
+        animate={
+          "height" in move.container
+            ? {
+                height: open ? "auto" : move.container.height,
+                transition: move.container.transition,
+              }
+            : { transition: move.container.transition }
+        }
       >
-        A conditional field.
-      </p>
+        <AnimatePresence mode="sync" initial={false}>
+          {open ? (
+            <motion.p
+              key="field"
+              className="font-body type-body-md"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: move.incoming.opacity,
+                transition: move.incoming.transition,
+              }}
+              exit={{
+                opacity: move.outgoing.opacity,
+                transition: move.outgoing.transition,
+              }}
+            >
+              A conditional field.
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 }
 
 function FieldExpandStory() {
+  const { quiet, osReduced, setForced } = useQuietMotion();
   const [open, setOpen] = useState(false);
-  const [quiet, setQuiet] = useState(false);
   const move = quiet ? transitionsReduced.fieldExpand : fieldExpand;
-  const shown = open ? move.incoming : move.outgoing;
   return (
-    <section className="bg-bg text-text grid max-w-prose gap-3 p-4">
+    <section className="bg-bg text-text grid w-80 gap-3 p-4">
       <h2 className="font-display type-body-md">Field expand</h2>
-      <ReducedToggle quiet={quiet} onChange={setQuiet} />
-      <button
-        type="button"
-        className="font-display type-body-sm"
-        onClick={() => setOpen((value) => !value)}
-      >
+      <ReducedToggle quiet={quiet} osReduced={osReduced} onChange={setForced} />
+      <Button variant="outline" type="button" onClick={() => setOpen((value) => !value)}>
         {open ? "Collapse" : "Expand"}
-      </button>
-      <p
-        className="font-body type-body-md"
-        style={{
-          opacity: shown.opacity,
-          transition: fade(shown.transition.duration, shown.transition.ease),
-        }}
+      </Button>
+      <motion.div
+        className="overflow-hidden"
+        initial={false}
+        animate={
+          "height" in move.container
+            ? {
+                height: open ? move.container.height : fieldCollapse.container.height,
+                transition: move.container.transition,
+              }
+            : { transition: move.container.transition }
+        }
       >
-        A conditional field.
-      </p>
+        <AnimatePresence mode="sync" initial={false}>
+          {open ? (
+            <motion.p
+              key="field"
+              className="font-body type-body-md"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: move.incoming.opacity,
+                transition: move.incoming.transition,
+              }}
+              exit={{
+                opacity: move.outgoing.opacity,
+                transition: move.outgoing.transition,
+              }}
+            >
+              A conditional field.
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 }
 
 function DetailPushStory() {
-  const [on, setOn] = useState(false);
-  const [quiet, setQuiet] = useState(false);
+  const { quiet, osReduced, setForced } = useQuietMotion();
+  const [pushed, setPushed] = useState(false);
   const move = quiet ? transitionsReduced.detailPush : detailPush;
-  const detail = on ? move.detail.animate : move.detail.initial;
-  const detailTransition = move.detail.animate.transition;
-  const list = on
-    ? move.list.exit
-    : { opacity: 1 as const, x: 0 as const, transition: move.list.exit.transition };
   return (
-    <section className="bg-bg text-text grid max-w-prose gap-3 overflow-hidden p-4">
+    <section className="bg-bg text-text grid w-80 gap-3 overflow-hidden p-4">
       <h2 className="font-display type-body-md">Detail push</h2>
-      <ReducedToggle quiet={quiet} onChange={setQuiet} />
-      <button
-        type="button"
-        className="font-display type-body-sm"
-        onClick={() => setOn((value) => !value)}
-      >
-        Push detail
-      </button>
-      <p
-        className="font-display type-body-md"
-        style={{
-          opacity: list.opacity,
-          transform: "x" in list ? `translateX(${list.x}px)` : "none",
-          transition: fade(list.transition.duration, list.transition.ease),
-        }}
-      >
-        List
-      </p>
-      <p
-        className="font-display type-body-md"
-        style={{
-          opacity: detail.opacity,
-          transform: "x" in detail ? `translateX(${detail.x}px)` : "none",
-          transition: fade(detailTransition.duration, detailTransition.ease),
-        }}
-      >
-        Detail
-      </p>
+      <ReducedToggle quiet={quiet} osReduced={osReduced} onChange={setForced} />
+      <Button variant="outline" type="button" onClick={() => setPushed((value) => !value)}>
+        {pushed ? "Show list" : "Push detail"}
+      </Button>
+      <div className="relative h-10">
+        <AnimatePresence mode="sync">
+          {pushed ? (
+            <motion.p
+              key="detail"
+              className="font-display type-body-md absolute inset-0"
+              initial={move.detail.initial}
+              animate={move.detail.animate}
+            >
+              Detail
+            </motion.p>
+          ) : (
+            <motion.p
+              key="list"
+              className="font-display type-body-md absolute inset-0"
+              exit={move.list.exit}
+            >
+              List
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 }
 
 function DetailPopStory() {
-  const [on, setOn] = useState(false);
-  const [quiet, setQuiet] = useState(false);
+  const { quiet, osReduced, setForced } = useQuietMotion();
+  const [popped, setPopped] = useState(false);
   const move = quiet ? transitionsReduced.detailPop : detailPop;
-  const detail = on
-    ? move.detail.exit
-    : { opacity: 1 as const, x: 0 as const, transition: move.detail.exit.transition };
-  const list = on ? move.list.animate : move.list.initial;
-  const listTransition = move.list.animate.transition;
   return (
-    <section className="bg-bg text-text grid max-w-prose gap-3 overflow-hidden p-4">
+    <section className="bg-bg text-text grid w-80 gap-3 overflow-hidden p-4">
       <h2 className="font-display type-body-md">Detail pop</h2>
-      <ReducedToggle quiet={quiet} onChange={setQuiet} />
-      <button
-        type="button"
-        className="font-display type-body-sm"
-        onClick={() => setOn((value) => !value)}
-      >
-        Pop detail
-      </button>
-      <p
-        className="font-display type-body-md"
-        style={{
-          opacity: list.opacity,
-          transform: "x" in list ? `translateX(${list.x}px)` : "none",
-          transition: fade(listTransition.duration, listTransition.ease),
-        }}
-      >
-        List
-      </p>
-      <p
-        className="font-display type-body-md"
-        style={{
-          opacity: detail.opacity,
-          transform: "x" in detail ? `translateX(${detail.x}px)` : "none",
-          transition: fade(detail.transition.duration, detail.transition.ease),
-        }}
-      >
-        Detail
-      </p>
+      <ReducedToggle quiet={quiet} osReduced={osReduced} onChange={setForced} />
+      <Button variant="outline" type="button" onClick={() => setPopped((value) => !value)}>
+        {popped ? "Show detail" : "Pop detail"}
+      </Button>
+      <div className="relative h-10">
+        <AnimatePresence mode="sync">
+          {popped ? (
+            <motion.p
+              key="list"
+              className="font-display type-body-md absolute inset-0"
+              initial={move.list.initial}
+              animate={move.list.animate}
+            >
+              List
+            </motion.p>
+          ) : (
+            <motion.p
+              key="detail"
+              className="font-display type-body-md absolute inset-0"
+              exit={move.detail.exit}
+            >
+              Detail
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 }
 
 const meta = {
-  title: "Profile motion",
+  title: "Nostr/Profile motion",
 } satisfies Meta;
 
 export default meta;

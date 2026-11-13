@@ -172,9 +172,18 @@ describe("nostr motion parity", () => {
     walk(reduced, "reduced");
     expect(hits).toEqual([]);
     expect(fieldCollapse.outgoing.transition).toBe(motion.exit);
-    expect(fieldExpand.incoming.transition).toBe(motion.exit);
+    expect(fieldCollapse.incoming.transition).toBe(motion.feedback);
+    expect(fieldExpand.incoming.transition).toBe(motion.feedback);
+    expect(fieldExpand.outgoing.transition).toBe(motion.exit);
     expect(detailPush.detail.animate.transition).toBe(motion.move);
     expect(detailPop.list.animate.transition).toBe(motion.move);
+  });
+
+  it("collapses a field to height 0 and expands it to auto", () => {
+    expect(fieldCollapse.container.height).toBe(0);
+    expect(fieldCollapse.container.transition).toBe(motion.surface);
+    expect(fieldExpand.container.height).toBe("auto");
+    expect(fieldExpand.container.transition).toBe(motion.surface);
   });
 
   it("keeps the skeleton wash static", () => {

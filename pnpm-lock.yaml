@@ -244,6 +244,9 @@ importers:
       '@macro88/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      motion:
+        specifier: 12.23.24
+        version: 12.23.24(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react:
         specifier: 19.3.1
         version: 19.3.1

@@ -193,17 +193,17 @@ export function scheduleChipReduced() {
   };
 }
 
-/** Collapse a field. Opacity only, plus an optional container height. */
+/** Collapse a field to height 0. The arriving content uses feedback. Anything leaving uses the exit curve. */
 export const fieldCollapse = {
   outgoing: { opacity: 0, transition: tweenExit },
   incoming: { opacity: 1, transition: tweenFeedback },
-  container: { height: "auto", transition: tweenSurface },
+  container: { height: 0, transition: tweenSurface },
 } as const;
 
-/** Expand a field. The collapse pair, reversed. */
+/** Expand a field to auto height. Incoming uses the feedback entrance. Outgoing uses the exit curve. */
 export const fieldExpand = {
-  outgoing: { opacity: 0, transition: tweenFeedback },
-  incoming: { opacity: 1, transition: tweenExit },
+  outgoing: { opacity: 0, transition: tweenExit },
+  incoming: { opacity: 1, transition: tweenFeedback },
   container: { height: "auto", transition: tweenSurface },
 } as const;
 
