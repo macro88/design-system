@@ -6,11 +6,10 @@ import { duration, ease, spring } from "@macro88/motion";
  * Navigation, typing, hover, and saving stay fast and never wait.
  * Role names are the override API for other themes.
  *
- * Colour, elevation, and radius tokens are owned by design-system / the theme.
- * Motion only references the Barrel Green names. It does not define values.
- * The static skeleton wash uses --color-skeleton (landed in theme 0.1.0).
- * Elevation semantic names are rest, hover, and lift; CSS names are assumed
- * as --elevation-rest, --elevation-hover, --elevation-lift.
+ * Colour, elevation, and radius tokens are owned by the theme.
+ * See docs/brand/nostr. Elevation names are rest, hover, and lift
+ * (`--elevation-rest`, `--elevation-hover`, `--elevation-lift`).
+ * The skeleton wash uses `--color-skeleton`.
  */
 export const motion = {
   navigate: { type: "tween", duration: duration.instant, ease: ease.out },
@@ -87,7 +86,7 @@ export const nowLine = {
   chop: "static",
 } as const;
 
-/** Semantic elevation names from the brief. CSS custom properties assumed. */
+/** Elevation tokens from @macro88/tokens. */
 export const elevation = {
   rest: "var(--elevation-rest)",
   hover: "var(--elevation-hover)",
@@ -95,13 +94,10 @@ export const elevation = {
 } as const;
 
 /**
- * Colour tokens, as published in @macro88/theme-nostr 0.1.0.
- * Two families, not interchangeable even where values match today:
- * - `danger*` (`--color-danger-*`): fields and destructive actions only
- *   (nsec and inline field errors, mutation errors on a field, destructive buttons).
- * - `status*` (`--color-status-*`): status badges and status words.
- *   Failed → status danger. Missed → status warning (settled 11 Nov).
- * The old failed and missed status names are retired.
+ * Colour tokens. See docs/brand/nostr.
+ * `danger*` (`--color-danger-*`) is for fields and destructive actions.
+ * `status*` (`--color-status-*`) is for status badges and status words.
+ * Failed uses status danger. Missed uses status warning.
  */
 export const colour = {
   bg: "var(--color-bg)",
@@ -132,7 +128,7 @@ export const colour = {
 } as const;
 
 /**
- * Radius token names from the brief, confirmed by design-system (11 Nov 2026).
+ * Radius token names. See docs/brand/nostr.
  * The ink chop is a square and uses no radius token.
  */
 export const radius = {
@@ -168,7 +164,7 @@ export type ChipArc = {
  * Quadratic Bézier from (0, 0) to (dx, dy), in pixels.
  * Sagitta (peak offset from the chord) is 24% of chord length, clamped 32–56px.
  *
- * Bow rule (v5, fitted to the Compose foot → adjacent queue layout):
+ * Bow rule, fitted to the Compose foot and the adjacent queue:
  * - Mostly horizontal (|dx| > |dy|): lift the midpoint straight up on screen,
  *   C = (M.x, M.y − 2S). Classic toss; does not bow back over the writing.
  * - Mostly vertical (|dy| ≥ |dx|): offset the midpoint to the right, toward
@@ -452,7 +448,10 @@ export const transitions = {
   },
   skeleton: {
     initial: { opacity: 0 },
-    animate: { opacity: 1, transition: tweenSurface },
+    animate: {
+      opacity: 1,
+      transition: { type: "tween", duration: feel.skeletonEnter, ease: ease.out },
+    },
   },
   toast: {
     initial: { opacity: 0, y: feel.toastEnterY },

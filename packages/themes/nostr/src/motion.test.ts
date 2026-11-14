@@ -2,13 +2,15 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { duration, ease, spring } from "@macro88/motion";
 import {
+  colour,
   detailPop,
   detailPush,
-  colour,
   feel,
   fieldCollapse,
   fieldExpand,
+  inkChop,
   motion,
+  nowLine,
   transitions,
   transitionsReduced,
 } from "./motion";
@@ -223,6 +225,21 @@ describe("nostr motion parity", () => {
     expect(colour.dangerBg).toBe("var(--color-danger-bg)");
     expect(colour.skeleton).toBe("var(--color-skeleton)");
     expect(Object.values(colour).join(" ")).not.toContain("status-missed");
+  });
+
+  it("matches the ink chop and the now line to their custom properties", () => {
+    expect(theme.get("--motion-ink-chop-size")).toBe(`${inkChop.squarePx}px`);
+    expect(theme.get("--motion-ink-chop-thickness")).toBe(`${inkChop.thicknessPx}px`);
+    expect(theme.get("--motion-now-line-interval")).toBe(`${nowLine.intervalMs}ms`);
+  });
+
+  it("enters the skeleton with the skeleton-enter tween", () => {
+    expect(transitions.skeleton.animate.transition).toEqual({
+      type: "tween",
+      duration: feel.skeletonEnter,
+      ease: ease.out,
+    });
+    expect(theme.get("--motion-skeleton-enter")).toBe(milliseconds(feel.skeletonEnter));
   });
 
   it("keeps the skeleton wash static", () => {
