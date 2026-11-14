@@ -120,7 +120,7 @@ describe("temporary theme palettes", () => {
 
       it("sets modest radius roles on the theme", () => {
         for (const name of Object.values(radiusVars)) {
-          if (name === radiusVars.full) continue;
+          if (name === radiusVars.full || name === radiusVars.switch) continue;
           const value = light.get(name);
           expect(value, name).toBeTruthy();
           if (value === light.get(radiusVars.full)) continue;

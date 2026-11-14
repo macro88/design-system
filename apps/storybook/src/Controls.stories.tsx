@@ -14,8 +14,9 @@ function Controls() {
         ]}
       />
       <Input label="Note" placeholder="Shown after the group" />
-      <Switch label="Reminders" defaultChecked />
-      <Switch label="Paused" disabled />
+      <Switch label="Off" />
+      <Switch label="On" defaultChecked />
+      <Switch label="Disabled" disabled />
     </div>
   );
 }
