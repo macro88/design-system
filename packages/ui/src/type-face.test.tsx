@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { Button } from "./button";
 import { EmptyState } from "./empty-state";
 import { Input } from "./input";
+import { RadioGroup } from "./radio-group";
 import { Toaster, showSuccess } from "./toast";
 import { toast } from "sonner";
 
@@ -38,7 +39,12 @@ describe("control and prose faces", () => {
     render(
       <div data-theme="nostr">
         <Button>Save</Button>
-        <Input label="Title" />
+        <Input label="Title" hint="Only you see this." error="Enter a title." />
+        <RadioGroup
+          label="Schedule"
+          defaultValue="weekly"
+          options={[{ value: "weekly", label: "Weekly", description: "Repeats every week." }]}
+        />
         <EmptyState title="Nothing here">A note in the body face.</EmptyState>
       </div>,
     );
@@ -46,11 +52,17 @@ describe("control and prose faces", () => {
     const button = getComputedStyle(screen.getByRole("button", { name: "Save" })).fontFamily;
     const label = getComputedStyle(screen.getByText("Title")).fontFamily;
     const field = getComputedStyle(screen.getByLabelText("Title")).fontFamily;
+    const hint = getComputedStyle(screen.getByText("Only you see this.")).fontFamily;
+    const error = getComputedStyle(screen.getByRole("alert")).fontFamily;
+    const description = getComputedStyle(screen.getByText("Repeats every week.")).fontFamily;
     const prose = getComputedStyle(screen.getByText("A note in the body face.")).fontFamily;
 
     expect(button).toContain("Be Vietnam Pro");
     expect(label).toContain("Be Vietnam Pro");
     expect(field).toContain("Be Vietnam Pro");
+    expect(hint).toContain("Be Vietnam Pro");
+    expect(error).toContain("Be Vietnam Pro");
+    expect(description).toContain("Be Vietnam Pro");
     expect(prose).toContain("Literata");
     expect(prose).not.toContain("Be Vietnam Pro");
   });

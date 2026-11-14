@@ -186,7 +186,7 @@
   width: var(--space-40);
   height: calc(var(--space-16) + 2 * var(--space-4) + 2 * var(--border-width));
   padding: var(--space-4);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-switch);
 }
 
 .switch[data-state="checked"] {
@@ -197,8 +197,9 @@
 .switch-thumb {
   width: var(--space-16);
   height: var(--space-16);
-  border-radius: var(--radius-control);
-  background: var(--color-text);
+  border-radius: var(--radius-switch);
+  background: var(--color-border-strong);
+  box-shadow: none;
   transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
@@ -268,6 +269,10 @@
 
 .type-caption {
   font-family: var(--font-body);
+}
+
+.type-caption.font-display {
+  font-family: var(--font-display);
 }
 
 .type-display-lg {

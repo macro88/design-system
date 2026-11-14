@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Switch } from "./switch";
 
 function declarations(css: string, selector: string): Map<string, string> {
@@ -62,6 +62,30 @@ function lengthPx(value: string, tokens: Map<string, number>): number {
   }, 0);
 }
 
+function mountSwitchStyles() {
+  document.getElementById("switch-fixture")?.remove();
+  const style = document.createElement("style");
+  style.id = "switch-fixture";
+  const tokens = readFileSync(path.join(process.cwd(), "../tokens/src/theme.css"), "utf8");
+  const nostr = readFileSync(path.join(process.cwd(), "../themes/nostr/src/theme.css"), "utf8");
+  const css = readFileSync(path.join(process.cwd(), "src/styles.css"), "utf8").replace(
+    /^@import[^;]+;\s*/,
+    "",
+  );
+  style.textContent = `
+    ${tokens}
+    ${nostr}
+    .border-strong-swatch { background: var(--color-border-strong); }
+    ${css}
+  `;
+  document.head.append(style);
+}
+
+afterEach(() => {
+  document.documentElement.style.removeProperty("--radius-switch");
+  document.getElementById("switch-fixture")?.remove();
+});
+
 describe("Switch", () => {
   it("toggles with Space and reports aria-checked", async () => {
     const user = userEvent.setup();
@@ -86,6 +110,27 @@ describe("Switch", () => {
     await user.click(screen.getByRole("switch", { name: "Reminders" }));
     expect(onCheckedChange).not.toHaveBeenCalled();
     expect(screen.getByRole("switch", { name: "Reminders" })).toBeChecked();
+  });
+
+  it("follows the switch radius, paints the off thumb with the strong border, and casts no shadow", () => {
+    mountSwitchStyles();
+    document.documentElement.style.setProperty("--radius-switch", "48px");
+    render(
+      <div data-theme="nostr">
+        <Switch label="Off" />
+        <div className="border-strong-swatch" data-testid="border-strong" />
+      </div>,
+    );
+
+    const track = screen.getByRole("switch", { name: "Off" });
+    const thumb = track.querySelector(".switch-thumb");
+    expect(thumb).not.toBeNull();
+    const thumbNode = thumb as HTMLElement;
+    const swatch = getComputedStyle(screen.getByTestId("border-strong")).backgroundColor;
+    expect(getComputedStyle(track).borderRadius).toBe("48px");
+    expect(getComputedStyle(thumbNode).borderRadius).toBe("48px");
+    expect(getComputedStyle(thumbNode).backgroundColor).toBe(swatch);
+    expect(getComputedStyle(thumbNode).boxShadow).toBe("none");
   });
 
   it("keeps an even inset around the checked thumb", () => {

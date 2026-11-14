@@ -13,7 +13,11 @@ export function FormMessage({ tone = "hint", id, children, className }: FormMess
     <p
       id={id}
       role={tone === "error" ? "alert" : undefined}
-      className={cx("type-caption", tone === "error" ? "text-danger-fg" : "text-muted", className)}
+      className={cx(
+        "type-caption font-display",
+        tone === "error" ? "text-danger-fg" : "text-muted",
+        className,
+      )}
     >
       {children}
     </p>
