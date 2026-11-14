@@ -4,29 +4,31 @@
  */
 
 [data-theme="nostr"] {
-  --motion-navigate-duration: var(--motion-duration-base);
-  --motion-navigate-ease: var(--motion-ease-standard);
+  --motion-navigate-duration: 0ms;
+  --motion-navigate-ease: var(--motion-ease-out);
   --motion-feedback-duration: var(--motion-duration-fast);
   --motion-feedback-ease: var(--motion-ease-hover);
   --motion-move-duration: 240ms;
   --motion-move-ease: var(--motion-ease-in-out);
   --motion-surface-duration: var(--motion-duration-base);
-  --motion-surface-ease: var(--motion-ease-standard);
+  --motion-surface-ease: var(--motion-ease-out);
   --motion-sheet-duration: 280ms;
   --motion-sheet-ease: var(--motion-ease-drawer);
   --motion-exit-duration: 160ms;
   --motion-exit-ease: var(--motion-ease-out);
-  --motion-press-duration: 80ms;
-  --motion-press-ease: var(--motion-ease-standard);
+  --motion-press-duration: 160ms;
+  --motion-press-ease: var(--motion-ease-out);
+  --motion-release-duration: 120ms;
+  --motion-release-ease: var(--motion-ease-out);
   --motion-reorder-stiffness: var(--motion-spring-lively-stiffness);
   --motion-reorder-damping: var(--motion-spring-lively-damping);
   --motion-reorder-mass: var(--motion-spring-lively-mass);
-  --motion-celebrate-stiffness: var(--motion-spring-bouncy-stiffness);
-  --motion-celebrate-damping: var(--motion-spring-bouncy-damping);
-  --motion-celebrate-mass: var(--motion-spring-bouncy-mass);
+  --motion-celebrate-stiffness: 560;
+  --motion-celebrate-damping: 32;
+  --motion-celebrate-mass: 1;
 
-  --motion-section-enter-y: 12px;
-  --motion-panel-enter-y: 12px;
+  --motion-section-enter-y: 0px;
+  --motion-panel-enter-y: 0px;
   --motion-sheet-enter-y: 28px;
   --motion-sheet-exit-y: 16px;
   --motion-detail-x: 28px;
@@ -36,21 +38,16 @@
   --motion-toast-gap: 8px;
   --motion-toast-inset-bottom: 24px;
   --motion-toast-max: 3;
-  --motion-hover-lift: -1px;
-  --motion-card-hover-lift: -2px;
-  --motion-row-hover-lift: -1px;
   --motion-drag-lift-y: -2px;
   --motion-chip-end-scale: 0.7;
-  --motion-check-from-scale: 0.5;
-  --motion-check-from-rotate: -12deg;
-  --motion-label-enter-y: 8px;
+  --motion-check-from-scale: 0.92;
+  --motion-check-from-rotate: 0deg;
+  --motion-check-offset: 8px;
   --motion-error-nudge: 6px;
   --motion-error-nudge-decay: 4px;
-  --motion-error-nudge-duration: 360ms;
+  --motion-error-nudge-duration: 280ms;
 
-  --motion-hover-scale: 1.02;
   --motion-press-scale: 0.97;
-  --motion-card-hover-scale: 1;
   --motion-drag-lift-scale: 1.04;
   --motion-calendar-lift-scale: 1.05;
   --motion-origin-slot-opacity: 0.4;
@@ -65,9 +62,13 @@
   --motion-slot-highlight-duration: 80ms;
   --motion-skeleton-delay: 200ms;
   --motion-skeleton-min: 400ms;
+  --motion-skeleton-enter: 200ms;
   --motion-arc-sagitta-ratio: 0.24;
   --motion-arc-sagitta-min: 32px;
   --motion-arc-sagitta-max: 56px;
+  --motion-now-line-interval: 60000ms;
+  --motion-ink-chop-size: 6px;
+  --motion-ink-chop-thickness: 2px;
 
   --motion-check-colour: var(--color-accent);
   --skeleton-animation: none;
@@ -81,23 +82,60 @@
   --duration-sheet: var(--motion-sheet-duration);
   --duration-exit: var(--motion-exit-duration);
   --duration-press: var(--motion-press-duration);
+  --duration-release: var(--motion-release-duration);
   --duration-chip: var(--motion-chip-duration);
   --duration-nudge: var(--motion-error-nudge-duration);
   --duration-check-hold: var(--motion-check-hold);
   --duration-check-fade: var(--motion-check-fade);
   --duration-skeleton-delay: var(--motion-skeleton-delay);
   --duration-skeleton-min: var(--motion-skeleton-min);
+  --duration-skeleton-enter: var(--motion-skeleton-enter);
   --ease-navigate: var(--motion-navigate-ease);
   --ease-feedback: var(--motion-feedback-ease);
   --ease-move: var(--motion-move-ease);
   --ease-surface: var(--motion-surface-ease);
   --ease-sheet: var(--motion-sheet-ease);
   --ease-exit-role: var(--motion-exit-ease);
-  --scale-hover: var(--motion-hover-scale);
+  --ease-press: var(--motion-press-ease);
+  --ease-release: var(--motion-release-ease);
   --scale-press: var(--motion-press-scale);
-  --scale-card-hover: var(--motion-card-hover-scale);
   --scale-drag-lift: var(--motion-drag-lift-scale);
   --scale-calendar-lift: var(--motion-calendar-lift-scale);
+}
+
+[data-theme="nostr"] .motion-skeleton {
+  background-color: var(--color-skeleton);
+  opacity: 1;
+  transition: opacity var(--motion-skeleton-enter) var(--motion-ease-out);
+}
+
+[data-theme="nostr"] .motion-skeleton[data-entering="true"] {
+  opacity: 0;
+}
+
+[data-theme="nostr"] .motion-check {
+  color: var(--color-accent);
+}
+
+[data-theme="nostr"] .motion-ink-chop,
+[data-theme="nostr"] .motion-sign-off-rule,
+[data-theme="nostr"] .motion-now-line {
+  transition: none;
+  animation: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="nostr"] .motion-hover-elevation {
+    transition:
+      box-shadow var(--motion-feedback-duration) var(--motion-feedback-ease),
+      background-color var(--motion-feedback-duration) var(--motion-feedback-ease),
+      color var(--motion-feedback-duration) var(--motion-feedback-ease),
+      border-color var(--motion-feedback-duration) var(--motion-feedback-ease);
+  }
+
+  [data-theme="nostr"] .motion-hover-elevation:hover {
+    box-shadow: var(--elevation-hover);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -109,8 +147,10 @@
     --motion-sheet-duration: 0ms;
     --motion-exit-duration: 0ms;
     --motion-press-duration: 0ms;
+    --motion-release-duration: 0ms;
     --motion-chip-duration: 0ms;
     --motion-error-nudge-duration: 0ms;
+    --motion-skeleton-enter: var(--motion-duration-fade);
     --motion-section-enter-y: 0px;
     --motion-panel-enter-y: 0px;
     --motion-sheet-enter-y: 0px;
@@ -119,16 +159,10 @@
     --motion-toast-enter-y: 0px;
     --motion-toast-exit-y: 0px;
     --motion-toast-drop-y: 0px;
-    --motion-hover-lift: 0px;
-    --motion-card-hover-lift: 0px;
-    --motion-row-hover-lift: 0px;
     --motion-drag-lift-y: 0px;
-    --motion-label-enter-y: 0px;
     --motion-error-nudge: 0px;
     --motion-error-nudge-decay: 0px;
-    --motion-hover-scale: 1;
     --motion-press-scale: 1;
-    --motion-card-hover-scale: 1;
     --motion-drag-lift-scale: 1;
     --motion-calendar-lift-scale: 1;
     --motion-chip-end-scale: 1;
@@ -137,5 +171,10 @@
     --motion-check-fade: var(--motion-duration-fade);
     --motion-arc-sagitta-min: 0px;
     --motion-arc-sagitta-max: 0px;
+  }
+
+  [data-theme="nostr"] .motion-skeleton,
+  [data-theme="nostr"] .motion-hover-elevation {
+    transition: none;
   }
 }

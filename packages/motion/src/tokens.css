@@ -65,6 +65,8 @@
   --motion-sheet-exit-y: var(--sheet-exit);
   --motion-exit-duration: var(--motion-duration-base);
   --motion-exit-ease: var(--motion-ease-exit);
+  --motion-release-duration: var(--motion-duration-fast);
+  --motion-release-ease: var(--motion-ease-out);
 }
 
 @theme inline {
