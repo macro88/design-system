@@ -2,12 +2,15 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { duration, ease, spring } from "@macro88/motion";
 import {
+  colour,
   detailPop,
   detailPush,
   feel,
   fieldCollapse,
   fieldExpand,
+  inkChop,
   motion,
+  nowLine,
   transitions,
   transitionsReduced,
 } from "./motion";
@@ -46,23 +49,18 @@ const feelCss = {
   toastGap: ["--motion-toast-gap", "px"],
   toastInsetBottom: ["--motion-toast-inset-bottom", "px"],
   toastMax: ["--motion-toast-max", ""],
-  hoverLift: ["--motion-hover-lift", "px"],
-  cardHoverLift: ["--motion-card-hover-lift", "px"],
-  rowHoverLift: ["--motion-row-hover-lift", "px"],
   dragLiftY: ["--motion-drag-lift-y", "px"],
-  labelEnterY: ["--motion-label-enter-y", "px"],
   errorNudge: ["--motion-error-nudge", "px"],
   errorNudgeDecay: ["--motion-error-nudge-decay", "px"],
   errorNudgeDuration: ["--motion-error-nudge-duration", "s"],
-  hoverScale: ["--motion-hover-scale", ""],
   pressScale: ["--motion-press-scale", ""],
-  cardHoverScale: ["--motion-card-hover-scale", ""],
   dragLiftScale: ["--motion-drag-lift-scale", ""],
   calendarLiftScale: ["--motion-calendar-lift-scale", ""],
   originSlotOpacity: ["--motion-origin-slot-opacity", ""],
   chipEndScale: ["--motion-chip-end-scale", ""],
   checkFromScale: ["--motion-check-from-scale", ""],
   checkFromRotate: ["--motion-check-from-rotate", "deg"],
+  checkOffset: ["--motion-check-offset", "px"],
   toastDismissSuccessMs: ["--motion-toast-dismiss-success", "ms"],
   toastDismissUndoMs: ["--motion-toast-dismiss-undo", "ms"],
   chipDuration: ["--motion-chip-duration", "s"],
@@ -73,6 +71,7 @@ const feelCss = {
   slotHighlightDuration: ["--motion-slot-highlight-duration", "s"],
   skeletonDelay: ["--motion-skeleton-delay", "s"],
   skeletonMin: ["--motion-skeleton-min", "s"],
+  skeletonEnter: ["--motion-skeleton-enter", "s"],
   arcSagittaRatio: ["--motion-arc-sagitta-ratio", ""],
   arcSagittaMin: ["--motion-arc-sagitta-min", "px"],
   arcSagittaMax: ["--motion-arc-sagitta-max", "px"],
@@ -83,12 +82,12 @@ const feelCss = {
 
 describe("nostr motion parity", () => {
   it("matches motion durations and springs to the custom properties", () => {
-    expect(theme.get("--motion-navigate-duration")).toBe("var(--motion-duration-base)");
-    expect(theme.get("--motion-navigate-ease")).toBe("var(--motion-ease-standard)");
+    expect(theme.get("--motion-navigate-duration")).toBe("0ms");
+    expect(theme.get("--motion-navigate-ease")).toBe("var(--motion-ease-out)");
     expect(motion.navigate).toEqual({
       type: "tween",
-      duration: duration.base,
-      ease: ease.standard,
+      duration: duration.instant,
+      ease: ease.out,
     });
 
     expect(theme.get("--motion-feedback-duration")).toBe("var(--motion-duration-fast)");
@@ -108,26 +107,30 @@ describe("nostr motion parity", () => {
     expect(motion.sheet).toEqual({ type: "tween", duration: 0.28, ease: ease.drawer });
 
     expect(theme.get("--motion-surface-duration")).toBe("var(--motion-duration-base)");
-    expect(theme.get("--motion-surface-ease")).toBe("var(--motion-ease-standard)");
-    expect(motion.surface).toEqual({ type: "tween", duration: duration.base, ease: ease.standard });
+    expect(theme.get("--motion-surface-ease")).toBe("var(--motion-ease-out)");
+    expect(motion.surface).toEqual({ type: "tween", duration: duration.base, ease: ease.out });
 
     expect(theme.get("--motion-exit-duration")).toBe(milliseconds(motion.exit.duration));
     expect(theme.get("--motion-exit-ease")).toBe("var(--motion-ease-out)");
     expect(motion.exit.ease).toEqual(ease.out);
 
     expect(theme.get("--motion-press-duration")).toBe(milliseconds(motion.press.duration));
-    expect(theme.get("--motion-press-ease")).toBe("var(--motion-ease-standard)");
-    expect(motion.press.ease).toEqual(ease.standard);
+    expect(theme.get("--motion-press-ease")).toBe("var(--motion-ease-out)");
+    expect(motion.press).toEqual({ type: "tween", duration: 0.16, ease: ease.out });
+
+    expect(theme.get("--motion-release-duration")).toBe(milliseconds(motion.release.duration));
+    expect(theme.get("--motion-release-ease")).toBe("var(--motion-ease-out)");
+    expect(motion.release).toEqual({ type: "tween", duration: duration.fast, ease: ease.out });
 
     expect(theme.get("--motion-reorder-stiffness")).toBe("var(--motion-spring-lively-stiffness)");
     expect(theme.get("--motion-reorder-damping")).toBe("var(--motion-spring-lively-damping)");
     expect(theme.get("--motion-reorder-mass")).toBe("var(--motion-spring-lively-mass)");
     expect(motion.reorder).toBe(spring.lively);
 
-    expect(theme.get("--motion-celebrate-stiffness")).toBe("var(--motion-spring-bouncy-stiffness)");
-    expect(theme.get("--motion-celebrate-damping")).toBe("var(--motion-spring-bouncy-damping)");
-    expect(theme.get("--motion-celebrate-mass")).toBe("var(--motion-spring-bouncy-mass)");
-    expect(motion.celebrate).toBe(spring.bouncy);
+    expect(theme.get("--motion-celebrate-stiffness")).toBe("560");
+    expect(theme.get("--motion-celebrate-damping")).toBe("32");
+    expect(theme.get("--motion-celebrate-mass")).toBe("1");
+    expect(motion.celebrate).toEqual({ type: "spring", stiffness: 560, damping: 32, mass: 1 });
   });
 
   it("matches every feel value to motion.css", () => {
@@ -185,6 +188,58 @@ describe("nostr motion parity", () => {
     expect(fieldCollapse.container.transition).toBe(motion.surface);
     expect(fieldExpand.container.height).toBe("auto");
     expect(fieldExpand.container.transition).toBe(motion.surface);
+  });
+
+  it("drops hover travel and keeps the toast enter on the surface tween", () => {
+    for (const key of [
+      "hoverLift",
+      "cardHoverLift",
+      "rowHoverLift",
+      "labelEnterY",
+      "hoverScale",
+      "cardHoverScale",
+    ]) {
+      expect(feel).not.toHaveProperty(key);
+    }
+    expect(motion.navigate.duration).toBe(0);
+    expect(motion.surface.ease).toBe(ease.out);
+    expect(motion.release).toEqual({ type: "tween", duration: 0.12, ease: ease.out });
+    expect(transitions.toast.animate.transition).toBe(motion.surface);
+    expect(transitions.toast.animate.transition.type).toBe("tween");
+    expect(transitions.section.exit.opacity).toBe(1);
+    expect(transitions.section.exit.transition.duration).toBe(0);
+    expect(transitions.slotHighlight.exit.transition.ease).toEqual(ease.out);
+    expect(transitions.listExitInstant.exit.transition.duration).toBe(0);
+  });
+
+  it("maps status colours to the status family and danger to fields", () => {
+    expect(colour.statusDangerFg).toBe("var(--color-status-danger-fg)");
+    expect(colour.statusDangerBg).toBe("var(--color-status-danger-bg)");
+    expect(colour.failedFg).toBe(colour.statusDangerFg);
+    expect(colour.failedBg).toBe(colour.statusDangerBg);
+    expect(colour.missedFg).toBe("var(--color-status-warning-fg)");
+    expect(colour.missedBg).toBe("var(--color-status-warning-bg)");
+    expect(colour.warningFg).toBe("var(--color-status-warning-fg)");
+    expect(colour.warningBg).toBe("var(--color-status-warning-bg)");
+    expect(colour.dangerFg).toBe("var(--color-danger-fg)");
+    expect(colour.dangerBg).toBe("var(--color-danger-bg)");
+    expect(colour.skeleton).toBe("var(--color-skeleton)");
+    expect(Object.values(colour).join(" ")).not.toContain("status-missed");
+  });
+
+  it("matches the ink chop and the now line to their custom properties", () => {
+    expect(theme.get("--motion-ink-chop-size")).toBe(`${inkChop.squarePx}px`);
+    expect(theme.get("--motion-ink-chop-thickness")).toBe(`${inkChop.thicknessPx}px`);
+    expect(theme.get("--motion-now-line-interval")).toBe(`${nowLine.intervalMs}ms`);
+  });
+
+  it("enters the skeleton with the skeleton-enter tween", () => {
+    expect(transitions.skeleton.animate.transition).toEqual({
+      type: "tween",
+      duration: feel.skeletonEnter,
+      ease: ease.out,
+    });
+    expect(theme.get("--motion-skeleton-enter")).toBe(milliseconds(feel.skeletonEnter));
   });
 
   it("keeps the skeleton wash static", () => {

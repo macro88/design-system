@@ -7,7 +7,7 @@ describe("@macro88/theme-nostr", () => {
     expect(themeId).toBe("nostr");
   });
 
-  it("does not scale cards", () => {
-    expect(feel.cardHoverScale).toBe(1);
+  it("does not keep a card hover scale", () => {
+    expect(feel).not.toHaveProperty("cardHoverScale");
   });
 });
