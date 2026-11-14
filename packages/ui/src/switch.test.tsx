@@ -114,13 +114,13 @@ describe("Switch", () => {
 
   it("follows the switch radius, paints the off thumb with the strong border, and casts no shadow", () => {
     mountSwitchStyles();
-    document.documentElement.style.setProperty("--radius-switch", "48px");
-    render(
+    const view = render(
       <div data-theme="nostr">
         <Switch label="Off" />
         <div className="border-strong-swatch" data-testid="border-strong" />
       </div>,
     );
+    view.container.querySelector("[data-theme]")?.setAttribute("style", "--radius-switch: 48px");
 
     const track = screen.getByRole("switch", { name: "Off" });
     const thumb = track.querySelector(".switch-thumb");
@@ -131,6 +131,23 @@ describe("Switch", () => {
     expect(getComputedStyle(thumbNode).borderRadius).toBe("48px");
     expect(getComputedStyle(thumbNode).backgroundColor).toBe(swatch);
     expect(getComputedStyle(thumbNode).boxShadow).toBe("none");
+  });
+
+  it("uses the nostr full radius when the theme redeclares it", () => {
+    mountSwitchStyles();
+    render(
+      <div data-theme="nostr">
+        <Switch label="Off" />
+      </div>,
+    );
+
+    const track = screen.getByRole("switch", { name: "Off" });
+    const full = getComputedStyle(track.parentElement as HTMLElement).getPropertyValue(
+      "--radius-full",
+    );
+    expect(full.trim()).toBe("9999px");
+    expect(document.documentElement.style.getPropertyValue("--radius-switch")).toBe("");
+    expect(getComputedStyle(track).borderRadius).toBe("9999px");
   });
 
   it("keeps an even inset around the checked thumb", () => {

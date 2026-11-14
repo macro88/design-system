@@ -4,6 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Button } from "./button";
 import { EmptyState } from "./empty-state";
+import { FormMessage } from "./form-message";
 import { Input } from "./input";
 import { RadioGroup } from "./radio-group";
 import { Toaster, showSuccess } from "./toast";
@@ -45,6 +46,7 @@ describe("control and prose faces", () => {
           defaultValue="weekly"
           options={[{ value: "weekly", label: "Weekly", description: "Repeats every week." }]}
         />
+        <FormMessage className="font-body">Only you see this, in the body face.</FormMessage>
         <EmptyState title="Nothing here">A note in the body face.</EmptyState>
       </div>,
     );
@@ -55,6 +57,9 @@ describe("control and prose faces", () => {
     const hint = getComputedStyle(screen.getByText("Only you see this.")).fontFamily;
     const error = getComputedStyle(screen.getByRole("alert")).fontFamily;
     const description = getComputedStyle(screen.getByText("Repeats every week.")).fontFamily;
+    const hintedBody = getComputedStyle(
+      screen.getByText("Only you see this, in the body face."),
+    ).fontFamily;
     const prose = getComputedStyle(screen.getByText("A note in the body face.")).fontFamily;
 
     expect(button).toContain("Be Vietnam Pro");
@@ -63,6 +68,8 @@ describe("control and prose faces", () => {
     expect(hint).toContain("Be Vietnam Pro");
     expect(error).toContain("Be Vietnam Pro");
     expect(description).toContain("Be Vietnam Pro");
+    expect(hintedBody).toContain("Literata");
+    expect(hintedBody).not.toContain("Be Vietnam Pro");
     expect(prose).toContain("Literata");
     expect(prose).not.toContain("Be Vietnam Pro");
   });

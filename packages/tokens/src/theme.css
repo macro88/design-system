@@ -107,6 +107,7 @@
 [data-scheme] {
   --color-disabled-bg: var(--color-status-neutral-bg);
   --color-disabled-fg: var(--color-muted);
+  --radius-switch: var(--radius-full);
 }
 
 :root {
