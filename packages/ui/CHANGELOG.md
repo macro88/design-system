@@ -1,5 +1,21 @@
 # @macro88/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 1c75170: The confirm sheet takes its distance, duration, and ease from the active theme. Enter uses the sheet role. Exit uses the exit role. The backdrop uses the surface role on the way in and the exit role on the way out.
+
+  `@macro88/motion` adds role timings for surface, sheet, and exit. Themes may override them.
+
+- 4b33385: Add RadioGroup and Switch. Both take a label, use token colour, and a 120ms feedback transition. The radio is fully round (`--radius-full`) and only the switch keeps the control radius. The switch thumb is instant under reduced motion.
+
+### Patch Changes
+
+- Updated dependencies [1c75170]
+- Updated dependencies [0b00320]
+  - @macro88/motion@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @macro88/design-system
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [1c75170]
+- Updated dependencies [0b00320]
+- Updated dependencies [4b33385]
+  - @macro88/motion@0.2.0
+  - @macro88/ui@0.3.0
+
 ## 0.0.2
 
 ### Patch Changes
