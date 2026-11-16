@@ -12,7 +12,9 @@ import {
   iconStrokeVar,
   borderWidthVar,
   layerVars,
+  overlayOpacityVar,
   packageName,
+  scrimBaseVar,
   scrimVar,
   sheetTravelVars,
   toastLayoutVars,
@@ -83,7 +85,12 @@ describe("@macro88/tokens", () => {
       expect(themeCss).toContain(`${name}:`);
     }
     expect(themeCss).toContain(`${borderWidthVar}:`);
+    expect(themeCss).toContain(`${scrimBaseVar}: #000`);
+    expect(themeCss).toContain(`${overlayOpacityVar}: 0.4`);
     expect(themeCss).toContain(`${scrimVar}:`);
+    expect(themeCss).toContain("var(--scrim-base)");
+    expect(themeCss).toContain("calc(var(--overlay-opacity) * 100%)");
+    expect(themeCss).toMatch(/\[data-scheme="dark"\]\s*\{[^}]*--overlay-opacity:\s*0\.6;/s);
     for (const name of Object.values(toastLayoutVars)) {
       expect(themeCss).toContain(`${name}:`);
     }

@@ -170,6 +170,13 @@ describe("nostr theme contract", () => {
     }
   });
 
+  it("darkens the sheet with a near-black scrim", () => {
+    expect(light.get("--scrim-base")).toBe("#070808");
+    expect(light.get("--overlay-opacity")).toBe("0.4");
+    expect(dark.get("--scrim-base")).toBe("#070808");
+    expect(dark.get("--overlay-opacity")).toBe("0.64");
+  });
+
   it("defines the ink chop class on the theme", () => {
     expect(css).toContain(".ink-rule");
   });
