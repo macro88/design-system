@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Toaster as SonnerToaster, toast } from "sonner";
 import { Button } from "./button";
 import { readToken } from "./read-token";
@@ -227,7 +227,115 @@ function watchTarget(target: EventTarget | null, fn: (id: string) => void) {
   if (id) fn(id);
 }
 
+type ToastPlace = "top-center" | "bottom-center";
+
+type ToastPlacement = {
+  position: ToastPlace;
+  offset: string;
+};
+
+const restingPlacement: ToastPlacement = {
+  position: "bottom-center",
+  offset: "var(--toast-offset)",
+};
+
+function sheetElements(): HTMLElement[] {
+  return [...document.querySelectorAll(".sheet")].filter(
+    (node): node is HTMLElement => node instanceof HTMLElement,
+  );
+}
+
+/** An open sheet keeps toasts off its actions. Narrow viewports use the top; wider ones sit above the sheet. */
+function placementForSheets(): { placement: ToastPlacement; clearance: string } {
+  const sheets = sheetElements();
+  if (sheets.length === 0) return { placement: restingPlacement, clearance: "" };
+  const clearance = Math.max(...sheets.map((sheet) => sheet.getBoundingClientRect().height));
+  const onTop =
+    getComputedStyle(document.documentElement).getPropertyValue("--toast-sheet-place").trim() ===
+    "top";
+  if (onTop) {
+    return {
+      placement: { position: "top-center", offset: "var(--toast-offset)" },
+      clearance: `${clearance}px`,
+    };
+  }
+  return {
+    placement: {
+      position: "bottom-center",
+      offset: "calc(var(--sheet-clearance) + var(--toast-gap))",
+    },
+    clearance: `${clearance}px`,
+  };
+}
+
+function publishSheet(open: boolean, clearance: string) {
+  const root = document.documentElement;
+  if (open) root.dataset.sheetOpen = "true";
+  else delete root.dataset.sheetOpen;
+  if (clearance) root.style.setProperty("--sheet-clearance", clearance);
+  else root.style.removeProperty("--sheet-clearance");
+}
+
 export function Toaster() {
+  const placementRef = useRef<ToastPlacement>(restingPlacement);
+  const [placement, setPlacement] = useState<ToastPlacement>(restingPlacement);
+
+  useLayoutEffect(() => {
+    let alive = true;
+    const root = document.documentElement;
+    const apply = () => {
+      if (!alive) return;
+      const next = placementForSheets();
+      const open = next.clearance !== "";
+      publishSheet(open, next.clearance);
+      const current = placementRef.current;
+      if (
+        current.position === next.placement.position &&
+        current.offset === next.placement.offset
+      ) {
+        return;
+      }
+      placementRef.current = next.placement;
+      setPlacement(next.placement);
+    };
+
+    const watched = new Set<Element>();
+    const sizes =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(() => {
+            apply();
+          });
+    const watchSheets = () => {
+      if (!sizes) return;
+      const sheets = sheetElements();
+      if (sheets.length === watched.size && sheets.every((sheet) => watched.has(sheet))) return;
+      sizes.disconnect();
+      watched.clear();
+      for (const sheet of sheets) {
+        watched.add(sheet);
+        sizes.observe(sheet);
+      }
+    };
+    const refresh = () => {
+      watchSheets();
+      apply();
+    };
+
+    refresh();
+    const mutations = new MutationObserver(refresh);
+    mutations.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("resize", apply);
+    return () => {
+      alive = false;
+      mutations.disconnect();
+      sizes?.disconnect();
+      window.removeEventListener("resize", apply);
+      delete root.dataset.sheetOpen;
+      root.style.removeProperty("--sheet-clearance");
+    };
+  }, []);
+
   useEffect(() => {
     const pointerOver = (event: Event) => watchTarget(event.target, hold);
     const pointerOut = (event: Event) => watchTarget(event.target, release);
@@ -259,10 +367,11 @@ export function Toaster() {
 
   return (
     <SonnerToaster
-      position="bottom-center"
+      position={placement.position}
       visibleToasts={visibleLimit}
       gap={readToken("--toast-gap")}
-      offset="var(--toast-offset)"
+      offset={placement.offset}
+      mobileOffset={placement.offset}
       duration={Number.POSITIVE_INFINITY}
     />
   );

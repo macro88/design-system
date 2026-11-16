@@ -385,6 +385,13 @@
   background: var(--color-scrim);
 }
 
+/* Below the small breakpoint, an open sheet keeps toasts at the top of the viewport. */
+@media (width < theme(--breakpoint-sm)) {
+  :root {
+    --toast-sheet-place: top;
+  }
+}
+
 [data-sonner-toaster] {
   font-family: var(--font-display);
 }

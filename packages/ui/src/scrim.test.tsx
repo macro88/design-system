@@ -66,4 +66,47 @@ describe("sheet scrim", () => {
     expect(nostrDark.a).not.toBeCloseTo(dark.a);
     expect(nostrDark.borderTopWidth).toBe("1px");
   });
+
+  it("keeps a light scheme at 0.4 inside a dark root, and nostr still wins", () => {
+    mountScrim();
+    const view = render(
+      <div data-theme="runifly" data-scheme="dark">
+        <div data-theme="runifly" data-scheme="light">
+          <div className="sheet-overlay" data-testid="nested-light" />
+        </div>
+        <div data-theme="nostr" data-scheme="light">
+          <div className="sheet-overlay" data-testid="nested-nostr-light" />
+        </div>
+        <div data-theme="nostr" data-scheme="dark">
+          <div className="sheet-overlay" data-testid="nested-nostr-dark" />
+        </div>
+      </div>,
+    );
+
+    const read = (id: string) => {
+      const overlay = view.getByTestId(id);
+      const match = getComputedStyle(overlay).backgroundColor.match(
+        /color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\/\s*([\d.]+)\)/,
+      );
+      if (!match) throw new Error(getComputedStyle(overlay).backgroundColor);
+      return {
+        r: Number(match[1]),
+        g: Number(match[2]),
+        a: Number(match[4]),
+      };
+    };
+
+    const nestedLight = read("nested-light");
+    const nostrLight = read("nested-nostr-light");
+    const nostrDark = read("nested-nostr-dark");
+
+    expect(nestedLight.r).toBeCloseTo(0);
+    expect(nestedLight.a).toBeCloseTo(0.4);
+    expect(nostrLight.r).toBeCloseTo(7 / 255);
+    expect(nostrLight.g).toBeCloseTo(8 / 255);
+    expect(nostrLight.a).toBeCloseTo(0.4);
+    expect(nostrDark.r).toBeCloseTo(7 / 255);
+    expect(nostrDark.a).toBeCloseTo(0.64);
+    expect(nostrDark.a).not.toBeCloseTo(0.6);
+  });
 });
