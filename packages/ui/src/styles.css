@@ -44,7 +44,7 @@
 
 .button {
   box-shadow: var(--elevation-rest);
-  transition-property: background-color, border-color, box-shadow, color;
+  transition-property: background-color, border-color, box-shadow, color, outline-color;
   transition-duration: var(--motion-duration-fast);
   transition-timing-function: var(--motion-ease-standard);
 }
@@ -60,6 +60,19 @@
 
 .button-ghost:hover:not(:disabled):not([aria-disabled="true"]) {
   background-color: var(--color-accent-subtle);
+}
+
+.button-danger-solid {
+  background-color: var(--color-danger-solid);
+  color: var(--color-danger-solid-on);
+}
+
+.button-danger-solid:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--color-danger-solid-hover);
+}
+
+.button-danger-solid:focus-visible {
+  outline-color: var(--color-danger-fg);
 }
 
 .button:disabled:not([aria-busy="true"]),

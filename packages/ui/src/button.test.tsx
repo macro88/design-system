@@ -69,6 +69,18 @@ describe("disabled colours inside a theme", () => {
 });
 
 describe("Button", () => {
+  it("keeps a soft danger button and a solid danger button", () => {
+    const view = render(<Button variant="danger">Remove</Button>);
+    const soft = screen.getByRole("button", { name: "Remove" });
+    expect(soft).toHaveClass("button-danger", "bg-danger-bg", "text-danger-fg");
+    expect(soft).not.toHaveClass("button-danger-solid");
+
+    view.rerender(<Button variant="danger-solid">Remove</Button>);
+    const solid = screen.getByRole("button", { name: "Remove" });
+    expect(solid).toHaveClass("button-danger-solid", "bg-danger-solid", "text-danger-solid-on");
+    expect(solid).not.toHaveClass("button-danger");
+  });
+
   it("runs its action from a click and from the keyboard", async () => {
     const user = userEvent.setup();
     const onClick = vi.fn();

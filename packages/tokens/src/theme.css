@@ -31,6 +31,9 @@
   --color-focus: #3f3f46;
   --color-danger-fg: #991b1b;
   --color-danger-bg: #f8d4d4;
+  --color-danger-solid: #991b1b;
+  --color-danger-solid-hover: #7a1616;
+  --color-danger-solid-on: #ffffff;
 
   --color-status-neutral-fg: #52525b;
   --color-status-neutral-bg: #ffffff;
@@ -161,6 +164,13 @@
   --shadow-rest: var(--elevation-rest);
   --shadow-hover: var(--elevation-hover);
   --shadow-lift: var(--elevation-lift);
+}
+
+[data-scheme="dark"] {
+  /* The base dark scheme keeps the light surfaces, so this stays the danger foreground. */
+  --color-danger-solid: #991b1b;
+  --color-danger-solid-hover: #7a1616;
+  --color-danger-solid-on: #ffffff;
 }
 
 /* Near-flat only when data-scheme is dark. Palettes switch the same way. */
