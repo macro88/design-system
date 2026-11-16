@@ -150,6 +150,27 @@ describe("Switch", () => {
     expect(getComputedStyle(track).borderRadius).toBe("9999px");
   });
 
+  it("describes the switch with its hint and keeps the row at control height", () => {
+    mountSwitchStyles();
+    render(
+      <div data-theme="nostr">
+        <Switch label="Reminders" hint="A quiet nudge in the morning." />
+      </div>,
+    );
+    const control = screen.getByRole("switch", { name: "Reminders" });
+    const hint = screen.getByText("A quiet nudge in the morning.");
+    expect(hint).toHaveClass("type-caption", "font-display", "text-muted");
+    expect(control).toHaveAttribute("aria-describedby", hint.id);
+    const display = document.createElement("span");
+    display.style.fontFamily = "var(--font-display)";
+    control.closest("[data-theme]")?.append(display);
+    expect(getComputedStyle(hint).fontFamily).toBe(getComputedStyle(display).fontFamily);
+    display.remove();
+    const row = control.parentElement;
+    expect(row).toHaveClass("switch-row");
+    expect(getComputedStyle(row as Element).minHeight).toBe("44px");
+  });
+
   it("keeps an even inset around the checked thumb", () => {
     const css = readFileSync(path.join(process.cwd(), "src/styles.css"), "utf8");
     const tokens = tokenLengths();

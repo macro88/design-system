@@ -32,7 +32,7 @@
 }
 
 .field {
-  transition-property: border-color, color;
+  transition-property: border-color, color, outline-color;
   transition-duration: var(--motion-duration-fast);
   transition-timing-function: var(--motion-ease-standard);
 }
@@ -117,8 +117,14 @@
   stroke-linejoin: round;
 }
 
-.field[data-invalid="true"] {
+.field[data-invalid="true"],
+.field[aria-invalid="true"] {
   border-color: var(--color-danger-fg);
+}
+
+.field[data-invalid="true"]:focus-visible,
+.field[aria-invalid="true"]:focus-visible {
+  outline-color: var(--color-danger-fg);
 }
 
 .field:disabled {
@@ -206,6 +212,10 @@
 .switch[data-state="checked"] .switch-thumb {
   background: var(--color-accent-on);
   transform: translateX(var(--switch-travel));
+}
+
+.switch-row {
+  min-height: var(--control-height);
 }
 
 .radio:disabled,
