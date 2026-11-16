@@ -1,6 +1,6 @@
 # @macro88/theme-nostr
 
-## 0.2.0
+## 0.3.0
 
 ### Minor Changes
 
@@ -12,7 +12,7 @@
 
 - Updated dependencies [1c75170]
 - Updated dependencies [0b00320]
-  - @macro88/motion@0.2.0
+  - @macro88/motion@0.3.0
 
 ## 0.1.0
 
