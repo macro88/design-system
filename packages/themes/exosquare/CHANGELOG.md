@@ -1,5 +1,11 @@
 # @macro88/theme-exosquare
 
+## 0.3.0
+
+### Minor Changes
+
+- Version aligned with the 0.3.0 release. No changes.
+
 ## 0.1.0
 
 ### Minor Changes
