@@ -166,13 +166,6 @@
   --shadow-lift: var(--elevation-lift);
 }
 
-[data-scheme="dark"] {
-  /* The base dark scheme keeps the light surfaces, so this stays the danger foreground. */
-  --color-danger-solid: #991b1b;
-  --color-danger-solid-hover: #7a1616;
-  --color-danger-solid-on: #ffffff;
-}
-
 /* Near-flat only when data-scheme is dark. Palettes switch the same way. */
 :root[data-scheme="dark"] {
   --elevation-strength: 0.08;

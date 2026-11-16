@@ -7,4 +7,4 @@
 "@macro88/theme-exosquare": patch
 ---
 
-A solid danger button is available for a confirming action. ConfirmSheet's destructive confirm changes appearance from the soft danger button to the solid danger button.
+A solid danger button is available for a confirming action. ConfirmSheet's destructive confirm changes appearance from the soft danger button to the solid danger button. Runifly and exosquare dark use a temporary solid danger until their brand direction is set.

@@ -117,7 +117,7 @@ function DestructiveConfirm() {
   const [open, setOpen] = useState(true);
   return (
     <div className="bg-bg text-text grid min-h-screen content-start gap-6 p-6">
-      <Button variant="danger-solid" className="justify-self-start">
+      <Button variant="danger" className="justify-self-start">
         Remove
       </Button>
       <ConfirmSheet
