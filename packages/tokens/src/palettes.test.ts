@@ -200,3 +200,51 @@ describe("temporary theme palettes", () => {
     });
   }
 });
+
+describe("solid danger", () => {
+  const tokens = readFileSync(new URL("./theme.css", import.meta.url), "utf8");
+  const tokenRules = ruleBodies(tokens);
+  const baseLight = declarations(tokenRules.get("@theme") ?? "");
+
+  function expectSolid(scheme: Map<string, string>, label: string) {
+    const fill = requireHex(scheme, "--color-danger-solid");
+    const hover = requireHex(scheme, "--color-danger-solid-hover");
+    const on = requireHex(scheme, "--color-danger-solid-on");
+    const bg = requireHex(scheme, "--color-bg");
+    const surface = requireHex(scheme, "--color-surface");
+    expect(contrast(on, fill), `${label} label on fill`).toBeGreaterThanOrEqual(4.5);
+    expect(contrast(on, hover), `${label} label on hover`).toBeGreaterThanOrEqual(4.5);
+    expect(contrast(fill, surface), `${label} fill on surface`).toBeGreaterThanOrEqual(3);
+    expect(contrast(fill, bg), `${label} fill on bg`).toBeGreaterThanOrEqual(3);
+    expect(contrast(hover, surface), `${label} hover on surface`).toBeGreaterThanOrEqual(3);
+    expect(contrast(hover, bg), `${label} hover on bg`).toBeGreaterThanOrEqual(3);
+  }
+
+  it("keeps every theme's solid danger at the contrast floors", () => {
+    expect(tokens).not.toMatch(/\[data-scheme="dark"\]\s*\{[^}]*--color-danger-solid/);
+    expectSolid(baseLight, "base light");
+    for (const themeId of themeIds) {
+      const css = readFileSync(path.join(themeRoot, themeId, "src", "theme.css"), "utf8");
+      const rules = ruleBodies(css);
+      const light = declarations(rules.get(`[data-theme="${themeId}"]`) ?? "");
+      const dark = declarations(rules.get(`[data-theme="${themeId}"][data-scheme="dark"]`) ?? "");
+      for (const name of [
+        "--color-danger-solid",
+        "--color-danger-solid-hover",
+        "--color-danger-solid-on",
+      ]) {
+        expect(dark.has(name), `${themeId} dark ${name}`).toBe(true);
+      }
+      expectSolid(new Map([...baseLight, ...light]), `${themeId} light`);
+      expectSolid(new Map([...baseLight, ...light, ...dark]), `${themeId} dark`);
+      if (themeId === "nostr") {
+        expect(light.get("--color-danger-solid")).toBe("#9e2a2e");
+        expect(light.get("--color-danger-solid-hover")).toBe("#7a2428");
+        expect(light.get("--color-danger-solid-on")).toBe("#ffffff");
+        expect(dark.get("--color-danger-solid")).toBe("#e8a8a4");
+        expect(dark.get("--color-danger-solid-hover")).toBe("#f0bfbb");
+        expect(dark.get("--color-danger-solid-on")).toBe("#141515");
+      }
+    }
+  });
+});

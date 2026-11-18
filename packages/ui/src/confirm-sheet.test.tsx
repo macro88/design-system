@@ -123,8 +123,9 @@ describe("ConfirmSheet", () => {
     }
   });
 
-  it("uses the danger button when the confirm action is destructive", () => {
+  it("uses the solid danger button for a destructive confirm and focuses cancel", () => {
     render(<ConfirmSheet {...props} destructive onOpenChange={vi.fn()} onConfirm={vi.fn()} />);
-    expect(screen.getByRole("button", { name: "Remove" })).toHaveClass("button-danger");
+    expect(screen.getByRole("button", { name: "Remove" })).toHaveClass("button-danger-solid");
+    expect(screen.getByRole("button", { name: "Cancel" })).toHaveFocus();
   });
 });

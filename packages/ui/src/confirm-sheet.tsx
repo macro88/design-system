@@ -122,7 +122,7 @@ export function ConfirmSheet({
                     </Button>
                   </AlertDialog.Cancel>
                   <AlertDialog.Action asChild>
-                    <Button variant={destructive ? "danger" : "primary"} onClick={onConfirm}>
+                    <Button variant={destructive ? "danger-solid" : "primary"} onClick={onConfirm}>
                       {confirmLabel}
                     </Button>
                   </AlertDialog.Action>

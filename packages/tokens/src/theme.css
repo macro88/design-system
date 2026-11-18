@@ -31,6 +31,9 @@
   --color-focus: #3f3f46;
   --color-danger-fg: #991b1b;
   --color-danger-bg: #f8d4d4;
+  --color-danger-solid: #991b1b;
+  --color-danger-solid-hover: #7a1616;
+  --color-danger-solid-on: #ffffff;
 
   --color-status-neutral-fg: #52525b;
   --color-status-neutral-bg: #ffffff;

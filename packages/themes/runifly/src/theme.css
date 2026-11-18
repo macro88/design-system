@@ -59,6 +59,10 @@
   --color-focus: #7cc4e4;
   --color-danger-fg: #fecaca;
   --color-danger-bg: #5c2424;
+  /* Temporary until this theme's brand direction is set. */
+  --color-danger-solid: #fecaca;
+  --color-danger-solid-hover: #fee2e2;
+  --color-danger-solid-on: #0e171d;
   --color-status-neutral-fg: #e4eef4;
   --color-status-neutral-bg: #2a3944;
   --color-status-accent-fg: #b6e2f4;

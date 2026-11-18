@@ -20,11 +20,11 @@ export type ButtonProps =
       size?: "md" | "lg";
     })
   | (ButtonBase & {
-      variant: "outline" | "ghost" | "danger";
+      variant: "outline" | "ghost" | "danger" | "danger-solid";
       size?: "sm" | "md" | "lg";
     });
 
-export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "danger" | "danger-solid";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const variantClass = {
@@ -32,6 +32,7 @@ const variantClass = {
   outline: "button-outline border-border-strong bg-surface text-text",
   ghost: "button-ghost border-transparent bg-transparent text-text",
   danger: "button-danger border-transparent bg-danger-bg text-danger-fg",
+  "danger-solid": "button-danger-solid border-transparent bg-danger-solid text-danger-solid-on",
 } as const;
 
 const sizeClass = {

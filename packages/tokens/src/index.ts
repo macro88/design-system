@@ -99,6 +99,12 @@ export const focusVars = {
   colour: "--color-focus",
 } as const;
 
+export const dangerSolidVars = {
+  fill: "--color-danger-solid",
+  hover: "--color-danger-solid-hover",
+  on: "--color-danger-solid-on",
+} as const;
+
 export const iconStrokeVar = "--icon-stroke";
 export const disabledOpacityVar = "--disabled-opacity";
 export const disabledColorVars = {

@@ -57,9 +57,9 @@ function FeedbackGallery() {
       <ConfirmSheet
         open={open}
         onOpenChange={setOpen}
-        title="Remove this item?"
-        description="This cannot be undone."
-        confirmLabel="Remove"
+        title="Continue?"
+        description="This keeps the item."
+        confirmLabel="Continue"
         onConfirm={() => undefined}
       />
       <ConfirmSheet
@@ -111,4 +111,55 @@ function OpenSheetWithToast() {
 
 export const ToastOverSheet: Story = {
   render: () => <OpenSheetWithToast />,
+};
+
+function DestructiveConfirm() {
+  const [open, setOpen] = useState(true);
+  return (
+    <div className="bg-bg text-text grid min-h-screen content-start gap-6 p-6">
+      <Button variant="danger" className="justify-self-start">
+        Remove
+      </Button>
+      <ConfirmSheet
+        open={open}
+        onOpenChange={setOpen}
+        title="Remove this item?"
+        description="This cannot be undone."
+        confirmLabel="Remove"
+        destructive
+        onConfirm={() => undefined}
+      />
+    </div>
+  );
+}
+
+export const DangerSolidNostrLight: Story = {
+  name: "danger-solid · nostr · light",
+  globals: { theme: "nostr", scheme: "light" },
+  render: () => <DestructiveConfirm />,
+};
+export const DangerSolidNostrDark: Story = {
+  name: "danger-solid · nostr · dark",
+  globals: { theme: "nostr", scheme: "dark" },
+  render: () => <DestructiveConfirm />,
+};
+export const DangerSolidRuniflyLight: Story = {
+  name: "danger-solid · runifly · light",
+  globals: { theme: "runifly", scheme: "light" },
+  render: () => <DestructiveConfirm />,
+};
+export const DangerSolidRuniflyDark: Story = {
+  name: "danger-solid · runifly · dark",
+  globals: { theme: "runifly", scheme: "dark" },
+  render: () => <DestructiveConfirm />,
+};
+export const DangerSolidExosquareLight: Story = {
+  name: "danger-solid · exosquare · light",
+  globals: { theme: "exosquare", scheme: "light" },
+  render: () => <DestructiveConfirm />,
+};
+export const DangerSolidExosquareDark: Story = {
+  name: "danger-solid · exosquare · dark",
+  globals: { theme: "exosquare", scheme: "dark" },
+  render: () => <DestructiveConfirm />,
 };
