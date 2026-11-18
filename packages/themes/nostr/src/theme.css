@@ -113,8 +113,8 @@
 
 [data-theme="nostr"] .ink-rule::before {
   content: "";
-  width: 6px;
-  height: 6px;
+  width: var(--motion-ink-chop-size);
+  height: var(--motion-ink-chop-size);
   flex: none;
   border-radius: 0;
   background: var(--color-accent);
@@ -122,7 +122,7 @@
 
 [data-theme="nostr"] .ink-rule::after {
   content: "";
-  height: 2px;
+  height: var(--motion-ink-chop-thickness);
   flex: 1 1 auto;
   border-radius: 0;
   background: var(--color-accent);
