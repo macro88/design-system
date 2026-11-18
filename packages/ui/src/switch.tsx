@@ -5,6 +5,7 @@ import { cx } from "./cx";
 
 export type SwitchProps = {
   label: string;
+  hint?: string;
   checked?: boolean;
   defaultChecked?: boolean;
   onCheckedChange?: (checked: boolean) => void;
@@ -15,6 +16,7 @@ export type SwitchProps = {
 
 export function Switch({
   label,
+  hint,
   checked,
   defaultChecked,
   onCheckedChange,
@@ -24,9 +26,10 @@ export function Switch({
 }: SwitchProps) {
   const generatedId = useId();
   const switchId = id ?? generatedId;
+  const hintId = hint ? `${switchId}-hint` : undefined;
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="switch-row flex items-center gap-3">
       <SwitchPrimitive.Root
         id={switchId}
         checked={checked}
@@ -34,16 +37,24 @@ export function Switch({
         onCheckedChange={onCheckedChange}
         disabled={disabled}
         name={name}
+        aria-describedby={hintId}
         className={cx("switch", focusRingClass)}
       >
         <SwitchPrimitive.Thumb className="switch-thumb" />
       </SwitchPrimitive.Root>
-      <label
-        htmlFor={switchId}
-        className={cx("type-body-md font-display", disabled ? "text-muted" : "text-text")}
-      >
-        {label}
-      </label>
+      <div className="grid gap-1">
+        <label
+          htmlFor={switchId}
+          className={cx("type-body-md font-display", disabled ? "text-muted" : "text-text")}
+        >
+          {label}
+        </label>
+        {hint ? (
+          <p id={hintId} className="type-caption font-display text-muted">
+            {hint}
+          </p>
+        ) : null}
+      </div>
     </div>
   );
 }

@@ -97,6 +97,7 @@
   --radius-badge: 4px;
   --radius-overlay: 12px;
   --radius-full: 999px;
+  --radius-switch: var(--radius-full);
 }
 
 /* Redeclare the aliases where a theme or scheme is applied.
@@ -106,6 +107,7 @@
 [data-scheme] {
   --color-disabled-bg: var(--color-status-neutral-bg);
   --color-disabled-fg: var(--color-muted);
+  --radius-switch: var(--radius-full);
 }
 
 :root {

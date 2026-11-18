@@ -14,8 +14,10 @@ function Controls() {
         ]}
       />
       <Input label="Note" placeholder="Shown after the group" />
-      <Switch label="Reminders" defaultChecked />
-      <Switch label="Paused" disabled />
+      <Switch label="Off" hint="A quiet nudge in the morning." />
+      <Switch label="On" hint="A quiet nudge in the morning." defaultChecked />
+      <Switch label="Disabled" disabled />
+      <Input label="City" error="Enter a city." autoFocus />
     </div>
   );
 }
