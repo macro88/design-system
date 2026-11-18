@@ -129,6 +129,7 @@ export const layerVars = {
 
 export const overlayOpacityVar = "--overlay-opacity";
 export const borderWidthVar = "--border-width";
+export const scrimBaseVar = "--scrim-base";
 export const scrimVar = "--color-scrim";
 export const toastLayoutVars = {
   gap: "--toast-gap",

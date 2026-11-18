@@ -1,6 +1,7 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { toast } from "sonner";
+import { ConfirmSheet } from "./confirm-sheet";
 import { Toaster, showError, showSuccess, showUndo } from "./toast";
 
 async function settle() {
@@ -127,5 +128,100 @@ describe("Toaster", () => {
 
     expect(document.querySelector(`[data-toast-id="${id}"]`)).toBeInTheDocument();
     expect(undo).toHaveAttribute("data-removed", "false");
+  });
+
+  it("keeps a toast clear of the sheet actions", async () => {
+    const viewportHeight = 900;
+    const sheetHeight = 260;
+    const sheetTop = viewportHeight - sheetHeight;
+    const toastHeight = 64;
+    const original = HTMLElement.prototype.getBoundingClientRect;
+
+    HTMLElement.prototype.getBoundingClientRect = function () {
+      if (this.classList.contains("sheet")) {
+        return new DOMRect(0, sheetTop, 800, sheetHeight);
+      }
+      if (this instanceof HTMLButtonElement && this.closest(".sheet")) {
+        const x = this.textContent?.includes("Remove") ? 120 : 16;
+        return new DOMRect(x, sheetTop + 180, 96, 44);
+      }
+      if (this.hasAttribute("data-sonner-toast") || this.hasAttribute("data-sonner-toaster")) {
+        const onTop =
+          document.querySelector("[data-sonner-toaster]")?.getAttribute("data-y-position") ===
+          "top";
+        if (onTop) return new DOMRect(16, 24, 360, toastHeight);
+        const clearance = Number.parseFloat(
+          document.documentElement.style.getPropertyValue("--sheet-clearance"),
+        );
+        const gapRaw = getComputedStyle(document.documentElement)
+          .getPropertyValue("--toast-gap")
+          .trim();
+        const gap = Number.parseFloat(gapRaw) * (gapRaw.endsWith("rem") ? 16 : 1);
+        const inset =
+          (Number.isFinite(clearance) ? clearance : 0) + (Number.isFinite(gap) ? gap : 0);
+        return new DOMRect(220, viewportHeight - inset - toastHeight, 360, toastHeight);
+      }
+      return original.call(this);
+    };
+
+    function overlaps(a: DOMRect, b: DOMRect) {
+      return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+    }
+
+    async function openSheet() {
+      render(
+        <>
+          <Toaster />
+          <ConfirmSheet
+            open
+            title="Remove this item?"
+            description="This cannot be undone."
+            confirmLabel="Remove"
+            destructive
+            onOpenChange={vi.fn()}
+            onConfirm={vi.fn()}
+          />
+        </>,
+      );
+      await act(async () => {
+        showSuccess("Saved");
+      });
+      await settle();
+    }
+
+    try {
+      document.documentElement.style.setProperty("--toast-sheet-place", "top");
+      await openSheet();
+      const narrowToast = screen.getByText("Saved").closest("[data-sonner-toast]");
+      const narrowToaster = narrowToast?.closest("[data-sonner-toaster]");
+      expect(narrowToaster).toHaveAttribute("data-y-position", "top");
+      const narrowBox = narrowToast?.getBoundingClientRect();
+      for (const name of ["Cancel", "Remove"]) {
+        const action = screen.getByRole("button", { name }).getBoundingClientRect();
+        expect(narrowBox && overlaps(narrowBox, action)).toBe(false);
+      }
+
+      toast.dismiss();
+      await settle();
+      cleanup();
+      document.documentElement.style.removeProperty("--toast-sheet-place");
+
+      await openSheet();
+      const wideToast = screen.getByText("Saved").closest("[data-sonner-toast]");
+      const wideToaster = wideToast?.closest("[data-sonner-toaster]");
+      expect(wideToaster).toHaveAttribute("data-y-position", "bottom");
+      const wideBox = wideToast?.getBoundingClientRect();
+      const sheet = document.querySelector(".sheet")?.getBoundingClientRect();
+      expect(wideBox && sheet && wideBox.bottom <= sheet.top).toBe(true);
+      for (const name of ["Cancel", "Remove"]) {
+        const action = screen.getByRole("button", { name }).getBoundingClientRect();
+        expect(wideBox && overlaps(wideBox, action)).toBe(false);
+      }
+    } finally {
+      HTMLElement.prototype.getBoundingClientRect = original;
+      document.documentElement.style.removeProperty("--toast-sheet-place");
+      document.documentElement.style.removeProperty("--sheet-clearance");
+      delete document.documentElement.dataset.sheetOpen;
+    }
   });
 });

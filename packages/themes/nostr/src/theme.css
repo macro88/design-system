@@ -42,6 +42,8 @@
   --color-status-danger-bg: #f0d9d8;
   --color-status-info-fg: #1e3842;
   --color-status-info-bg: #d7e2e4;
+  --scrim-base: #070808;
+  --overlay-opacity: 0.4;
 }
 
 [data-theme="nostr"][data-scheme="dark"] {
@@ -77,6 +79,8 @@
   --color-status-danger-bg: #3a2424;
   --color-status-info-fg: #b3c7ce;
   --color-status-info-bg: #243036;
+  --scrim-base: #070808;
+  --overlay-opacity: 0.64;
 }
 
 [data-theme="nostr"] .motion-shimmer {

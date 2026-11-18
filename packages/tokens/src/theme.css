@@ -111,6 +111,20 @@
   --color-disabled-bg: var(--color-status-neutral-bg);
   --color-disabled-fg: var(--color-muted);
   --radius-switch: var(--radius-full);
+  --color-scrim: color-mix(
+    in srgb,
+    var(--scrim-base) calc(var(--overlay-opacity) * 100%),
+    transparent
+  );
+}
+
+[data-scheme="dark"] {
+  --overlay-opacity: 0.6;
+}
+
+/* A light subtree must not inherit a dark page's opacity. */
+[data-scheme="light"] {
+  --overlay-opacity: 0.4;
 }
 
 :root {
@@ -140,9 +154,14 @@
   --layer-overlay: 20;
   --layer-modal: 30;
   --layer-toast: 40;
-  --overlay-opacity: 0.32;
+  --scrim-base: #000;
+  --overlay-opacity: 0.4;
   --border-width: 1px;
-  --color-scrim: color-mix(in srgb, var(--color-text) 32%, transparent);
+  --color-scrim: color-mix(
+    in srgb,
+    var(--scrim-base) calc(var(--overlay-opacity) * 100%),
+    transparent
+  );
   --toast-gap: 0.5rem;
   --toast-offset: 1.5rem;
   --sheet-enter: 1.75rem;
@@ -170,6 +189,7 @@
 
 /* Near-flat only when data-scheme is dark. Palettes switch the same way. */
 :root[data-scheme="dark"] {
+  --overlay-opacity: 0.6;
   --elevation-strength: 0.08;
   --color-selected: #27272a;
   --color-today: #1f1f23;
