@@ -27,6 +27,9 @@
   --color-focus: #662482;
   --color-danger-fg: #7a2428;
   --color-danger-bg: #f0d9d8;
+  --color-danger-solid: #9e2a2e;
+  --color-danger-solid-hover: #7a2428;
+  --color-danger-solid-on: #ffffff;
   --color-status-neutral-fg: #404846;
   --color-status-neutral-bg: #f3f4f3;
   --color-status-accent-fg: #521c69;
@@ -61,6 +64,9 @@
   --color-focus: #b373ce;
   --color-danger-fg: #e8a8a4;
   --color-danger-bg: #3a2424;
+  --color-danger-solid: #e8a8a4;
+  --color-danger-solid-hover: #f0bfbb;
+  --color-danger-solid-on: #141515;
   --color-status-neutral-fg: #a8b0ad;
   --color-status-neutral-bg: #1c1e1d;
   --color-status-accent-fg: #be82d4;
@@ -117,8 +123,8 @@
 
 [data-theme="nostr"] .ink-rule::before {
   content: "";
-  width: 6px;
-  height: 6px;
+  width: var(--motion-ink-chop-size);
+  height: var(--motion-ink-chop-size);
   flex: none;
   border-radius: 0;
   background: var(--color-accent);
@@ -126,7 +132,7 @@
 
 [data-theme="nostr"] .ink-rule::after {
   content: "";
-  height: 2px;
+  height: var(--motion-ink-chop-thickness);
   flex: 1 1 auto;
   border-radius: 0;
   background: var(--color-accent);

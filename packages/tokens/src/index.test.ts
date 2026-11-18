@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   colorRoles,
+  dangerSolidVars,
   elevationVars,
   controlHeightVars,
   disabledColorVars,
@@ -55,6 +56,9 @@ describe("@macro88/tokens", () => {
     ]);
     expect(statusTones).toEqual(["neutral", "accent", "success", "warning", "danger", "info"]);
     expect(semanticColorVars).toHaveLength(colorRoles.length + statusTones.length * 2);
+    for (const name of Object.values(dangerSolidVars)) {
+      expect(themeCss).toContain(`${name}:`);
+    }
   });
 
   it("declares every semantic colour, radius role, space step, and type role", () => {

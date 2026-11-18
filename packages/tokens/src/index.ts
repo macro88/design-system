@@ -27,7 +27,15 @@ export const statusTones = ["neutral", "accent", "success", "warning", "danger",
 export type StatusTone = (typeof statusTones)[number];
 export type StatusPart = "fg" | "bg";
 
-export const radiusRoles = ["control", "field", "panel", "badge", "overlay", "full"] as const;
+export const radiusRoles = [
+  "control",
+  "field",
+  "panel",
+  "badge",
+  "overlay",
+  "switch",
+  "full",
+] as const;
 
 export type RadiusRole = (typeof radiusRoles)[number];
 
@@ -73,6 +81,7 @@ export const radiusVars = {
   panel: "--radius-panel",
   badge: "--radius-badge",
   overlay: "--radius-overlay",
+  switch: "--radius-switch",
   full: "--radius-full",
 } as const satisfies Record<RadiusRole, string>;
 
@@ -88,6 +97,12 @@ export const focusVars = {
   width: "--focus-width",
   offset: "--focus-offset",
   colour: "--color-focus",
+} as const;
+
+export const dangerSolidVars = {
+  fill: "--color-danger-solid",
+  hover: "--color-danger-solid-hover",
+  on: "--color-danger-solid-on",
 } as const;
 
 export const iconStrokeVar = "--icon-stroke";
