@@ -1,5 +1,27 @@
 # @macro88/ui
 
+## 0.4.0
+
+### Minor Changes
+
+- 8057b84: A solid danger button is available for a confirming action. ConfirmSheet's destructive confirm changes appearance from the soft danger button to the solid danger button. Runifly and exosquare dark use a temporary solid danger until their brand direction is set.
+- aafbc79: The switch is fully round. Its off thumb uses the strong border colour. Field hints and errors use the display face. An invalid field uses a danger focus ring. A switch can carry a hint, and its row is at least the control height.
+
+  Apps that styled hints expecting the body face should add font-body.
+
+### Patch Changes
+
+- d808592: The sheet scrim is a dark wash. Light schemes use 40% opacity and dark schemes use 60%. A light scheme keeps 40% even inside a dark page. The nostr theme uses a neutral near-black, at 40% in light and 64% in dark.
+
+  While a sheet is open, a toast sits at the top of a narrow viewport and above the sheet on a wider one, clear of the sheet actions.
+
+- Updated dependencies [8057b84]
+- Updated dependencies [d808592]
+- Updated dependencies [aafbc79]
+- Updated dependencies [33d8fe5]
+  - @macro88/tokens@0.4.0
+  - @macro88/motion@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
