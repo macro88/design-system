@@ -14,8 +14,8 @@ Released under the MIT licence.
 
 ## Prerequisites
 
-- Node.js 26.13.0 (see `.nvmrc`)
-- pnpm 12.18.0
+- Node.js 26.13.1 (see `.nvmrc`)
+- pnpm 12.21.0
 
 ## Install
 
