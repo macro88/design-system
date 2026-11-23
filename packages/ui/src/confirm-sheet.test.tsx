@@ -1,5 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { ConfirmSheet, sheetTiming } from "./confirm-sheet";
 
@@ -121,6 +123,60 @@ describe("ConfirmSheet", () => {
         else root.removeProperty(name);
       }
     }
+  });
+
+  it("keeps a short fade and no travel when motion is reduced", () => {
+    const timing = sheetTiming(true);
+    expect(timing.enterY).toBe(0);
+    expect(timing.exitY).toBe(0);
+    expect(timing.sheetExit).toMatchObject({ type: "tween", ease: [0, 0, 1, 1] });
+    expect(timing.sheetExit.duration).toBeGreaterThan(0);
+    expect(timing.backdropExit).toEqual(timing.sheetExit);
+  });
+
+  it("removes the sheet only after the exit finishes", async () => {
+    const view = render(<ConfirmSheet {...props} onOpenChange={vi.fn()} onConfirm={vi.fn()} />);
+    expect(document.querySelector(".sheet")).not.toBeNull();
+    view.rerender(
+      <ConfirmSheet {...props} open={false} onOpenChange={vi.fn()} onConfirm={vi.fn()} />,
+    );
+    expect(document.querySelector(".sheet")).not.toBeNull();
+    await waitFor(() => expect(document.querySelector(".sheet")).toBeNull());
+  });
+
+  it("fires exit completion after the exiting node is gone", async () => {
+    const user = userEvent.setup();
+    const onDone = vi.fn();
+
+    function ExitHost() {
+      const [open, setOpen] = useState(true);
+      return (
+        <>
+          <button type="button" onClick={() => setOpen(false)}>
+            Close
+          </button>
+          <AnimatePresence
+            onExitComplete={() => {
+              onDone(document.querySelector(".exit-node") != null);
+            }}
+          >
+            {open ? (
+              <motion.div
+                className="exit-node"
+                exit={{ opacity: 0, transition: { duration: 0.05, ease: "linear" } }}
+              />
+            ) : null}
+          </AnimatePresence>
+        </>
+      );
+    }
+
+    render(<ExitHost />);
+    expect(document.querySelector(".exit-node")).not.toBeNull();
+    await user.click(screen.getByRole("button", { name: "Close" }));
+    await waitFor(() => expect(onDone).toHaveBeenCalledTimes(1));
+    expect(onDone).toHaveBeenCalledWith(false);
+    expect(document.querySelector(".exit-node")).toBeNull();
   });
 
   it("uses the solid danger button for a destructive confirm and focuses cancel", () => {
